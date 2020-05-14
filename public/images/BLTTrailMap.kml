@@ -1,0 +1,1357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>BLT Trail Map</name>
+    <description>www.blttrails.ca</description>
+    <Style id="icon-1071-nodesc-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1071-biz-pub.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1071-nodesc-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1071-biz-pub.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1071-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1071-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1071-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1087-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1087-biz-restaurant-icecream.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1087-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1087-biz-restaurant-icecream.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1087">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1087-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1087-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1203-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1203-fac-info.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1203-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1203-fac-info.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1203">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1203-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1203-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1207-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1207-fac-parking.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1207-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1207-fac-parking.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1207">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1207-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1207-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1229-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1229-poi-art.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1229-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1229-poi-art.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1229">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1229-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1229-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1233-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1233-poi-bridge.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1233-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1233-poi-bridge.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1233">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1233-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1233-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1369-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1369-rec-hiking-trail.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1369-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1369-rec-hiking-trail.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1369">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1369-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1369-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1381-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1381-rec-picnic.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1381-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1381-rec-picnic.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1381">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1381-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1381-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1381-nodesc-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1381-rec-picnic.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1381-nodesc-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1381-rec-picnic.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1381-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1381-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1381-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1399-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1399-rec-viewing-platform.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1399-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/1399-rec-viewing-platform.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1399">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1399-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1399-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-503-DB4436-normal">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-503-DB4436-highlight">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-503-DB4436">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-503-DB4436-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-503-DB4436-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-965-nodesc-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/965-biz-animal.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-965-nodesc-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/965-biz-animal.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-965-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-965-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-965-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-983-normal">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/983-biz-bicycle.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-983-highlight">
+      <IconStyle>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/983-biz-bicycle.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-983">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-983-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-983-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-000000-3713-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>3.713</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-000000-3713-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>5.5695</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-000000-3713">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-000000-3713-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-000000-3713-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-009D57-3519-normal">
+      <LineStyle>
+        <color>ff579d00</color>
+        <width>3.519</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-009D57-3519-highlight">
+      <LineStyle>
+        <color>ff579d00</color>
+        <width>5.2785</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-009D57-3519">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-009D57-3519-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-009D57-3519-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-4186F0-3519-normal">
+      <LineStyle>
+        <color>fff08641</color>
+        <width>3.519</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-4186F0-3519-highlight">
+      <LineStyle>
+        <color>fff08641</color>
+        <width>5.2785</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-4186F0-3519">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-4186F0-3519-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-4186F0-3519-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-777777-2938-nodesc-normal">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>2.938</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-777777-2938-nodesc-highlight">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>4.407</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-777777-2938-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-777777-2938-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-777777-2938-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-777777-3325-normal">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>3.325</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-777777-3325-highlight">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>4.9875</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-777777-3325">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-777777-3325-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-777777-3325-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-777777-3519-normal">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>3.519</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-777777-3519-highlight">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>5.2785</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-777777-3519">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-777777-3519-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-777777-3519-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-777777-3519-nodesc-normal">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>3.519</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-777777-3519-nodesc-highlight">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>5.2785</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-777777-3519-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-777777-3519-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-777777-3519-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-777777-3713-nodesc-normal">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>3.713</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-777777-3713-nodesc-highlight">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>5.5695</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-777777-3713-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-777777-3713-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-777777-3713-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-777777-4100-nodesc-normal">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>4.1</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-777777-4100-nodesc-highlight">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>6.15</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-777777-4100-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-777777-4100-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-777777-4100-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-777777-4488-nodesc-normal">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>4.488</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-777777-4488-nodesc-highlight">
+      <LineStyle>
+        <color>ff777777</color>
+        <width>6.732</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-777777-4488-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-777777-4488-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-777777-4488-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-7C3592-3713-normal">
+      <LineStyle>
+        <color>ff92357c</color>
+        <width>3.713</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-7C3592-3713-highlight">
+      <LineStyle>
+        <color>ff92357c</color>
+        <width>5.5695</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-7C3592-3713">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-7C3592-3713-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-7C3592-3713-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-DB4436-3519-normal">
+      <LineStyle>
+        <color>ff3644db</color>
+        <width>3.519</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-DB4436-3519-highlight">
+      <LineStyle>
+        <color>ff3644db</color>
+        <width>5.2785</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-DB4436-3519">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-DB4436-3519-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-DB4436-3519-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>BLT Trail Sections</name>
+      <Placemark>
+        <name>Blue Jay Way</name>
+        <description>The first leg of the BLT trail has been designated as Blue Jay Way, and has a total distance of 1.75km and should take the average hiker about 40 minutes. This scenic walk takes you through a corridor of birch, maple, spruce, fir and tamarack. After about 1km the trail follows the shore of Governor Lake. Two benches are placed at this spot, courtesy of Atlantic Wholesalers. This section of the trail provides a number of scenic vistas and an opportunity to enjoy the peace and tranquility associated with a wilderness experience.</description>
+        <styleUrl>#line-DB4436-3519</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.6885166,44.6410966,0
+            -63.6889484,44.6412054,0
+            -63.6891617,44.6411549,0
+            -63.6925802,44.6419707,0
+            -63.6949485,44.6425499,0
+            -63.6954608,44.6427321,0
+            -63.6966531,44.6432579,0
+            -63.6970031,44.6433939,0
+            -63.6973907,44.6435108,0
+            -63.701245,44.6445756,0
+            -63.7026572,44.6449658,0
+            -63.7031917,44.6451066,0
+            -63.7037154,44.6452187,0
+            -63.7042169,44.6453266,0
+            -63.7049277,44.6454358,0
+            -63.705554,44.6455343,0
+            -63.7058021,44.6455871,0
+            -63.7063452,44.6457025,0
+            -63.7072103,44.6459324,0
+            -63.7085688,44.6464076,0
+            -63.7104919,44.6471041,0
+            -63.7121744,44.647709,0
+            -63.7125841,44.6478292,0
+            -63.7129193,44.6479246,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Six Mile Falls</name>
+        <description><![CDATA[The second leg of your journey begins at the foot of the lake and is known as Six Mile Falls. You follow Governor’s Brook as you continue your journey and within 500 meters you will see a path to your left, just past the church which will allow you to cross the brook and walk through the parking lot to Trinity Way and get a coffee or other refreshments in Timberlea village. Continuing on you will see Six Mile Falls on your right about 500 meters up the trail. Those interested in geology may want to examine the rocks around the falls. The area has considerable amounts of amethyst within the rock formation. There is a rest area in front of the falls for those who wish to sit and relax.<br><br>The trail continues with Governor Brook on one side. You will soon come to a small rail bridge. It is known as 6.2-mile bridge, a hold- over from the days when the rail line was in use. As you make your way along the trail you will notice the traffic from St. Margaret’s Bay Rd. (Highway #3) which runs parallel to the trail until you get half-way through Timberlea.<br><br>Next you will arrive at the Railway Bridge over the Nine-Mile River, which is an opportunity to stop and admire the view from the bridge. A mural was recently added to this recently replaced bridge depicting scenes from Timberlea’s past. This brings you to the end of Six Mile Falls section; approximately 4 km from the trail head. It takes the average hiker approximately one hour, without stopping, to reach this point.]]></description>
+        <styleUrl>#line-009D57-3519</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.7129193,44.6479246,0
+            -63.7133076,44.6480191,0
+            -63.7137012,44.6480925,0
+            -63.71407,44.6481541,0
+            -63.7145354,44.6482061,0
+            -63.7149544,44.6482624,0
+            -63.7153172,44.6483301,0
+            -63.7158644,44.6484523,0
+            -63.7169333,44.6488368,0
+            -63.717978,44.6492537,0
+            -63.7209499,44.6504387,0
+            -63.7217626,44.6507659,0
+            -63.7225418,44.6511313,0
+            -63.7232922,44.6514805,0
+            -63.7246943,44.6520549,0
+            -63.7259328,44.6524975,0
+            -63.7264417,44.6527131,0
+            -63.7267187,44.6528767,0
+            -63.727068,44.6531434,0
+            -63.7275374,44.6536065,0
+            -63.7280135,44.6540363,0
+            -63.7284923,44.6544208,0
+            -63.7288785,44.6546651,0
+            -63.7293278,44.6548855,0
+            -63.7298119,44.6550314,0
+            -63.7300908,44.6551115,0
+            -63.7307761,44.6551936,0
+            -63.7326081,44.6552423,0
+            -63.7327449,44.655248,0
+            -63.7331814,44.6553925,0
+            -63.733217,44.6553415,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Fraser Mill Walk</name>
+        <description>As you cross St. Margaret’s Bay Rd. you enter the Fraser Mill Walk section of the trail. You will note there is a convenience store just past the beginning of the walk; your last chance for refreshments on the BLT Trail.This portion of the trail travels very close to the back yards of the residents. Approximately 1 km from where you crossed the road there is a millpond on your right, on the other side of the road. This was the location of the Fraser family’s mill, the last water-powered sawmill in Halifax county, for which the walk is named. After crossing Forestglen Dr., the last street that intersects the trail, you come to a quiet section of trail lined with oak, birch, maple and several varieties of softwood. You have now reached the 6km marker on the trail and and have been walking for approximately 90 minutes.</description>
+        <styleUrl>#line-4186F0-3519</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.733217,44.6553415,0
+            -63.7332793,44.6552713,0
+            -63.7334446,44.6553326,0
+            -63.733559,44.6553195,0
+            -63.7339948,44.6554015,0
+            -63.7350261,44.6557183,0
+            -63.7364879,44.6565577,0
+            -63.7380825,44.6578227,0
+            -63.7397575,44.6590972,0
+            -63.7412489,44.6602056,0
+            -63.7415962,44.6604079,0
+            -63.7419972,44.6605796,0
+            -63.7423392,44.6606826,0
+            -63.7427294,44.6607723,0
+            -63.7435153,44.6608715,0
+            -63.7443414,44.6609669,0
+            -63.7447491,44.661067,0
+            -63.7451568,44.6612091,0
+            -63.7456933,44.6614838,0
+            -63.7462243,44.6619551,0
+            -63.7464885,44.6622842,0
+            -63.7472248,44.6634031,0
+            -63.7477156,44.6638342,0
+            -63.7482226,44.6641356,0
+            -63.7494671,44.6646659,0
+            -63.7502275,44.6650179,0
+            -63.7510255,44.6653241,0
+            -63.7520153,44.6655206,0
+            -63.7527287,44.6655741,0
+            -63.7534046,44.6655092,0
+            -63.7542013,44.6654004,0
+            -63.7550354,44.6651124,0
+            -63.7557623,44.6647709,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Cranberry Run</name>
+        <description><![CDATA[Cranberry Run is the most remote section of the trail. It affords the hiker an opportunity to get away from the road and enjoy all of the wonders nature has to offer. Just before you come to Cranberry Lake you will see the<br>trailhead to the Bluff Trail, a wilderness trail which requires caution. You can learn more about the Bluff Trail at this link (http://wrweo.ca/wp/?page_id=107 ). Please read the signs before using this trail. Continuing on the BLT trail you will travel through a bog area while enjoying the beauty of Cranberry Lake. You will see the large bog/wetland at Cranberry Lake and all of the good things associated with such an ecologically sensitive area.]]></description>
+        <styleUrl>#line-000000-3713</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.7557623,44.6647709,0
+            -63.7567949,44.6642882,0
+            -63.7581682,44.6638457,0
+            -63.7592411,44.6637541,0
+            -63.7601638,44.6638609,0
+            -63.7611508,44.6642119,0
+            -63.7627709,44.665038,0
+            -63.7634039,44.6652802,0
+            -63.7642622,44.6654481,0
+            -63.7647959,44.665513,0
+            -63.7658098,44.665471,0
+            -63.7680227,44.6650933,0
+            -63.769927,44.6647614,0
+            -63.7715096,44.6644866,0
+            -63.7723142,44.6644389,0
+            -63.7730947,44.6645267,0
+            -63.7738323,44.6647308,0
+            -63.774409,44.6649922,0
+            -63.7830377,44.6694006,0
+            -63.7869215,44.6713234,0
+            -63.7884665,44.6718269,0
+            -63.7892818,44.671949,0
+            -63.7905559,44.6718908,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Coach House Trail</name>
+        <description><![CDATA[When you arrive at the next intersection,whch is Silver Birch Dr in Lake of the Woods you have traveled the 9.25 km and should be (done in ) about 3hrs on the way. At this juncture we have another 3.25km to go. You will pass over two small bridges through a quiet area until you see Five Island Lake and reach Sir John A Hi School on your left. About 1.6km further, you will come to the #3 highway crossing, which is the end of the BLT Trail.<br><br>At this point you can retrace your steps, or continue on to the trail system of St Margarets Bay]]></description>
+        <styleUrl>#line-7C3592-3713</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.7905559,44.6718908,0
+            -63.7933762,44.6717082,0
+            -63.793788,44.6716972,0
+            -63.7948179,44.6717812,0
+            -63.7954509,44.6718956,0
+            -63.7960222,44.6721646,0
+            -63.7966217,44.6725394,0
+            -63.7980768,44.6738298,0
+            -63.7986092,44.6741654,0
+            -63.7991524,44.6744439,0
+            -63.7997746,44.674627,0
+            -63.8004559,44.6747491,0
+            -63.8011881,44.6748158,0
+            -63.8017702,44.674833,0
+            -63.8025856,44.674833,0
+            -63.8041198,44.6747262,0
+            -63.8052276,44.6746575,0
+            -63.8068972,44.6745593,0
+            -63.8072446,44.6745259,0
+            -63.8077274,44.6745268,0
+            -63.8081633,44.6746041,0
+            -63.8090551,44.6749093,0
+            -63.8092818,44.6750304,0
+            -63.8108522,44.6759441,0
+            -63.8112867,44.6762063,0
+            -63.8120377,44.6764733,0
+            -63.8128249,44.6765906,0
+            -63.8137154,44.6766335,0
+            -63.8147293,44.6766383,0
+            -63.8165975,44.6766259,0
+            -63.8180244,44.6766335,0
+            -63.8191415,44.6765963,0
+            -63.8202667,44.6765114,0
+            -63.8216212,44.6764466,0
+            -63.8229704,44.6763436,0
+            -63.823539,44.6762807,0
+            -63.8249874,44.6760308,0
+            -63.8264009,44.6757637,0
+            -63.8270903,44.6756951,0
+            -63.827852,44.6757561,0
+            -63.8286245,44.6759621,0
+            -63.8291006,44.6761652,0
+            -63.8301158,44.6768318,0
+            -63.8312933,44.6776577,0
+            -63.8320617,44.6781612,0
+            -63.8325867,44.6785722,0
+            -63.8328087,44.6788306,0
+            -63.8330354,44.6791577,0
+            -63.8331602,44.6794333,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Access Trails</name>
+      <Placemark>
+        <name>Access Trail: Raines Mill</name>
+        <styleUrl>#line-777777-4488-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.6925802,44.6419707,0
+            -63.6927438,44.641735,0
+            -63.6928672,44.6416663,0
+            -63.6930496,44.6416243,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Access Trail: Trinity Way</name>
+        <styleUrl>#line-777777-3519-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.7158819,44.6484561,0
+            -63.7159435,44.6482176,0
+            -63.7159556,44.6481326,0
+            -63.7159476,44.648105,0
+            -63.7159207,44.6480926,0
+            -63.7158751,44.6480792,0
+            -63.7156767,44.6480391,0
+            -63.7154286,44.6480162,0
+            -63.7152033,44.6478235,0
+            -63.7151925,44.6475803,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Access Trail: Fitzgerald's]]></name>
+        <styleUrl>#line-777777-3713-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.7352608,44.6558547,0
+            -63.7352756,44.6559062,0
+            -63.7353252,44.6559577,0
+            -63.7351093,44.6561409,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Access Trail: Fraser Rd</name>
+        <styleUrl>#line-777777-4100-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.7553224,44.6646583,0
+            -63.7557623,44.6647709,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Access Trail: Bluff Parking Lot</name>
+        <styleUrl>#line-777777-2938-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.7626234,44.6666032,0
+            -63.762779,44.6662159,0
+            -63.7628245,44.6659804,0
+            -63.7629707,44.66542,0
+            -63.7630525,44.6651496,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Access Trail: St Margaret's Bay Rd]]></name>
+        <description>Near Five Bridges Jr High</description>
+        <styleUrl>#line-777777-3519</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.8144624,44.6768109,0
+            -63.8144088,44.6766392,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Access Trail: St Margaret's Bay Rd]]></name>
+        <description><![CDATA[Near Hubley's Rd]]></description>
+        <styleUrl>#line-777777-3325</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -63.8190088,44.6768223,0
+            -63.8188988,44.6766087,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Information</name>
+      <Placemark>
+        <name>Map</name>
+        <description>Large posted map and bulletin board.</description>
+        <styleUrl>#icon-1203</styleUrl>
+        <Point>
+          <coordinates>
+            -63.689107,44.641201,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Map</name>
+        <description>Small posted map.</description>
+        <styleUrl>#icon-1203</styleUrl>
+        <Point>
+          <coordinates>
+            -63.71854,44.64949,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Map</name>
+        <description>posted map.</description>
+        <styleUrl>#icon-1203</styleUrl>
+        <Point>
+          <coordinates>
+            -63.770897,44.664585,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Parking</name>
+      <Placemark>
+        <name>B.L.T. Trail - Parking</name>
+        <description><![CDATA[<img src="https://lh3.googleusercontent.com/proxy/j3yJUZTD4EpEy6fmQG6LUxHL0wNzitvH4uJeNyEu-EUqPfk--gMfLRb-enm5-P6OEmFXh4Mjbt8SGz5h5i8_VUFrcjLXEMCTk3-fnrJDY7Z00XhpOeREHlug4k734jVcAM5WmvoceIYh9514ly1VpEMox83K-lQYDdkP_aM6jMnnRXOVVUZTsQzUuluHRFRmA9ZQFxbKk6J0cqG7xJsc0mzw4tDlhgLVJE4t" height="200" width="auto" /><br><br>Parking Lot next to old Coke plant. http://www.halifaxtrails.ca/index_files/BLT.htm]]></description>
+        <styleUrl>#icon-1207</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value>https://lh3.googleusercontent.com/proxy/j3yJUZTD4EpEy6fmQG6LUxHL0wNzitvH4uJeNyEu-EUqPfk--gMfLRb-enm5-P6OEmFXh4Mjbt8SGz5h5i8_VUFrcjLXEMCTk3-fnrJDY7Z00XhpOeREHlug4k734jVcAM5WmvoceIYh9514ly1VpEMox83K-lQYDdkP_aM6jMnnRXOVVUZTsQzUuluHRFRmA9ZQFxbKk6J0cqG7xJsc0mzw4tDlhgLVJE4t</value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            -63.688632,44.641021,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bluff Trail Parking</name>
+        <description>Large Parking Area next to Bay Self Storage. Bluff Trail info: http://www.halifaxtrails.ca/index_files/BluffTrail.htm</description>
+        <styleUrl>#icon-1207</styleUrl>
+        <Point>
+          <coordinates>
+            -63.76231,44.666348,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>St. Margarets Bay Trail - Parking</name>
+        <description>Small gravel parking area.</description>
+        <styleUrl>#icon-1207</styleUrl>
+        <Point>
+          <coordinates>
+            -63.833475,44.67985,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name><![CDATA[Garbage Cans & Dog Bags]]></name>
+      <Placemark>
+        <name>Dog bag dispenser.</name>
+        <styleUrl>#icon-965-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -63.755791,44.664787,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Dog bag dispenser.</name>
+        <styleUrl>#icon-965-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -63.722023,44.650891,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Garbage Can</name>
+        <styleUrl>#icon-1071-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -63.6891753,44.6411512,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Garbage can</name>
+        <styleUrl>#icon-1071-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -63.718761,44.649628,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Garbage can</name>
+        <styleUrl>#icon-1071-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -63.710706,44.647139,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Garbage Can</name>
+        <styleUrl>#icon-1071-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -63.740718,44.659771,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Benches</name>
+      <Placemark>
+        <name>Bench</name>
+        <description>360 view: https://goo.gl/maps/62jxZuttFYv</description>
+        <styleUrl>#icon-1381</styleUrl>
+        <Point>
+          <coordinates>
+            -63.710476,44.647076,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Benches</name>
+        <description>360 Views:https://goo.gl/maps/RjmufwJbaJm |  https://goo.gl/maps/Y788j9wRGiN2 | https://goo.gl/maps/38NQfKAr5GT2</description>
+        <styleUrl>#icon-1381</styleUrl>
+        <Point>
+          <coordinates>
+            -63.771373,44.664475,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Fraser Mill Pond</name>
+        <description><![CDATA[Bench & Interpretive sign. 360 View: https://goo.gl/maps/FcWAATBr6qJ2]]></description>
+        <styleUrl>#icon-1381</styleUrl>
+        <Point>
+          <coordinates>
+            -63.744457,44.660999,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bench</name>
+        <description>360 View: https://goo.gl/maps/SHcZRC9piTn</description>
+        <styleUrl>#icon-1381</styleUrl>
+        <Point>
+          <coordinates>
+            -63.709362,44.646622,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bench</name>
+        <styleUrl>#icon-1381-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -63.740578,44.65967,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Benches</name>
+        <description>2 benches</description>
+        <styleUrl>#icon-1381</styleUrl>
+        <Point>
+          <coordinates>
+            -63.755066,44.665134,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Points of Interest</name>
+      <Placemark>
+        <name><![CDATA[Fitzgerald's Grocery]]></name>
+        <description><![CDATA[<img src="https://lh3.googleusercontent.com/proxy/Vb_sXXbitxF8vT2uWhON3lhNT39XesZ-qki4YX86VUUXZK83cZEP32uyhi1UHwhvGsjn-u0TFwbETp3ZXhzEE3tQ9enI60qus50t8de8jidaLQ1aTHMuSHMxMn-7l-bnknU1HojA" height="200" width="auto" /><br><br>A really great place to stop and grab an ice cream cone or bottle of water. Locally owned and operated convenience store.]]></description>
+        <styleUrl>#icon-1087</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value>https://lh3.googleusercontent.com/proxy/Vb_sXXbitxF8vT2uWhON3lhNT39XesZ-qki4YX86VUUXZK83cZEP32uyhi1UHwhvGsjn-u0TFwbETp3ZXhzEE3tQ9enI60qus50t8de8jidaLQ1aTHMuSHMxMn-7l-bnknU1HojA</value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            -63.7354285,44.6561189,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>HWY 103 Overpass Mural</name>
+        <description><![CDATA[<img src="https://lh4.googleusercontent.com/proxy/lHB0jeoJLZuPqZvjwE4eU1HhF7wKjX0oZWRjUNZk4KVfEUqNTjG7l-jyfmcTAjLTUf7of6bvVzEFcmhgOz_CaD6a" height="200" width="auto" /><br><br>‏@IainTRankin on 15 Nov 2015 tweeted:<br>Great addition to the BLTTrail in #Timberlea supported by local community groups and approved by @NS_TIR #community<br>https://twitter.com/IainTRankin/status/666074138180718592]]></description>
+        <styleUrl>#icon-1229</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value>https://lh4.googleusercontent.com/proxy/lHB0jeoJLZuPqZvjwE4eU1HhF7wKjX0oZWRjUNZk4KVfEUqNTjG7l-jyfmcTAjLTUf7of6bvVzEFcmhgOz_CaD6a</value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            -63.7684746,44.6650046,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bluff Wilderness Hiking Trail Enterance</name>
+        <description>http://wrweo.ca/wp/the-bluff-trail/</description>
+        <styleUrl>#icon-1369</styleUrl>
+        <Point>
+          <coordinates>
+            -63.769927,44.6647614,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bike Rack</name>
+        <description>Place to lock your bike. Entrance to the Bluff Wilderness hiking trail system (http://www.halifaxtrails.ca/index_files/BluffTrail.htm)</description>
+        <styleUrl>#icon-983</styleUrl>
+        <Point>
+          <coordinates>
+            -63.769932,44.664761,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bridge</name>
+        <description>Wooden bridge and bench. 360 View: https://goo.gl/maps/oE9KwyPUt262</description>
+        <styleUrl>#icon-1233</styleUrl>
+        <Point>
+          <coordinates>
+            -63.731912,44.655236,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bridge</name>
+        <description>small wooden bridge over a river.</description>
+        <styleUrl>#icon-1233</styleUrl>
+        <Point>
+          <coordinates>
+            -63.7205561,44.6502896,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Six Mile Falls</name>
+        <description><![CDATA[<img src="https://lh5.googleusercontent.com/proxy/TtlRQYX_fglYGsKewQ7MnC7OWshZ0y3zzRXVbEWMelavIl9EKqx_57FvB8eSBgSQpppuijGOIrd4bgHeaciinaJ5u4ZcWXTxwTSDElm78pWk9kENnNtnAi71VsO_FLttv-tSzKHjMxpXwk47fE2u7PbDcKw3wkJoWrjo1hpmWGILlUEIbeYeUTDU_PWtPbxhpooAZFmLenj55M2pHHpRuSYDCNXnE2TO1vM" height="200" width="auto" /><br><br>2 benches, map & garbage can. 360 View: https://goo.gl/maps/KuBDkXLrfP32]]></description>
+        <styleUrl>#icon-1399</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value>https://lh5.googleusercontent.com/proxy/TtlRQYX_fglYGsKewQ7MnC7OWshZ0y3zzRXVbEWMelavIl9EKqx_57FvB8eSBgSQpppuijGOIrd4bgHeaciinaJ5u4ZcWXTxwTSDElm78pWk9kENnNtnAi71VsO_FLttv-tSzKHjMxpXwk47fE2u7PbDcKw3wkJoWrjo1hpmWGILlUEIbeYeUTDU_PWtPbxhpooAZFmLenj55M2pHHpRuSYDCNXnE2TO1vM</value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            -63.718509,44.649471,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Governor Lake View</name>
+        <description>360 View: https://goo.gl/maps/N4vAAccwtvH2</description>
+        <styleUrl>#icon-1399</styleUrl>
+        <Point>
+          <coordinates>
+            -63.701413,44.644304,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>5km</name>
+        <description>5km from Lakeside Entrance. 8km from St. Margarets Bay Entrance</description>
+        <styleUrl>#icon-503-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -63.743808,44.660865,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>10km</name>
+        <description>10km from Lakeside entrance. 3km from St. Margarets Bay entrance.</description>
+        <styleUrl>#icon-503-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -63.798487,44.67407,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
