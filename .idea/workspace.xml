@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e186471-1e5b-4904-94f3-9cabc2be4961" name="Default Changelist" comment="">
+    <list default="true" id="3e186471-1e5b-4904-94f3-9cabc2be4961" name="Default Changelist" comment="Fix Relative Path error in Map File.">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/googlemaps.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/googlemaps.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/map.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/map.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,10 +171,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
+    <property name="last_opened_file_path" value="$USER_HOME$/.ssh/id_rsa.pub" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="vcs.Subversion.SSH" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -167,7 +188,9 @@
     </configuration>
   </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\server\AppData\Roaming\Subversion</configuration>
+    <option name="sshConnectionType" value="PRIVATE_KEY" />
+    <option name="sshPrivateKeyPath" value="C:\Users\server\.ssh\id_rsa" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -178,7 +201,7 @@
       <updated>1589030931409</updated>
       <workItem from="1589030932744" duration="22996000" />
       <workItem from="1589129242637" duration="18054000" />
-      <workItem from="1589320939917" duration="41997000" />
+      <workItem from="1589320939917" duration="49089000" />
     </task>
     <task id="LOCAL-00001" summary="Initializing Laravel Framework and Project Requirements.">
       <created>1589497496971</created>
@@ -187,23 +210,65 @@
       <option name="project" value="LOCAL" />
       <updated>1589497496972</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Google API Key put in the .env file where it belongs.">
+      <created>1589571841327</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1589571841327</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Updated example .env.example for Google API">
+      <created>1589575031689</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1589575031689</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Defined default string length to prevent error on deployment migration.">
+      <created>1589630918247</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1589630918247</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Defined default string length to prevent error on deployment migration.">
+      <created>1589631400300</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1589631400300</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Initializing Laravel Framework and Project Requirements." />
-    <option name="LAST_COMMIT_MESSAGE" value="Initializing Laravel Framework and Project Requirements." />
+    <MESSAGE value="Google API Key put in the .env file where it belongs." />
+    <MESSAGE value="Updated example .env.example for Google API" />
+    <MESSAGE value="Defined default string length to prevent error on deployment migration." />
+    <option name="LAST_COMMIT_MESSAGE" value="Defined default string length to prevent error on deployment migration." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="598" y="198" key="#Deployment" timestamp="1589496489456">
+    <state x="598" y="198" key="#Deployment" timestamp="1589575024474">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="598" y="198" key="#Deployment/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589496489456" />
+    <state x="598" y="198" key="#Deployment/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589575024474" />
     <state x="598" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589129328647">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
@@ -216,14 +281,18 @@
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
     <state x="736" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589478373288" />
-    <state x="578" y="117" key="CommitChangelistDialog2" timestamp="1589497496449">
+    <state x="578" y="117" key="CommitChangelistDialog2" timestamp="1589633319060">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="578" y="117" key="CommitChangelistDialog2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589497496449" />
+    <state x="578" y="117" key="CommitChangelistDialog2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589633319060" />
     <state x="783" y="422" width="447" height="265" key="ComposerInitDialogKey" timestamp="1589385586729">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
     <state x="783" y="422" width="447" height="265" key="ComposerInitDialogKey/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589385586729" />
+    <state x="786" y="295" key="FileChooserDialogImpl" timestamp="1589574098872">
+      <screen x="93" y="0" width="1827" height="1080" />
+    </state>
+    <state x="786" y="295" key="FileChooserDialogImpl/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589574098872" />
     <state x="882" y="438" key="Github.ShareDialog" timestamp="1589496355324">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
@@ -256,22 +325,30 @@
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
     <state x="841" y="463" key="NewPhpFileDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589037696923" />
-    <state x="507" y="185" key="SettingsEditor" timestamp="1589385712069">
+    <state x="826" y="242" key="RollbackChangesDialog" timestamp="1589631187676">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="507" y="185" key="SettingsEditor/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589385712069" />
-    <state x="598" y="273" key="Vcs.Push.Dialog.v2" timestamp="1589571027299">
+    <state x="826" y="242" key="RollbackChangesDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589631187676" />
+    <state x="507" y="185" key="SettingsEditor" timestamp="1589574283571">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="598" y="273" key="Vcs.Push.Dialog.v2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589571027299" />
-    <state x="185" y="92" width="1643" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589571695742">
+    <state x="507" y="185" key="SettingsEditor/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589574283571" />
+    <state x="598" y="273" key="Vcs.Push.Dialog.v2" timestamp="1589631417094">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="185" y="92" width="1643" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589571695742" />
-    <state x="815" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589570958900">
+    <state x="598" y="273" key="Vcs.Push.Dialog.v2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589631417094" />
+    <state x="185" y="92" width="1643" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589632377405">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="815" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589570958900" />
+    <state x="185" y="92" width="1643" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589632377405" />
+    <state x="815" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589571869873">
+      <screen x="93" y="0" width="1827" height="1080" />
+    </state>
+    <state x="815" y="454" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589571869873" />
+    <state x="790" y="441" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1589574221639">
+      <screen x="93" y="0" width="1827" height="1080" />
+    </state>
+    <state x="790" y="441" key="git4idea.remote.GitConfigureRemotesDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589574221639" />
     <state x="669" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1589455365665">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>

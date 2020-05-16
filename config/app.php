@@ -1,11 +1,5 @@
 <?php
 
-//todo: create view for Scheduling
-//todo: create view for Members/users
-//todo: allow users to designate volunteer area for alerts
-//todo: allow users to indicate frequency of helping
-//todo: allow users to be alerted on multiple conditions: location, age of task, skills, etc.
-//todo: integrate social media content that contains location data in geofence area.
 return [
 
     /*

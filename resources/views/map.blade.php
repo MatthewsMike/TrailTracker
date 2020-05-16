@@ -95,7 +95,7 @@
             removeAllMarkers();
             $.ajax({
                 type: 'POST',
-                url: '/get-points-of-interest-markers',
+                url: 'get-points-of-interest-markers',
                 data: {
                     daysToLookAhead: 14,
                 },
@@ -119,7 +119,7 @@
             removeAllMarkers();
             $.ajax({
                 type: 'POST',
-                url: '/get-maintenance-markers',
+                url: 'get-maintenance-markers',
                 data: {
                     daysToLookAhead: 14,
                 },
@@ -155,7 +155,7 @@
             e.preventDefault();
             $.ajax({
                 type: 'POST',
-                url: '/save-new-marker',
+                url: 'save-new-marker',
                 data: {
                     address: $('#modal-input-address').val(),
                     lat: $('#modal-input-lat').val(),
@@ -178,7 +178,7 @@
                         //todo - populate all marker properties
                         })
                     );
-                    map.setCenter(marker.getPosition());
+                    map.setCenter(latlng);
                     $('#newMarker').modal('hide');
                     hideMapDrawControls();
                 }
