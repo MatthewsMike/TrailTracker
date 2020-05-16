@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //https://laracasts.com/discuss/channels/laravel/laravel-54-failing-on-php-artisan-migrate-after-php-artisan-makeauth
+        //Prevent Migration Scripts from Failing with error:
+        //  Syntax error or access violation: 1071 Specified key was too long; max key length is 1000 bytes (SQL: alter table `users` add unique `users_email_unique`(`email`))
+        Schema::defaultStringLength(191);
     }
 }
