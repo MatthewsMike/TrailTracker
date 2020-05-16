@@ -105,7 +105,6 @@ class CreateMaintenanceTable extends Migration
             $table->integer('type_id');
         });
 
-
         DB::table('schedules')->insert(
             [
                 'frequency_id'=>'1',

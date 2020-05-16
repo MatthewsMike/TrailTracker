@@ -38,7 +38,11 @@
                             <!-- Type -->
                             <div class="form-group">
                                 <label class="col-form-label" for="modal-input-type">Type</label>
-                                <input type="text" name="modal-input-type" class="form-control" id="modal-input-type" required>
+                                <select name="modal-input-type" id="modal-input-type" class="form-control" required>
+                                    @foreach($categoryTypes as $type)
+                                        <option value="{{$type}}">{{$type}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <!-- /type -->
                             <!-- category -->

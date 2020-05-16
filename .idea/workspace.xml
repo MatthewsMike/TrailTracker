@@ -19,12 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e186471-1e5b-4904-94f3-9cabc2be4961" name="Default Changelist" comment="Fix Relative Path error in Map File.">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="3e186471-1e5b-4904-94f3-9cabc2be4961" name="Default Changelist" comment="Added Categories to database.">
+      <change afterPath="$PROJECT_DIR$/app/Category.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_16_214613_create_categories_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/map.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/map.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MapController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MapController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_13_000213_create_maintenance_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_13_000213_create_maintenance_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/modals/map_add_marker.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/map_add_marker.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +40,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -161,7 +163,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1bflGJehgyFA4oNUq9flBVt3r6I" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -177,6 +181,9 @@
     <property name="settings.editor.selected.configurable" value="vcs.Subversion.SSH" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Homestead_Projects\TrailTracker\public\js" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Homestead_Projects\TrailTracker\public\images" />
     </key>
@@ -201,7 +208,7 @@
       <updated>1589030931409</updated>
       <workItem from="1589030932744" duration="22996000" />
       <workItem from="1589129242637" duration="18054000" />
-      <workItem from="1589320939917" duration="49089000" />
+      <workItem from="1589320939917" duration="60116000" />
     </task>
     <task id="LOCAL-00001" summary="Initializing Laravel Framework and Project Requirements.">
       <created>1589497496971</created>
@@ -238,7 +245,21 @@
       <option name="project" value="LOCAL" />
       <updated>1589631400300</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix Relative Path error in Map File. Moved todo list to README.md">
+      <created>1589633513481</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1589633513481</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Populated all values for newly added maker.  Refactor code to files.">
+      <created>1589642933188</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1589642933188</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,7 +283,9 @@
     <MESSAGE value="Google API Key put in the .env file where it belongs." />
     <MESSAGE value="Updated example .env.example for Google API" />
     <MESSAGE value="Defined default string length to prevent error on deployment migration." />
-    <option name="LAST_COMMIT_MESSAGE" value="Defined default string length to prevent error on deployment migration." />
+    <MESSAGE value="Fix Relative Path error in Map File. Moved todo list to README.md" />
+    <MESSAGE value="Populated all values for newly added maker.  Refactor code to files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Populated all values for newly added maker.  Refactor code to files." />
   </component>
   <component name="WindowStateProjectService">
     <state x="598" y="198" key="#Deployment" timestamp="1589575024474">
@@ -277,14 +300,14 @@
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
     <state x="747" y="342" key="#com.intellij.fileTypes.FileTypeChooser/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589053529127" />
-    <state x="736" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589478373288">
+    <state x="736" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589668398338">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="736" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589478373288" />
-    <state x="578" y="117" key="CommitChangelistDialog2" timestamp="1589633319060">
+    <state x="736" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589668398338" />
+    <state x="578" y="117" key="CommitChangelistDialog2" timestamp="1589670585386">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="578" y="117" key="CommitChangelistDialog2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589633319060" />
+    <state x="578" y="117" key="CommitChangelistDialog2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589670585386" />
     <state x="783" y="422" width="447" height="265" key="ComposerInitDialogKey" timestamp="1589385586729">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
@@ -317,14 +340,14 @@
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
     <state width="1228" height="295" key="GridCell.Tab.0.right/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589382330700" />
-    <state x="804" y="263" key="NewPhpClassDialog" timestamp="1589370625273">
+    <state x="804" y="263" key="NewPhpClassDialog" timestamp="1589669710811">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="804" y="263" key="NewPhpClassDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589370625273" />
-    <state x="841" y="463" key="NewPhpFileDialog" timestamp="1589037696923">
+    <state x="804" y="263" key="NewPhpClassDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589669710811" />
+    <state x="841" y="463" key="NewPhpFileDialog" timestamp="1589639920999">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="841" y="463" key="NewPhpFileDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589037696923" />
+    <state x="841" y="463" key="NewPhpFileDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589639920999" />
     <state x="826" y="242" key="RollbackChangesDialog" timestamp="1589631187676">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
@@ -333,10 +356,10 @@
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
     <state x="507" y="185" key="SettingsEditor/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589574283571" />
-    <state x="598" y="273" key="Vcs.Push.Dialog.v2" timestamp="1589631417094">
+    <state x="598" y="273" key="Vcs.Push.Dialog.v2" timestamp="1589642946666">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="598" y="273" key="Vcs.Push.Dialog.v2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589631417094" />
+    <state x="598" y="273" key="Vcs.Push.Dialog.v2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589642946666" />
     <state x="185" y="92" width="1643" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589632377405">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>

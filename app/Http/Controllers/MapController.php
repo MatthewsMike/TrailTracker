@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Task;
 use Carbon\Carbon;
 use FarhanWazir\GoogleMaps\GMaps;
@@ -28,6 +29,8 @@ class MapController extends Controller
 
         /******** End Controls ********/
 
+
+        /******** Custom Map Configuration ********/
         $config = array();
         $config['map_height'] = "100%";
         $config['zoom'] = '14';
@@ -73,15 +76,16 @@ class MapController extends Controller
 
         $this->gmap->add_marker($marker);
 
-
-
-        $PointsOfInterest = $this->getAllPointsOfInterest();
-        foreach($PointsOfInterest as $POI) {
+        $pointsOfInterest = $this->getAllPointsOfInterest();
+        foreach($pointsOfInterest as $POI) {
             $this->gmap->add_marker($this->addMapPointsPropertiesToMarker($POI));
         }
         $map = $this->gmap->create_map(); // This object will render javascript files and map view; you can call JS by $map['js'] and map view by $map['html']
+        /******** END Custom Map Configuration ********/
 
-        return view('map', ['map' => $map]);
+        $categoryTypes = (new Category())->getAllCategoryTypes();
+
+        return view('map', ['map' => $map, 'categoryTypes' => $categoryTypes]);
     }
 
     private function getAllPointsOfInterest() {
