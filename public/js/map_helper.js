@@ -32,16 +32,7 @@
                 },
                 success: function (markersProperties) {
                     markersProperties.forEach(function(markerProperties){
-                        console.log(markerProperties.title);
-                        let latlng = new google.maps.LatLng(markerProperties.lat, markerProperties.lng);
-                        markers_map.push (new google.maps.Marker({
-                                position: latlng,
-                                title: markerProperties.title,
-                                animation: google.maps.Animation.DROP,
-                                map: map
-                                //todo - populate all marker properties
-                            })
-                        );
+                        AddMarkerToMap(markerProperties, markerProperties.category.default_icon);
                     })
                 }
             });
@@ -57,7 +48,7 @@
                 },
                 success: function (markersProperties) {
                     markersProperties.forEach(function(markerProperties){
-                        AddMarkerToMap(markerProperties);
+                        AddMarkerToMap(markerProperties, markerProperties.default_icon);
                     })
                 }
             });
@@ -82,14 +73,14 @@ function hideMapDrawControls() {
     });
 }
 
-function AddMarkerToMap(markerProperties) {
+function AddMarkerToMap(markerProperties, defaultIcon) {
     let latlng = new google.maps.LatLng(markerProperties.lat, markerProperties.lng);
     let marker = new google.maps.Marker({
         position: latlng,
         title: markerProperties.title,
         cursor: 'Cursor',
         content: markerProperties.description,
-        icon: markerProperties.icon,
+        icon: (markerProperties.icon != null ? markerProperties.icon : defaultIcon),
         animation: google.maps.Animation.DROP,
         map: map
     });

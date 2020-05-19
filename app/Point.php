@@ -53,6 +53,5 @@ class Point extends Model
         return $this->hasOne('App\Category','id', 'categories_id');
     }
 
-    //todo: function to set default icon if necessary.
 
 }

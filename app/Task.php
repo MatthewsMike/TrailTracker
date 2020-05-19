@@ -38,6 +38,10 @@ class Task extends Model
     //
     protected $guarded = [];
 
+    public function point() {
+        return $this->hasOne('App\Point','id', 'points_id');
+    }
+
     public function CreateAllTasksFromSchedules () {
         log::debug('Creating all Tasks From Schedules');
         //todo:

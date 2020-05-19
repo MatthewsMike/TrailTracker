@@ -4,8 +4,6 @@ This application is being designed as a proof of concept way of crowd sourcing m
 - [BLT Rails to Trails](https://blttrails.ca/)
 
 
-- todo: populate default icon.
-- todo: remove movable marker on page load.
 - todo: allow picture upload for new markers
 - todo: Add Existing POI's for BLT Trail
 - todo: create view for Scheduling

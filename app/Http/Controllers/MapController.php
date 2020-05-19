@@ -51,13 +51,6 @@ class MapController extends Controller
         //$config['center'] = 'Halifax, Nova Scotia';
         //$config['kmlLayerURL'] = 'https://blttrails.ca/BLTTrailMap.kml';
         $config['map_type'] = 'SATELLITE';
-        $config['onboundschanged'] = 'if (!centreGot) {
-            var mapCentre = map.getCenter();
-            marker_0.setOptions({
-                position: new google.maps.LatLng(mapCentre.lat(), mapCentre.lng())
-            });
-        }
-        centreGot = true;';
 
         $this->gmap->initialize($config); // Initialize Map with custom configuration
 
@@ -90,7 +83,7 @@ class MapController extends Controller
 
     private function getAllPointsOfInterest() {
 
-        return Point::all();
+        return (new \App\Point)->with('category')->get();
     }
 
     private function addMapPointsPropertiesToMarker($POI) {
@@ -118,7 +111,8 @@ class MapController extends Controller
 
     public function GetAllTasksInDateRangeJSON(Request $request) {
         //todo: only return 1st of series (distinct on points_id and type of task) - Min Date.
-        return response()->json((new Task)->join('points','tasks.points_id','=', 'points.id')->whereNotIn('status',['Cancelled', 'Completed'])->where('estimated_date','<=', carbon::now()->addDays($request->input('daysToLookAhead')))->get());
+        return response()->json((new Task)->join('points','tasks.points_id','=', 'points.id')->join('categories','points.categories_id', '=','categories.id')->whereNotIn('status',['Cancelled', 'Completed'])->where('estimated_date','<=', carbon::now()->addDays($request->input('daysToLookAhead')))->get());
+
     }
 
     public function GetAllPointsOfInterestJSON() {
