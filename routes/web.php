@@ -16,7 +16,7 @@ Route::get('/', 'MapController@index');
 Route::post('save-new-marker', 'MapController@saveNewMarker');
 Route::post('get-maintenance-markers', 'MapController@GetAllTasksInDateRangeJSON');
 Route::post('get-points-of-interest-markers', 'MapController@GetAllPointsOfInterestJSON');
-
+Route::post('get-categories-and-id-by-type', 'MapController@getCategoriesByTypesJSON');
 Route::get('/welcome', function () {
     return view('welcome');
 });

@@ -62,11 +62,10 @@ class Task extends Model
     }
 
     private function GetFutureTasksToGenerateCount($schedule) {
-
         if($schedule->item_category == NULL ) {
             $futureTasksToGenerateCount = $schedule->future_events_to_generate;
         } else {
-            $PointsAffectedBySchedule = (new Point)->where('categories','like', '%' . $schedule->item_category . '%')->count();
+            $PointsAffectedBySchedule = (new Point)->where('categories_id','=', '%' . $schedule->item_category . '%')->count();
             $futureTasksToGenerateCount = $schedule->future_events_to_generate * $PointsAffectedBySchedule;
         }
         log::debug('Future Tasks To Generate Count: ' . $futureTasksToGenerateCount);

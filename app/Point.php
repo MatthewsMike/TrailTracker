@@ -41,10 +41,18 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Point whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Point whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Point whereUrl($value)
+ * @property int $categories_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Point whereCategoriesId($value)
  */
 class Point extends Model
 {
     //
     protected $guarded = ['isApproved'];
+
+    public function category() {
+        return $this->hasOne('App\Category','id', 'categories_id');
+    }
+
+    //todo: function to set default icon if necessary.
 
 }

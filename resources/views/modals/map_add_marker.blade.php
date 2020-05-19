@@ -1,6 +1,3 @@
-<!-- Include the JS helper file in main view header if using this modal:
-<script src="{{ asset('js/map_helper.js') }}" defer></script>
--->
 <div id="newMarker" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -48,7 +45,9 @@
                             <!-- category -->
                             <div class="form-group">
                                 <label class="col-form-label" for="modal-input-categories">Category</label>
-                                <input type="text" name="modal-input-categories" class="form-control" id="modal-input-categories" required>
+                                <Select name="modal-input-categories" class="form-control" id="modal-input-categories" required>
+                                    <option>Please Select Type First</option>
+                                </Select>
                             </div>
                             <!-- /category -->
                         </div>
@@ -85,7 +84,7 @@
                     address: $('#modal-input-address').val(),
                     lat: $('#modal-input-lat').val(),
                     lng: $('#modal-input-lng').val(),
-                    categories: $('#modal-input-categories').val(),
+                    categories_id: $('#modal-input-categories').val(),
                     type: $('#modal-input-type').val(),
                     title: $('#modal-input-title').val(),
                     description: $('#modal-input-description').val(),

@@ -40,12 +40,17 @@ use Illuminate\Support\Facades\DB;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Schedule wherePointsId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Schedule whereRewardPoints($value)
  * @mixin \Eloquent
+ * @property int $categories_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Schedule whereCategoriesId($value)
  */
 class Schedule extends Model
 {
     //
     protected $guarded = [];
 
+    public function category() {
+        return $this->hasOne('App\Category','id', 'categories_id');
+    }
     public function isScheduleLocationsFromCategory () {
         return $this->item_category == null ?  false :  true;
     }
@@ -56,6 +61,6 @@ class Schedule extends Model
 
     public function GetAllSchedulePointsIdFromCategory() {
         //todo: convert to one to many or handle case where category is part of the name of another.
-        return DB::table('points')->where('categories', 'like', '%' . $this->item_category . '%')->get();
+        return DB::table('points')->where('categories_id', '=',  $this->item_category)->get();
     }
 }

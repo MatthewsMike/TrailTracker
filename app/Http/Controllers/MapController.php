@@ -23,8 +23,8 @@ class MapController extends Controller
     public function index(){
 
         /******** Custom Map Controls ********/
-        $bottomCenterControls = ['document.getElementById("bottomCenterControl")'];
-        $this->gmap->injectControlsInBottomCenter = $bottomCenterControls;
+        $Controls = ['document.getElementById("topCenterControl")'];
+        $this->gmap->injectControlsInTopCenter = $Controls;
 
 
         /******** End Controls ********/
@@ -47,9 +47,9 @@ class MapController extends Controller
             ');
 
         //$config['center'] = '44.655694,-63.734611';
-        //$config['center'] = 'auto';
+        $config['center'] = 'auto';
         //$config['center'] = 'Halifax, Nova Scotia';
-        $config['kmlLayerURL'] = 'https://blttrails.ca/BLTTrailMap.kml';
+        //$config['kmlLayerURL'] = 'https://blttrails.ca/BLTTrailMap.kml';
         $config['map_type'] = 'SATELLITE';
         $config['onboundschanged'] = 'if (!centreGot) {
             var mapCentre = map.getCenter();
@@ -89,15 +89,17 @@ class MapController extends Controller
     }
 
     private function getAllPointsOfInterest() {
+
         return Point::all();
     }
 
     private function addMapPointsPropertiesToMarker($POI) {
+        Log::debug('Using Icon: ' . $POI->category->default_icon );
         $marker = array();
         $marker['position']= $POI->lat . ',' . $POI->lng;
         $marker['infowindow_content'] = $POI->description;
         $marker['cursor'] = $POI->title;
-        $marker['icon'] = $POI->icon;
+        $marker['icon'] = $POI->icon ?: $POI->category->default_icon;
         $marker['title'] = $POI->title;
         return $marker;
     }
@@ -121,5 +123,10 @@ class MapController extends Controller
 
     public function GetAllPointsOfInterestJSON() {
         return response()->json($this->getAllPointsOfInterest());
+    }
+
+    public function getCategoriesByTypesJSON(Request $request) {
+        return response()->json((new Category)->getCategoriesAndIdByType($request->input('type')));
+
     }
 }
