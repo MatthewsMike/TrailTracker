@@ -84,6 +84,12 @@
 
         $("#btn-save-new-marker").click(function (e) {
             e.preventDefault();
+            let button = $("#btn-save-new-marker");
+            let buttonText = button.html();
+            button.prop('disabled', true);
+            button.html("saving...");
+
+
             let fd = new FormData();
             //fd.append('address',  $('#modal-input-address').val());
             //fd.append('url', $('#modal-input-url').val());
@@ -105,6 +111,8 @@
                     AddMarkerToMap(markerProperties);
                     $('#newMarker').modal('hide');
                     hideMapDrawControls();
+                    button.prop('disabled', false);
+                    button.html(buttonText);
                 }
             });
 

@@ -69,6 +69,7 @@ class MapController extends Controller
         }, this);
         ';
 
+        $this->gmap->onload = "var geoloccontrol = new klokantech.GeolocationControl(map);";
         $this->gmap->add_marker($marker);
 
         $pointsOfInterest = $this->getAllPointsOfInterest();
@@ -76,6 +77,7 @@ class MapController extends Controller
             $this->gmap->add_marker($this->addMapPointsPropertiesToMarker($POI));
         }
         $map = $this->gmap->create_map(); // This object will render javascript files and map view; you can call JS by $map['js'] and map view by $map['html']
+
         /******** END Custom Map Configuration ********/
 
         $categoryTypes = (new Category())->getAllCategoryTypes();

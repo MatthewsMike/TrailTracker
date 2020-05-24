@@ -4,13 +4,15 @@ This application is being designed as a proof of concept way of crowd sourcing m
 - [BLT Rails to Trails](https://blttrails.ca/)
 
 
-- todo: allow picture upload for new markers
+- todo: Upload progress of picture
+- todo: show users current location on the map (when click add)
 - todo: create view for Scheduling
   - Set Default schedule per category
   - Allow Override schedule per point
  - todo: make POI info window contain actions/option button per type
    - Feature: report condition, Hide this type, etc
    - Maintenance: Accept, Release, Complete (with note), Review Schedule Default/This Point
+   - Include uploaded Image
 - todo: Track IP address of submissions
 - todo: enable Authentication
 - todo: create view for Members/users

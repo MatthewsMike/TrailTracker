@@ -1,4 +1,5 @@
-   var centreGot = false;
+    var centreGot = false;
+
     $(document).ready(function () {
 
         $("#modal-input-type").change(function() {
@@ -21,6 +22,8 @@
             });
 
         })
+
+
 
         $("#showPointsOfInterest").click(function(e) {
             removeAllMarkers();
@@ -62,7 +65,8 @@
         });
 
 
-    });
+
+    }); //End On Load Complete
 
 
 
