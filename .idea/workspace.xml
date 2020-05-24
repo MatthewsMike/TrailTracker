@@ -19,13 +19,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e186471-1e5b-4904-94f3-9cabc2be4961" name="Default Changelist" comment="Added Categories to database.">
-      <change afterPath="$PROJECT_DIR$/app/Category.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_16_214613_create_categories_table.php" afterDir="false" />
+    <list default="true" id="3e186471-1e5b-4904-94f3-9cabc2be4961" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f68352d2-5473-4b8b-b9aa-f0f7c8a8c25f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f68352d2-5473-4b8b-b9aa-f0f7c8a8c25f.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MapController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MapController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_13_000213_create_maintenance_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_13_000213_create_maintenance_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modals/map_add_marker.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/map_add_marker.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +177,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/.ssh/id_rsa.pub" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/modals" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="vcs.Subversion.SSH" />
@@ -185,6 +187,7 @@
       <recent name="C:\Homestead_Projects\TrailTracker\public\js" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Homestead_Projects\TrailTracker\resources\views\modals" />
       <recent name="C:\Homestead_Projects\TrailTracker\public\images" />
     </key>
   </component>
@@ -208,7 +211,8 @@
       <updated>1589030931409</updated>
       <workItem from="1589030932744" duration="22996000" />
       <workItem from="1589129242637" duration="18054000" />
-      <workItem from="1589320939917" duration="60116000" />
+      <workItem from="1589320939917" duration="83533000" />
+      <workItem from="1590184049225" duration="27375000" />
     </task>
     <task id="LOCAL-00001" summary="Initializing Laravel Framework and Project Requirements.">
       <created>1589497496971</created>
@@ -259,7 +263,35 @@
       <option name="project" value="LOCAL" />
       <updated>1589642933188</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added Categories to database.">
+      <created>1589670623965</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1589670623965</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Updated Todo List,&#10;Added Default Marker Population&#10;Moved controls to top as button group&#10;started default icons, and categories FK implementation">
+      <created>1589887547776</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1589887547776</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added code to populate default icon based on category.">
+      <created>1589928113995</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1589928113995</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added upload Image to Add Marker&#10;added ability to set Category based schedules">
+      <created>1590317413454</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1590317413454</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,6 +307,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -285,29 +318,37 @@
     <MESSAGE value="Defined default string length to prevent error on deployment migration." />
     <MESSAGE value="Fix Relative Path error in Map File. Moved todo list to README.md" />
     <MESSAGE value="Populated all values for newly added maker.  Refactor code to files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Populated all values for newly added maker.  Refactor code to files." />
+    <MESSAGE value="Added Categories to database." />
+    <MESSAGE value="Updated Todo List,&#10;Added Default Marker Population&#10;Moved controls to top as button group&#10;started default icons, and categories FK implementation" />
+    <MESSAGE value="added code to populate default icon based on category." />
+    <MESSAGE value="added upload Image to Add Marker&#10;added ability to set Category based schedules" />
+    <option name="LAST_COMMIT_MESSAGE" value="added upload Image to Add Marker&#10;added ability to set Category based schedules" />
   </component>
   <component name="WindowStateProjectService">
     <state x="598" y="198" key="#Deployment" timestamp="1589575024474">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
     <state x="598" y="198" key="#Deployment/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589575024474" />
-    <state x="598" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589129328647">
+    <state x="582" y="185" key="#SSH_Configurations" timestamp="1590318688905">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="598" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589129328647" />
+    <state x="582" y="185" key="#SSH_Configurations/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1590318688905" />
+    <state x="598" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590318789091">
+      <screen x="93" y="0" width="1827" height="1080" />
+    </state>
+    <state x="598" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1590318789091" />
     <state x="747" y="342" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589053529127">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
     <state x="747" y="342" key="#com.intellij.fileTypes.FileTypeChooser/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589053529127" />
-    <state x="736" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589668398338">
+    <state x="736" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590184560271">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="736" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589668398338" />
-    <state x="578" y="117" key="CommitChangelistDialog2" timestamp="1589670585386">
+    <state x="736" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1590184560271" />
+    <state x="578" y="117" key="CommitChangelistDialog2" timestamp="1590317412868">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="578" y="117" key="CommitChangelistDialog2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589670585386" />
+    <state x="578" y="117" key="CommitChangelistDialog2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1590317412868" />
     <state x="783" y="422" width="447" height="265" key="ComposerInitDialogKey" timestamp="1589385586729">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
@@ -324,22 +365,22 @@
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
     <state x="734" y="245" key="Github.UntrackedFilesDialog/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589496200418" />
-    <state width="1228" height="295" key="GridCell.Tab.0.bottom" timestamp="1589382330700">
+    <state width="1228" height="295" key="GridCell.Tab.0.bottom" timestamp="1590317956630">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state width="1228" height="295" key="GridCell.Tab.0.bottom/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589382330700" />
-    <state width="1228" height="295" key="GridCell.Tab.0.center" timestamp="1589382330700">
+    <state width="1228" height="295" key="GridCell.Tab.0.bottom/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1590317956630" />
+    <state width="1228" height="295" key="GridCell.Tab.0.center" timestamp="1590317956629">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state width="1228" height="295" key="GridCell.Tab.0.center/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589382330700" />
-    <state width="1228" height="295" key="GridCell.Tab.0.left" timestamp="1589382330700">
+    <state width="1228" height="295" key="GridCell.Tab.0.center/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1590317956629" />
+    <state width="1228" height="295" key="GridCell.Tab.0.left" timestamp="1590317956629">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state width="1228" height="295" key="GridCell.Tab.0.left/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589382330700" />
-    <state width="1228" height="295" key="GridCell.Tab.0.right" timestamp="1589382330700">
+    <state width="1228" height="295" key="GridCell.Tab.0.left/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1590317956629" />
+    <state width="1228" height="295" key="GridCell.Tab.0.right" timestamp="1590317956629">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state width="1228" height="295" key="GridCell.Tab.0.right/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589382330700" />
+    <state width="1228" height="295" key="GridCell.Tab.0.right/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1590317956629" />
     <state x="804" y="263" key="NewPhpClassDialog" timestamp="1589669710811">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
@@ -356,10 +397,10 @@
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
     <state x="507" y="185" key="SettingsEditor/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589574283571" />
-    <state x="598" y="273" key="Vcs.Push.Dialog.v2" timestamp="1589642946666">
+    <state x="598" y="273" key="Vcs.Push.Dialog.v2" timestamp="1590317460261">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>
-    <state x="598" y="273" key="Vcs.Push.Dialog.v2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1589642946666" />
+    <state x="598" y="273" key="Vcs.Push.Dialog.v2/93.0.1827.1080/1920.0.1280.984@93.0.1827.1080" timestamp="1590317460261" />
     <state x="185" y="92" width="1643" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589632377405">
       <screen x="93" y="0" width="1827" height="1080" />
     </state>

@@ -7,5 +7,15 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://192.168.10.10:3306/TrailTracker</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="@Production" uuid="79ef9267-7fb5-4d74-b15b-b7b13f0dd600">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <remarks>NameCheap Host</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1:3306/anatuqtn_TrailTracker</jdbc-url>
+      <driver-properties>
+        <property name="serverTimezone" value="UTC" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>
