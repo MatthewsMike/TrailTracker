@@ -14,9 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', 'MapController@index');
 Route::post('save-new-marker', 'MapController@saveNewMarker');
+Route::post('save-category-schedule', 'MapController@saveCategorySchedule');
 Route::post('get-maintenance-markers', 'MapController@GetAllTasksInDateRangeJSON');
 Route::post('get-points-of-interest-markers', 'MapController@GetAllPointsOfInterestJSON');
 Route::post('get-categories-and-id-by-type', 'MapController@getCategoriesByTypesJSON');
+Route::post('get-schedule-by-category-id', 'MapController@getScheduleByCategoryIDJSON');
+
+
 Route::get('/welcome', function () {
     return view('welcome');
 });

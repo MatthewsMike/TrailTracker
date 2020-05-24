@@ -5,7 +5,6 @@ This application is being designed as a proof of concept way of crowd sourcing m
 
 
 - todo: allow picture upload for new markers
-- todo: Add Existing POI's for BLT Trail
 - todo: create view for Scheduling
   - Set Default schedule per category
   - Allow Override schedule per point
@@ -19,3 +18,4 @@ This application is being designed as a proof of concept way of crowd sourcing m
 - todo: allow users to indicate frequency of helping
 - todo: allow users to be alerted on multiple conditions: location, age of task, skills, etc.
 - todo: integrate social media content that contains location data in geofence area.
+- todo: add machine learning to generate maintenance items based on "inspection" tasks

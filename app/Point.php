@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $description
  * @property string|null $icon
  * @property string|null $url
- * @property mixed|null $options
  * @property int|null $ApprovedBy
  * @property string|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -43,6 +42,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Point whereUrl($value)
  * @property int $categories_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Point whereCategoriesId($value)
+ * @property string $image
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Point whereImage($value)
  */
 class Point extends Model
 {

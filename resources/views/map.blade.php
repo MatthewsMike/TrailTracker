@@ -1,14 +1,16 @@
 <html>
     <head>
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/map_helper.js') }}" defer></script>
-        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         {!! $map['js'] !!}
+        <script src="{{ asset('js/map_helper.js') }}"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
         <!-- Styles -->
-        <link href="{{ asset('css/map.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/map.css') }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width"> <!-- Fix object size on mobile devices -->
 </head>
@@ -24,6 +26,7 @@
                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Todo - List Maintenance Items</a>
+                        <a class="dropdown-item" href="#" id="showMaintenanceSchedules">Manage Default Schedules</a>
                         <a class="dropdown-item" href="#">Todo - Show Account Preferences</a>
                         <a class="dropdown-item" href="#">Todo - Manage Visible POIs</a>
                         <div class="dropdown-divider"></div>
@@ -35,6 +38,7 @@
 </div>
 
  @include('modals.map_add_marker')
+ @include('modals.map_view_schedules')
 
 
 </body>

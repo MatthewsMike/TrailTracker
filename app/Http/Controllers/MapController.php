@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Frequency;
+use App\Schedule;
 use App\Task;
 use Carbon\Carbon;
 use FarhanWazir\GoogleMaps\GMaps;
@@ -77,8 +79,10 @@ class MapController extends Controller
         /******** END Custom Map Configuration ********/
 
         $categoryTypes = (new Category())->getAllCategoryTypes();
+        $categories = (new Category())->getAllCategoriesAndId();
+        $frequencies  = (new Frequency())->getAllFrequenciesAndId();
 
-        return view('map', ['map' => $map, 'categoryTypes' => $categoryTypes]);
+        return view('map', compact(['map','categoryTypes', 'frequencies', 'categories']));
     }
 
     private function getAllPointsOfInterest() {
@@ -101,13 +105,41 @@ class MapController extends Controller
         request()->validate([
             'lat' => 'required',
             'lng' => 'required',
-            'title' => 'required'
+            'title' => 'required',
+            'categories_id' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000'
         ]);
-        (new Point)->create($request->all());
+        $newMarker = $request->all();
+
+        $imageName = (new \App\Category)->getCategoryNameByID($newMarker['categories_id']) . '-' . $newMarker['title'] . '-' . time().'.'.$request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+        $newMarker['image'] = $imageName;
+
+
+        (new Point)->create($newMarker);
         (new Task)->CreateAllTasksFromSchedules();  //todo: remove from debugging.
-        Log::debug('Saving New Map Point');
-        return  response()->json($request->all());
+
+        $newMarker['icon'] = (new \App\Category)->getDefaultIconByID($newMarker['categories_id']);
+        return  response()->json($newMarker);
     }
+
+    public function saveCategorySchedule(Request $request) {
+        request()->validate([
+            'frequency_id' => 'required',
+            'start_date' => 'required|date',
+            'title' => 'required',
+            'description' => 'required',
+            'future_events_to_generate' => 'required',
+            'cascade_future_tasks_on_completion' => 'required',
+            'categories_id' => 'required',
+            'reward_points' => 'required',
+            'action' => 'required'
+        ]);
+        $schedule = Schedule::updateOrCreate(['id' => $request->input('id')], $request->all());
+        $response = "Default Schedule Updated For " . $schedule->category->name;
+        return  response()->json($response);
+    }
+
 
     public function GetAllTasksInDateRangeJSON(Request $request) {
         //todo: only return 1st of series (distinct on points_id and type of task) - Min Date.
@@ -122,5 +154,9 @@ class MapController extends Controller
     public function getCategoriesByTypesJSON(Request $request) {
         return response()->json((new Category)->getCategoriesAndIdByType($request->input('type')));
 
+    }
+
+    public function getScheduleByCategoryIDJSON(Request $request) {
+        return response()->json((new Schedule)::where('categories_id',$request->input('categories_id'))->first());
     }
 }

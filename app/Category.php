@@ -37,4 +37,16 @@ class Category extends Model
     public function getCategoriesAndIdByType($type) {
         return DB::table('categories')->where('type', '=', $type)->pluck('name','id');
     }
+
+    public function getAllCategoriesAndId() {
+        return DB::table('categories')->pluck('name','id');
+    }
+
+    public function getCategoryNameByID($id) {
+        return DB::table('categories')->where('id', '=', $id)->pluck('name')->first();
+    }
+
+    public function getDefaultIconByID($id) {
+        return DB::table('categories')->where('id', '=', $id)->pluck('default_icon')->first();
+    }
 }

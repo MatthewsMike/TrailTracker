@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Log;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Task wherePointsId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereUpdatedAt($value)
+ * @property-read \App\Point|null $point
  */
 class Task extends Model
 {

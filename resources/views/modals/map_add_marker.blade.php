@@ -8,7 +8,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="add-marker-form" class="form-horizontal" method="POST">
+                    <form id="add-marker-form" class="form-horizontal" method="POST" enctype="multipart/form-data">
                         <div class="card-body">
                             <!-- Position -->
                             <div class="form-group">
@@ -36,6 +36,7 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="modal-input-type">Type</label>
                                 <select name="modal-input-type" id="modal-input-type" class="form-control" required>
+                                        <option value="-1">Please Select</option>
                                     @foreach($categoryTypes as $type)
                                         <option value="{{$type}}">{{$type}}</option>
                                     @endforeach
@@ -50,6 +51,12 @@
                                 </Select>
                             </div>
                             <!-- /category -->
+                            <!-- image -->
+                            <div class="form-group">
+                                <label class="col-form-label" for="modal-input-image">Image</label>
+                                <input type="file" name="modal-input-image" id="modal-input-image" class="form-control">
+                            </div>
+                            <!-- /image -->
                         </div>
                     </form>
                 </div>
@@ -77,21 +84,23 @@
 
         $("#btn-save-new-marker").click(function (e) {
             e.preventDefault();
+            let fd = new FormData();
+            //fd.append('address',  $('#modal-input-address').val());
+            //fd.append('url', $('#modal-input-url').val());
+            //fd.append('icon', $('#modal-input-icon').val());
+            fd.append('lat', $('#modal-input-lat').val());
+            fd.append('lng', $('#modal-input-lng').val());
+            fd.append('categories_id', $('#modal-input-categories').val());
+            fd.append('type', $('#modal-input-type').val());
+            fd.append('title', $('#modal-input-title').val());
+            fd.append('description', $('#modal-input-description').val());
+            fd.append('image', $('#modal-input-image')[0].files[0]);
             $.ajax({
                 type: 'POST',
                 url: 'save-new-marker',
-                data: {
-                    address: $('#modal-input-address').val(),
-                    lat: $('#modal-input-lat').val(),
-                    lng: $('#modal-input-lng').val(),
-                    categories_id: $('#modal-input-categories').val(),
-                    type: $('#modal-input-type').val(),
-                    title: $('#modal-input-title').val(),
-                    description: $('#modal-input-description').val(),
-                    icon: $('#modal-input-icon').val(),
-                    options: $('#modal-input-options').val(),
-                    url: $('#modal-input-url').val()
-                },
+                data: fd,
+                processData: false,  // tell jQuery not to process the data
+                contentType: false,   // tell jQuery not to set contentType
                 success: function (markerProperties) {
                     AddMarkerToMap(markerProperties);
                     $('#newMarker').modal('hide');

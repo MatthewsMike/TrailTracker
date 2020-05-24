@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -42,15 +44,25 @@ use Illuminate\Support\Facades\DB;
  * @mixin \Eloquent
  * @property int $categories_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Schedule whereCategoriesId($value)
+ * @property-read \App\Category|null $category
+ * @property-read \App\Frequency|null $frequency
  */
 class Schedule extends Model
 {
     //
     protected $guarded = [];
 
+    public function setStartDateAttribute($value) {
+        $this->attributes['start_date'] = Carbon::parse($value);
+    }
     public function category() {
         return $this->hasOne('App\Category','id', 'categories_id');
     }
+
+    public function frequency() {
+        return $this->hasOne('App\Frequency', 'id', 'frequency_id');
+    }
+
     public function isScheduleLocationsFromCategory () {
         return $this->item_category == null ?  false :  true;
     }
