@@ -75,7 +75,6 @@
                 drawingControl: true,
                 drawingMode: 'marker'
             });
-
         });
 
         $(".btn-cancel-new-marker").click(function (e) {
@@ -87,7 +86,7 @@
             let button = $("#btn-save-new-marker");
             let buttonText = button.html();
             button.prop('disabled', true);
-            button.html("saving...");
+            button.html("saving..." + "0%");
 
 
             let fd = new FormData();
@@ -102,6 +101,24 @@
             fd.append('description', $('#modal-input-description').val());
             fd.append('image', $('#modal-input-image')[0].files[0]);
             $.ajax({
+                xhr: function() {
+                    let xhr = new window.XMLHttpRequest();
+
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            let percentComplete = evt.loaded / evt.total;
+                            percentComplete = parseInt(percentComplete * 100);
+                            console.log(percentComplete);
+                            button.html("saving..." + percentComplete + "%");
+                            if (percentComplete === 100) {
+
+                            }
+
+                        }
+                    }, false);
+
+                    return xhr;
+                },
                 type: 'POST',
                 url: 'save-new-marker',
                 data: fd,
