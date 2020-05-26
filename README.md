@@ -4,14 +4,11 @@ This application is designed as a proof of concept way of crowdsourcing maintena
 - [BLT Rails to Trails](https://blttrails.ca/)
 
 
-- todo: show users current location on the map (when click add)
-- todo: create view for Scheduling
-  - Set Default schedule per category
-  - Allow Override schedule per point
  - todo: make POI info window contain actions/option button per type
+   - Allow Override schedule per point
    - Feature: report condition, Hide this type, etc
    - Maintenance: Accept, Release, Complete (with note), Review Schedule Default/This Point
-   - Include uploaded Image
+- todo: Add Card formatting to information window of tasks
 - todo: Track IP address of submissions
 - todo: enable Authentication
 - todo: create view for Members/users

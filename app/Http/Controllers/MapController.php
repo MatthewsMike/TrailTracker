@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 use App\Point;
 use Illuminate\Support\Facades\Log;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class MapController extends Controller
 {
@@ -96,11 +97,49 @@ class MapController extends Controller
         Log::debug('Using Icon: ' . $POI->category->default_icon );
         $marker = array();
         $marker['position']= $POI->lat . ',' . $POI->lng;
-        $marker['infowindow_content'] = $POI->description;
+        $marker['infowindow_content'] = $this->generateInfoWindowFromPoint($POI);
         $marker['cursor'] = $POI->title;
         $marker['icon'] = $POI->icon ?: $POI->category->default_icon;
         $marker['title'] = $POI->title;
         return $marker;
+    }
+
+    private function generateInfoWindowFromPoint($POI) {
+        $html = "<div class=\"card\" style=\"width:302px\">";
+            if($POI->image) {
+                $html .= "<img class=\"card-img-top\" src=\"" . '/images/map-card/' . $POI->image ."\" alt=\"Card image\">";
+            }
+            $html .= "<div class=\"card-body\">";
+                $html .= "<h4 class=\"card-title\">" . $POI->title . "</h4>";
+                $html .= "<p class=\"card-text\">" . $POI->description . ".</p>";
+                $html .= "<a href=\"#\" class=\"btn btn-primary\">Edit</a>";
+            $html .= "</div>";
+        $html .= "</div>";
+        return $html;
+    }
+
+    private function verifyAllMapCardImagesResized() {
+        $images = (new Point)->where('image', '!=', '')->pluck('image');
+        foreach($images as $image) {
+            if(is_file(public_path('/images/' . $image))) {
+                if(!$this->isMapCardImageCreated($image)) {
+                    $this->resizeImageForMapCard($image);
+                }
+            }
+        }
+    }
+
+    private function isMapCardImageCreated($image) {
+        if(is_file(public_path('/images/map-card/' . $image))) {
+            return true;
+        }
+        return false;
+    }
+
+    private function resizeImageForMapCard($image) {
+        Image::make(public_path('/images/' . $image))
+            ->resize(300, null, function ($constraint) {$constraint->aspectRatio();})
+            ->save(public_path('/images/map-card/' . $image));
     }
 
     public function saveNewMarker(Request $request) {
@@ -115,14 +154,17 @@ class MapController extends Controller
 
         $imageName = (new \App\Category)->getCategoryNameByID($newMarker['categories_id']) . '-' . $newMarker['title'] . '-' . time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
-        $newMarker['image'] = $imageName;
+        $this->resizeImageForMapCard($imageName);
 
+        $POI = (new Point)->create($newMarker);
 
-        (new Point)->create($newMarker);
+        $POI['image'] = $imageName;
+        $POI['icon'] = (new \App\Category)->getDefaultIconByID($POI['categories_id']);
+        $POI['description'] = $this->generateInfoWindowFromPoint($POI);
+
+        $this->verifyAllMapCardImagesResized(); //todo: move call to verify data routine with Schedules.
         (new Task)->CreateAllTasksFromSchedules();  //todo: remove from debugging.
-
-        $newMarker['icon'] = (new \App\Category)->getDefaultIconByID($newMarker['categories_id']);
-        return  response()->json($newMarker);
+        return  response()->json($POI);
     }
 
     public function saveCategorySchedule(Request $request) {
@@ -150,7 +192,11 @@ class MapController extends Controller
     }
 
     public function GetAllPointsOfInterestJSON() {
-        return response()->json($this->getAllPointsOfInterest());
+        $POIs = $this->getAllPointsOfInterest();
+        foreach($POIs as $id => $POI) {
+            $POIs[$id]->description = $this->generateInfoWindowFromPoint(($POI));
+        }
+        return response()->json($POIs);
     }
 
     public function getCategoriesByTypesJSON(Request $request) {

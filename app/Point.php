@@ -54,5 +54,4 @@ class Point extends Model
         return $this->hasOne('App\Category','id', 'categories_id');
     }
 
-
 }
