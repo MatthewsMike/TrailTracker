@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Point;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManagerStatic as Image;
+use function Psy\debug;
 
 class MapController extends Controller
 {
@@ -57,21 +58,8 @@ class MapController extends Controller
 
         $this->gmap->initialize($config); // Initialize Map with custom configuration
 
-        // set up the marker ready for positioning
-        $marker = array();
-        $marker['draggable'] = true;
-        $marker['ondragend'] = '
-        iw_'. $this->gmap->map_name .'.close();
-        reverseGeocode(event.latLng, function(status, result, mark){
-            if(status == 200){
-                iw_'. $this->gmap->map_name .'.setContent(result);
-                iw_'. $this->gmap->map_name .'.open('. $this->gmap->map_name .', mark);
-            }
-        }, this);
-        ';
-
-        $this->gmap->onload = "var geoloccontrol = new klokantech.GeolocationControl(map);";
-        $this->gmap->add_marker($marker);
+        //events that would be triggered to early by OnLoadCompleted need to be added here.
+        $this->gmap->onload = "onMapLoadComplete();";
 
         $pointsOfInterest = $this->getAllPointsOfInterest();
         foreach($pointsOfInterest as $POI) {
@@ -94,7 +82,6 @@ class MapController extends Controller
     }
 
     private function addMapPointsPropertiesToMarker($POI) {
-        Log::debug('Using Icon: ' . $POI->category->default_icon );
         $marker = array();
         $marker['position']= $POI->lat . ',' . $POI->lng;
         $marker['infowindow_content'] = $this->generateInfoWindowFromPoint($POI);
@@ -105,6 +92,7 @@ class MapController extends Controller
     }
 
     private function generateInfoWindowFromPoint($POI) {
+        //Move to Point Class
         $html = "<div class=\"card\" style=\"width:302px\">";
             if($POI->image) {
                 $html .= "<img class=\"card-img-top\" src=\"" . '/images/map-card/' . $POI->image ."\" alt=\"Card image\">";
@@ -112,7 +100,14 @@ class MapController extends Controller
             $html .= "<div class=\"card-body\">";
                 $html .= "<h4 class=\"card-title\">" . $POI->title . "</h4>";
                 $html .= "<p class=\"card-text\">" . $POI->description . ".</p>";
-                $html .= "<a href=\"#\" class=\"btn btn-primary\">Edit</a>";
+                $html .= "<button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Options</button>";
+                $html .= "    <div class=\"dropdown-menu\">";
+                $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Manage Schedule</a>";
+                $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Report Condition</a>";
+                $html .= "        <a class=\"dropdown-item editMarker\" href=\"#\" id='". $POI->id ."'>Edit Marker</a>";
+                $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Hide This Type</a>";
+                $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Rate</a>";
+                $html .= "    </div>";
             $html .= "</div>";
         $html .= "</div>";
         return $html;
@@ -148,17 +143,16 @@ class MapController extends Controller
             'lng' => 'required',
             'title' => 'required',
             'categories_id' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000'
+            'image' => 'nullable|sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:10000'
         ]);
         $newMarker = $request->all();
-
-        $imageName = (new \App\Category)->getCategoryNameByID($newMarker['categories_id']) . '-' . $newMarker['title'] . '-' . time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
-        $this->resizeImageForMapCard($imageName);
-
+        if($request->has('image')) {
+            $imageName = (new \App\Category)->getCategoryNameByID($newMarker['categories_id']) . '-' . $newMarker['title'] . '-' . time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $this->resizeImageForMapCard($imageName);
+            $newMarker['image'] = $imageName;
+        }
         $POI = (new Point)->create($newMarker);
-
-        $POI['image'] = $imageName;
         $POI['icon'] = (new \App\Category)->getDefaultIconByID($POI['categories_id']);
         $POI['description'] = $this->generateInfoWindowFromPoint($POI);
 
@@ -166,6 +160,32 @@ class MapController extends Controller
         (new Task)->CreateAllTasksFromSchedules();  //todo: remove from debugging.
         return  response()->json($POI);
     }
+
+
+    public function saveEditMarker(Request $request) {
+        request()->validate([
+            'lat' => 'required',
+            'id' => 'required',
+            'lng' => 'required',
+            'title' => 'required',
+            'categories_id' => 'required',
+            'image' => 'nullable|sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:15000'
+        ]);
+        $newMarker = $request->all();
+
+        if($request->has('image')) {
+            $imageName = (new \App\Category)->getCategoryNameByID($newMarker['categories_id']) . '-' . $newMarker['title'] . '-' . time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $this->resizeImageForMapCard($imageName);
+            $newMarker['image'] = $imageName;
+        }
+
+        $POI = Point::updateOrCreate(['id' => $request->input('id')], $newMarker);
+        $POI['icon'] = (new \App\Category)->getDefaultIconByID($POI['categories_id']);
+        $POI['description'] = $this->generateInfoWindowFromPoint($POI);
+        return  response()->json($POI);
+    }
+
 
     public function saveCategorySchedule(Request $request) {
         request()->validate([
@@ -189,6 +209,10 @@ class MapController extends Controller
         //todo: only return 1st of series (distinct on points_id and type of task) - Min Date.
         return response()->json((new Task)->join('points','tasks.points_id','=', 'points.id')->join('categories','points.categories_id', '=','categories.id')->whereNotIn('status',['Cancelled', 'Completed'])->where('estimated_date','<=', carbon::now()->addDays($request->input('daysToLookAhead')))->get());
 
+    }
+
+    public function getMarkerByIDJSON(Request $request) {
+        return response()->json((new Point())::where('id', $request->input('id'))->first());
     }
 
     public function GetAllPointsOfInterestJSON() {

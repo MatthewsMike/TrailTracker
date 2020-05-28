@@ -2,7 +2,7 @@
 
     $(document).ready(function () {
 
-        $("#modal-input-type").change(function() {
+        $('#modal-input-type').change(function() {
             let type = this.value;
             $.ajax({
                 type: 'POST',
@@ -25,7 +25,7 @@
 
 
 
-        $("#showPointsOfInterest").click(function(e) {
+        $('#showPointsOfInterest').click(function(e) {
             removeAllMarkers();
             $.ajax({
                 type: 'POST',
@@ -41,7 +41,7 @@
             });
         })
 
-        $("#showMaintenance").click(function (e) {
+        $('#showMaintenance').click(function (e) {
             removeAllMarkers();
             $.ajax({
                 type: 'POST',
@@ -56,7 +56,6 @@
                 }
             });
         });
-
 
         $.ajaxSetup({
             headers: {
@@ -102,3 +101,9 @@ function removeAllMarkers(){
     }
 }
 
+//called from snippet added in MapController
+function onMapLoadComplete(){
+    new klokantech.GeolocationControl(map);
+    $('#map_canvas').on('click','.editMarker', function() {showMarkerModalEdit(this.id);});
+    console.log('ready');
+}

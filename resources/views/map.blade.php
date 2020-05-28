@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width"> <!-- Fix object size on mobile devices -->
 </head>
 <body>
-<div class="container">
+<div class="container" id="container">
     <div class="content">
         {!! $map['html'] !!}
         <div id="topCenterControl" class="nav-controls">
@@ -38,6 +38,7 @@
 </div>
 
  @include('modals.map_add_marker')
+ @include('modals.map_edit_marker')
  @include('modals.map_view_schedules')
 
 </body>

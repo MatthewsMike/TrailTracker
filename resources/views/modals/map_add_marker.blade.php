@@ -99,7 +99,9 @@
             fd.append('type', $('#modal-input-type').val());
             fd.append('title', $('#modal-input-title').val());
             fd.append('description', $('#modal-input-description').val());
-            fd.append('image', $('#modal-input-image')[0].files[0]);
+            if( $('#modal-input-image')[0].files[0]) {
+                fd.append('image', $('#modal-input-image')[0].files[0]);
+            }
             $.ajax({
                 xhr: function() {
                     let xhr = new window.XMLHttpRequest();
