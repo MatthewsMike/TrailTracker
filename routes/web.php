@@ -23,6 +23,9 @@ Route::post('get-categories-and-id-by-type', 'MapController@getCategoriesByTypes
 Route::post('get-schedule-by-category-id', 'MapController@getScheduleByCategoryIDJSON');
 Route::post('get-category-by-category-id', 'MapController@getCategoryByCategoryIDJSON');
 Route::post('save-category', 'MapController@saveCategory');
+Route::post('execute-validate-pictures', 'MapController@executeVerifyPictures');
+Route::post('execute-validate-tasks', 'MapController@executeVerifyTasks');
+
 
 Route::get('/welcome', function () {
     return view('welcome');

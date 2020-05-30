@@ -8,6 +8,10 @@ This application is designed as a proof of concept way of crowdsourcing maintena
    - Allow Override schedule per point
    - Feature: report condition, Hide this type, etc
    - Maintenance: Accept, Release, Complete (with note), Review Schedule Default/This Point
+- todo: Allow Deletion of a marker
+- todo: Add better task generation from schedule. 
+    - Possibly remove 'Future task count to generate' feature. 
+    - Add Cron Job to update Status from Future -> Current -> Overdue
 - todo: Add Card formatting to information window of tasks
 - todo: Track IP address of submissions
 - todo: enable Authentication

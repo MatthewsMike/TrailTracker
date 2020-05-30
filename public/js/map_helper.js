@@ -52,12 +52,36 @@
                 success: function (markersProperties) {
                     markersProperties.forEach(function(marker){
                         AddMarkerToMap(marker, marker.default_icon);
-                        console.log(marker);
-                        console.log('ready');
                     })
                 }
             });
         });
+
+        $('#ValidateTasks').click(function (e) {
+            removeAllMarkers();
+            $.ajax({
+                type: 'POST',
+                url: 'execute-validate-tasks',
+                success: function (data) {
+                    $('#toast-status-body').html(data);
+                    $('#toast-status').toast('show');
+                }
+            });
+        });
+
+        $('#ValidatePictures').click(function (e) {
+            removeAllMarkers();
+            $.ajax({
+                type: 'POST',
+                url: 'execute-validate-pictures',
+                success: function (data) {
+                    $('#toast-status-body').html(data);
+                    $('#toast-status').toast('show');
+                }
+            });
+        });
+
+
 
         $.ajaxSetup({
             headers: {

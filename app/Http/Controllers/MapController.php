@@ -175,8 +175,7 @@ class MapController extends Controller
         $POI['icon'] = (new \App\Category)->getDefaultIconByID($POI['categories_id']);
         $POI['description'] = $this->generateInfoWindowFromPoint($POI);
 
-        $this->verifyAllMapCardImagesResized(); //todo: move call to verify data routine with Schedules.
-        (new Task)->CreateAllTasksFromSchedules();  //todo: remove from debugging.
+        //todo: trigger schedule generation for new POI
         return  response()->json($POI);
     }
 
@@ -272,5 +271,14 @@ class MapController extends Controller
         return  response()->json($response);
     }
 
+    public function executeVerifyTasks() {
+        (new Task)->CreateAllTasksFromSchedules();
+        return "All Tasks Verified";
+    }
+
+    public function executeVerifyPictures() {
+        $this->verifyAllMapCardImagesResized();
+        return "All Pictures Verified";
+    }
 
 }
