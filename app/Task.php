@@ -101,14 +101,16 @@ class Task extends Model
             //get base date.
         Log::debug('Creating New Task from Schedule id ' . $schedule->id );
         if($schedule->isScheduleLocationsFromCategory()) {
-            $pointsFromCategory = $schedule->GetAllSchedulePointsIdFromCategory();
+            $pointsFromCategory = $schedule->GetAllSchedulePointsIdFromCategory(); //todo: exclude points that have custom schedule
+            log::debug($pointsFromCategory);
             foreach($pointsFromCategory as $point) {
+                Log::debug('Creating Task for Point id ' . $point);
                 (new Task)->create(
                     [   'schedule_id' => $schedule->id,
-                        'points_id' => $point->id,
+                        'points_id' => $point,
                         'status' => 'future',
                         'type_id' => '1',
-                        'estimated_date' => $this->GetNextTaskDate($schedule, $point->id)
+                        'estimated_date' => $this->GetNextTaskDate($schedule, $point)
                     ]
                 );
             }

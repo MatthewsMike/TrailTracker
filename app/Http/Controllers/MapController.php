@@ -27,8 +27,8 @@ class MapController extends Controller
     public function index(){
 
         /******** Custom Map Controls ********/
-        $Controls = ['document.getElementById("topCenterControl")'];
-        $this->gmap->injectControlsInTopCenter = $Controls;
+        $Controls = ['document.getElementById("custom-controls")'];
+        $this->gmap->injectControlsInBottomCenter = $Controls;
 
 
         /******** End Controls ********/
@@ -50,10 +50,8 @@ class MapController extends Controller
                 $("#newMarker").modal("show");
             ');
 
-        //$config['center'] = '44.655694,-63.734611';
         $config['center'] = 'auto';
-        //$config['center'] = 'Halifax, Nova Scotia';
-        //$config['kmlLayerURL'] = 'https://blttrails.ca/BLTTrailMap.kml';
+        $config['kmlLayerURL'] = 'https://blttrails.ca/BLTMap.kml'; //Base Map of Trail
         $config['map_type'] = 'SATELLITE';
 
         $this->gmap->initialize($config); // Initialize Map with custom configuration
@@ -94,21 +92,42 @@ class MapController extends Controller
     private function generateInfoWindowFromPoint($POI) {
         //Move to Point Class
         $html = "<div class=\"card\" style=\"width:302px\">";
-            if($POI->image) {
-                $html .= "<img class=\"card-img-top\" src=\"" . '/images/map-card/' . $POI->image ."\" alt=\"Card image\">";
-            }
-            $html .= "<div class=\"card-body\">";
-                $html .= "<h4 class=\"card-title\">" . $POI->title . "</h4>";
-                $html .= "<p class=\"card-text\">" . $POI->description . ".</p>";
-                $html .= "<button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Options</button>";
-                $html .= "    <div class=\"dropdown-menu\">";
-                $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Manage Schedule</a>";
-                $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Report Condition</a>";
-                $html .= "        <a class=\"dropdown-item editMarker\" href=\"#\" id='". $POI->id ."'>Edit Marker</a>";
-                $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Hide This Type</a>";
-                $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Rate</a>";
-                $html .= "    </div>";
-            $html .= "</div>";
+        if($POI->image) {
+            $html .= "<img class=\"card-img-top\" src=\"" . '/images/map-card/' . $POI->image ."\" alt=\"Card image\">";
+        }
+        $html .= "<div class=\"card-body\">";
+        $html .= "<h4 class=\"card-title\">" . $POI->title . "</h4>";
+        $html .= "<p class=\"card-text\">" . $POI->description . ".</p>";
+        $html .= "<button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Options</button>";
+        $html .= "    <div class=\"dropdown-menu\">";
+        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Manage Schedule</a>";
+        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Report Condition</a>";
+        $html .= "        <a class=\"dropdown-item editMarker\" href=\"#\" id='". $POI->id ."'>Edit Marker</a>";
+        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Hide This Type</a>";
+        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Rate</a>";
+        $html .= "    </div>";
+        $html .= "</div>";
+        $html .= "</div>";
+        return $html;
+    }
+    private function generateInfoWindowFromTask($task) {
+        //Move to Point Class
+        $html = "<div class=\"card\" style=\"width:302px\">";
+        if($task->image) {
+            $html .= "<img class=\"card-img-top\" src=\"" . '/images/map-card/' . $task->image ."\" alt=\"Card image\">";
+        }
+        $html .= "<div class=\"card-body\">";
+        $html .= "<h4 class=\"card-title\">" . $task->title . "</h4>";
+        $html .= "<p class=\"card-text\">" . $task->description . ".</p>";
+        $html .= "<button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Options</button>";
+        $html .= "    <div class=\"dropdown-menu\">";
+        $html .= "        <a class=\"dropdown-item editMarker\" href=\"#\" id='". $task->id ."'>Edit Marker</a>";
+        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Mark Completed</a>";
+        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Assign</a>";
+        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Delegate</a>";
+        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Report Condition</a>";
+        $html .= "    </div>";
+        $html .= "</div>";
         $html .= "</div>";
         return $html;
     }
@@ -207,7 +226,12 @@ class MapController extends Controller
 
     public function GetAllTasksInDateRangeJSON(Request $request) {
         //todo: only return 1st of series (distinct on points_id and type of task) - Min Date.
-        return response()->json((new Task)->join('points','tasks.points_id','=', 'points.id')->join('categories','points.categories_id', '=','categories.id')->whereNotIn('status',['Cancelled', 'Completed'])->where('estimated_date','<=', carbon::now()->addDays($request->input('daysToLookAhead')))->get());
+        $taskCollection = (new Task)->join('points','tasks.points_id','=', 'points.id')->join('categories','points.categories_id', '=','categories.id')->whereNotIn('status',['Cancelled', 'Completed'])->where('estimated_date','<=', carbon::now()->addDays($request->input('daysToLookAhead')))->get();
+        $taskCollection = $taskCollection->map(function($task) {
+            $task['description'] = $this->generateInfoWindowFromPoint($task);
+            return $task;
+        });
+        return response()->json($taskCollection);
 
     }
 
@@ -231,4 +255,22 @@ class MapController extends Controller
     public function getScheduleByCategoryIDJSON(Request $request) {
         return response()->json((new Schedule)::where('categories_id',$request->input('categories_id'))->first());
     }
+
+    public function getCategoryByCategoryIDJSON(Request $request) {
+        return response()->json((new Category)::where('id',$request->input('categories_id'))->first());
+    }
+
+
+    public function saveCategory(Request $request) {
+        request()->validate([
+            'type' => 'required',
+            'name' => 'required',
+            'default_icon' => 'required'
+        ]);
+        $category = Category::updateOrCreate(['id' => $request->input('id')], $request->all());
+        $response = $category->type . ' / ' . $category->name . " successfully updated";
+        return  response()->json($response);
+    }
+
+
 }

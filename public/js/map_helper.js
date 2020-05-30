@@ -50,8 +50,10 @@
                     daysToLookAhead: 14,
                 },
                 success: function (markersProperties) {
-                    markersProperties.forEach(function(markerProperties){
-                        AddMarkerToMap(markerProperties, markerProperties.default_icon);
+                    markersProperties.forEach(function(marker){
+                        AddMarkerToMap(marker, marker.default_icon);
+                        console.log(marker);
+                        console.log('ready');
                     })
                 }
             });
@@ -105,5 +107,4 @@ function removeAllMarkers(){
 function onMapLoadComplete(){
     new klokantech.GeolocationControl(map);
     $('#map_canvas').on('click','.editMarker', function() {showMarkerModalEdit(this.id);});
-    console.log('ready');
 }

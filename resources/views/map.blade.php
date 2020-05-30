@@ -18,7 +18,7 @@
 <div class="container" id="container">
     <div class="content">
         {!! $map['html'] !!}
-        <div id="topCenterControl" class="nav-controls">
+        <div id="custom-controls" class="nav-controls">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-primary" id="addMarker">Add Marker</button>
                 <button type="button" class="btn btn-primary" id="showMaintenance">Show Maintenance Items</button>
@@ -26,6 +26,7 @@
                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#" id="showMaintenanceSchedules">Manage Default Schedules</a>
+                        <a class="dropdown-item" href="#" id="showCategories">Manage Categories</a>
                         <a class="dropdown-item" href="#">Todo - List Maintenance Items</a>
                         <a class="dropdown-item" href="#">Todo - Show Account Preferences</a>
                         <a class="dropdown-item" href="#">Todo - Manage Visible POIs</a>
@@ -40,6 +41,6 @@
  @include('modals.map_add_marker')
  @include('modals.map_edit_marker')
  @include('modals.map_view_schedules')
-
+ @include('modals.map_view_categories')
 </body>
 </html>

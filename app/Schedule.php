@@ -64,7 +64,7 @@ class Schedule extends Model
     }
 
     public function isScheduleLocationsFromCategory () {
-        return $this->item_category == null ?  false :  true;
+        return $this->categories_id == null ?  false :  true;
     }
 
     public function isScheduleLocationsFromPoint () {
@@ -73,6 +73,6 @@ class Schedule extends Model
 
     public function GetAllSchedulePointsIdFromCategory() {
         //todo: convert to one to many or handle case where category is part of the name of another.
-        return DB::table('points')->where('categories_id', '=',  $this->item_category)->get();
+        return DB::table('points')->where('categories_id', '=',  $this->categories_id)->pluck('id');
     }
 }

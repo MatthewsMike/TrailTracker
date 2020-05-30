@@ -21,7 +21,8 @@ Route::post('get-maintenance-markers', 'MapController@GetAllTasksInDateRangeJSON
 Route::post('get-points-of-interest-markers', 'MapController@GetAllPointsOfInterestJSON');
 Route::post('get-categories-and-id-by-type', 'MapController@getCategoriesByTypesJSON');
 Route::post('get-schedule-by-category-id', 'MapController@getScheduleByCategoryIDJSON');
-
+Route::post('get-category-by-category-id', 'MapController@getCategoryByCategoryIDJSON');
+Route::post('save-category', 'MapController@saveCategory');
 
 Route::get('/welcome', function () {
     return view('welcome');
