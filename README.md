@@ -12,7 +12,6 @@ This application is designed as a proof of concept way of crowdsourcing maintena
 - todo: Add better task generation from schedule. 
     - Possibly remove 'Future task count to generate' feature. 
     - Add Cron Job to update Status from Future -> Current -> Overdue
-- todo: Add Card formatting to information window of tasks
 - todo: Track IP address of submissions
 - todo: enable Authentication
 - todo: create view for Members/users

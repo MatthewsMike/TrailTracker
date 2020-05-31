@@ -8,7 +8,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="add-marker-form" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                    <form id="edit-marker-form" class="form-horizontal" method="POST" enctype="multipart/form-data">
                         <div class="card-body">
                             <!-- Point ID -->
                             <input type="hidden" id="modal-input-edit-marker-point-id" name="modal-input-edit-marker-point-id" value="">
@@ -55,12 +55,20 @@
                             </div>
                             <!-- /category -->
                             <!-- image -->
-                                <img src="" id="modal-input-edit-marker-current-image"> <!-- add No Image default image -->
+                                <img src="" id="modal-input-edit-marker-current-image"> <!--todo: add default image -->
                             <div class="form-group">
                                 <label class="col-form-label" for="modal-input-edit-marker-image">Image</label>
                                 <input type="file" name="modal-input-edit-marker-image" id="modal-input-edit-marker-image" class="form-control">
                             </div>
                             <!-- /image -->
+                            <!-- delete -->
+                            <img src="" id="modal-input-edit-marker-current-image"> <!--todo: add default image -->
+                            <div class="form-group">
+                                <label class="col-form-label" for="modal-input-edit-marker-delete">Delete Marker?</label>
+                                <input type="checkbox" name="modal-input-edit-marker-delete" id="modal-input-edit-marker-delete">
+                            </div>
+                            <!-- /delete -->
+
                         </div>
                     </form>
                 </div>
@@ -105,6 +113,9 @@
             fd.append('type', $('#modal-input-edit-marker-type').val());
             fd.append('title', $('#modal-input-edit-marker-title').val());
             fd.append('description', $('#modal-input-edit-marker-description').val());
+            if($('#modal-input-edit-marker-delete').is(':checked')) {
+                fd.append('delete', 'delete');
+            }
             if($('#modal-input-edit-marker-image')[0].files[0]) {
                 fd.append('image', $('#modal-input-edit-marker-image')[0].files[0]);
             }
@@ -132,12 +143,17 @@
                 data: fd,
                 processData: false,  // tell jQuery not to process the data
                 contentType: false,   // tell jQuery not to set contentType
-                success: function (markerProperties) {
-                    AddMarkerToMap(markerProperties);
-                    $('#editMarker').modal('hide');
-                    hideMapDrawControls();
-                    button.prop('disabled', false);
-                    button.html(buttonText);
+                success: function (data) {
+                    if(data === 1) {
+                        //deleted
+                    } else {
+                        //saved
+                        AddMarkerToMap(data);
+                        $('#editMarker').modal('hide');
+                        hideMapDrawControls();
+                        button.prop('disabled', false);
+                        button.html(buttonText);
+                    }
                 }
             });
 

@@ -2,15 +2,12 @@
     <head>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-        <script src="{{ asset('js/map_helper.js') }}"></script>
+        <script src="{{ asset('js/all.js') }}"></script>
         {!! $map['js'] !!}
-        <script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script> <!-- icon to show current location -->
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/map.css') }}" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width"> <!-- Fix object size on mobile devices -->
 </head>

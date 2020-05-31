@@ -93,7 +93,7 @@ class MapController extends Controller
         //Move to Point Class
         $html = "<div class=\"card\" style=\"width:302px\">";
         if($POI->image) {
-            $html .= "<img class=\"card-img-top\" src=\"" . '/images/map-card/' . $POI->image ."\" alt=\"Card image\">";
+            $html .= "<img class=\"card-img-top card-image-map\" src=\"" . url('/images/map-card/'). '/'. $POI->image ."\" alt=\"Card image\">";
         }
         $html .= "<div class=\"card-body\">";
         $html .= "<h4 class=\"card-title\">" . $POI->title . "</h4>";
@@ -114,7 +114,7 @@ class MapController extends Controller
         //Move to Point Class
         $html = "<div class=\"card\" style=\"width:302px\">";
         if($task->image) {
-            $html .= "<img class=\"card-img-top\" src=\"" . '/images/map-card/' . $task->image ."\" alt=\"Card image\">";
+            $html .= "<img class=\"card-img-top card-image-map\" src=\"" . '/images/map-card/' . $task->image ."\" alt=\"Card image\">";
         }
         $html .= "<div class=\"card-body\">";
         $html .= "<h4 class=\"card-title\">" . $task->title . "</h4>";
@@ -153,6 +153,7 @@ class MapController extends Controller
     private function resizeImageForMapCard($image) {
         Image::make(public_path('/images/' . $image))
             ->resize(300, null, function ($constraint) {$constraint->aspectRatio();})
+            ->orientate()
             ->save(public_path('/images/map-card/' . $image));
     }
 
@@ -189,6 +190,11 @@ class MapController extends Controller
             'categories_id' => 'required',
             'image' => 'nullable|sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:15000'
         ]);
+        log::debug(request()->input('delete'));
+        if(request()->input('delete') == 'delete') {
+            return Point::destroy(request()->input('id'));
+        }
+
         $newMarker = $request->all();
 
         if($request->has('image')) {

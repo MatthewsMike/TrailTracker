@@ -9,7 +9,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="add-marker-form" class="form-horizontal" method="POST">
+                    <form id="view-categories-form" class="form-horizontal" method="POST">
                         <div class="card-body">
                             <!-- Category -->
                             <div class="form-group">
