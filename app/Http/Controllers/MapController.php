@@ -121,11 +121,10 @@ class MapController extends Controller
         $html .= "<p class=\"card-text\">" . $task->description . ".</p>";
         $html .= "<button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Options</button>";
         $html .= "    <div class=\"dropdown-menu\">";
-        $html .= "        <a class=\"dropdown-item editMarker\" href=\"#\" id='". $task->id ."'>Edit Marker</a>";
-        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Mark Completed</a>";
-        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Assign</a>";
-        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Delegate</a>";
-        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Report Condition</a>";
+        $html .= "        <a class=\"dropdown-item taskMarkCompleted\" href=\"#\" task-id='". $task->tasks_id ."'>Mark Completed</a>";
+        $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Assign</a>";
+        $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Delegate</a>";
+        $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Report Condition</a>";
         $html .= "    </div>";
         $html .= "</div>";
         $html .= "</div>";
@@ -231,9 +230,9 @@ class MapController extends Controller
 
     public function GetAllTasksInDateRangeJSON(Request $request) {
         //todo: only return 1st of series (distinct on points_id and type of task) - Min Date.
-        $taskCollection = (new Task)->join('points','tasks.points_id','=', 'points.id')->join('categories','points.categories_id', '=','categories.id')->whereNotIn('status',['Cancelled', 'Completed'])->where('estimated_date','<=', carbon::now()->addDays($request->input('daysToLookAhead')))->get();
+        $taskCollection = Task::select('tasks.id as tasks_id', 'tasks.*', 'points.*', 'categories.*')->join('points','tasks.points_id','=', 'points.id')->join('categories','points.categories_id', '=','categories.id')->whereNotIn('status',['Cancelled', 'Completed'])->where('estimated_date','<=', carbon::now()->addDays($request->input('daysToLookAhead')))->get();
         $taskCollection = $taskCollection->map(function($task) {
-            $task['description'] = $this->generateInfoWindowFromPoint($task);
+            $task['description'] = $this->generateInfoWindowFromTask($task);
             return $task;
         });
         return response()->json($taskCollection);
@@ -241,7 +240,7 @@ class MapController extends Controller
     }
 
     public function getMarkerByIDJSON(Request $request) {
-        return response()->json((new Point())::where('id', $request->input('id'))->first());
+        return response()->json(Point::where('id', $request->input('id'))->first());
     }
 
     public function GetAllPointsOfInterestJSON() {
@@ -285,6 +284,16 @@ class MapController extends Controller
     public function executeVerifyPictures() {
         $this->verifyAllMapCardImagesResized();
         return "All Pictures Verified";
+    }
+
+    public function executeMarkTaskComplete(Request $request) {
+        request()->validate([
+            'taskId' => 'required'
+        ]);
+        $task = (new \App\Task)->find($request->input('taskId'));
+        $task->status = 'Completed';
+        $task->save();
+        return('Task marked as completed');
     }
 
 }

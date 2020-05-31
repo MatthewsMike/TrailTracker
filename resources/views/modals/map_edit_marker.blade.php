@@ -153,9 +153,12 @@
                         hideMapDrawControls();
                         button.prop('disabled', false);
                         button.html(buttonText);
+                        removeAllMarkers();
+                        requestAllMarkers();
                     }
                 }
             });
+
 
         });
 

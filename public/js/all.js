@@ -129,38 +129,15 @@ this.Pa=this.enabled=!1,this.yb=b||null,this.Z=this.ma=this.Bb=null,M(this.eleme
 
         $('#showPointsOfInterest').click(function(e) {
             removeAllMarkers();
-            $.ajax({
-                type: 'POST',
-                url: 'get-points-of-interest-markers',
-                data: {
-                    daysToLookAhead: 14,
-                },
-                success: function (markersProperties) {
-                    markersProperties.forEach(function(markerProperties){
-                        AddMarkerToMap(markerProperties, markerProperties.category.default_icon);
-                    })
-                }
-            });
+            requestAllMarkers()
         })
 
         $('#showMaintenance').click(function (e) {
             removeAllMarkers();
-            $.ajax({
-                type: 'POST',
-                url: 'get-maintenance-markers',
-                data: {
-                    daysToLookAhead: 14,
-                },
-                success: function (markersProperties) {
-                    markersProperties.forEach(function(marker){
-                        AddMarkerToMap(marker, marker.default_icon);
-                    })
-                }
-            });
+            requestAllTasks();
         });
 
         $('#ValidateTasks').click(function (e) {
-            removeAllMarkers();
             $.ajax({
                 type: 'POST',
                 url: 'execute-validate-tasks',
@@ -172,7 +149,6 @@ this.Pa=this.enabled=!1,this.yb=b||null,this.Z=this.ma=this.Bb=null,M(this.eleme
         });
 
         $('#ValidatePictures').click(function (e) {
-            removeAllMarkers();
             $.ajax({
                 type: 'POST',
                 url: 'execute-validate-pictures',
@@ -182,7 +158,6 @@ this.Pa=this.enabled=!1,this.yb=b||null,this.Z=this.ma=this.Bb=null,M(this.eleme
                 }
             });
         });
-
 
 
         $.ajaxSetup({
@@ -227,10 +202,61 @@ function removeAllMarkers(){
     for(let i=0; i<markers_map.length; i++){
         markers_map[i].setMap(null);
     }
+    markers_map = [];
+}
+
+function requestAllMarkers() {
+    $.ajax({
+        type: 'POST',
+        url: 'get-points-of-interest-markers',
+        data: {
+            daysToLookAhead: 14,
+        },
+        success: function (markersProperties) {
+            markersProperties.forEach(function (markerProperties) {
+                AddMarkerToMap(markerProperties, markerProperties.category.default_icon);
+            })
+        }
+    });
+}
+
+function requestAllTasks() {
+    $.ajax({
+        type: 'POST',
+        url: 'get-maintenance-markers',
+        data: {
+            daysToLookAhead: 14,
+        },
+        success: function (markersProperties) {
+            markersProperties.forEach(function(marker){
+                AddMarkerToMap(marker, marker.default_icon);
+            })
+        }
+    });
 }
 
 //called from snippet added in MapController
 function onMapLoadComplete(){
     new klokantech.GeolocationControl(map);
-    $('#map_canvas').on('click','.editMarker', function() {showMarkerModalEdit(this.id);});
+    let mapCanvas = $('#map_canvas');
+    mapCanvas.on('click','.editMarker', function() {showMarkerModalEdit(this.id);});
+    mapCanvas.on('click','.taskMarkCompleted', function() {taskMarkerCompleted($(this).attr('task-id'));});
+}
+
+
+function taskMarkerCompleted(taskId) {
+    $.ajax({
+        type: 'POST',
+        url: 'execute-mark-task-complete',
+        data: {
+            taskId: taskId
+        },
+        success: function (data) {
+            $('#toast-status-body').html(data);
+            $('#toast-status').toast('show');
+            removeAllMarkers();
+            requestAllTasks();
+        }
+    });
+
 }

@@ -25,7 +25,7 @@ Route::post('get-category-by-category-id', 'MapController@getCategoryByCategoryI
 Route::post('save-category', 'MapController@saveCategory');
 Route::post('execute-validate-pictures', 'MapController@executeVerifyPictures');
 Route::post('execute-validate-tasks', 'MapController@executeVerifyTasks');
-
+Route::post('execute-mark-task-complete', 'MapController@executeMarkTaskComplete');
 
 Route::get('/welcome', function () {
     return view('welcome');

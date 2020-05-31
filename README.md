@@ -3,11 +3,12 @@
 This application is designed as a proof of concept way of crowdsourcing maintenance of multi use trails.  The initial goal is to provide a system to view and act on maintenance tasks.  Task can be generated from user submissions (Downed Tree), or by a schedule (Empty Garbage).
 - [BLT Rails to Trails](https://blttrails.ca/)
 
-
+ - remove marker that was deleted/ task completed (perhaps add property on marker called "marker_id" and have that as an attr of the infowindow buttons)
+ 
  - todo: make POI info window contain actions/option button per type
+   - Maintenance: Accept, Release, Complete (with note), Review Schedule Default/This Point
    - Allow Override schedule per point
    - Feature: report condition, Hide this type, etc
-   - Maintenance: Accept, Release, Complete (with note), Review Schedule Default/This Point
 - todo: Allow Deletion of a marker
 - todo: Add better task generation from schedule. 
     - Possibly remove 'Future task count to generate' feature. 
