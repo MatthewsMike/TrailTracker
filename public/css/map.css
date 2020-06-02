@@ -7,7 +7,7 @@ body div.container {
     padding: 10px;
 }
 
-.card-image-map {
+img.card-image-map {
     max-height: 200px;
     max-width: fit-content;
     align-self: center;

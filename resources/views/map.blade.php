@@ -50,7 +50,6 @@
     </div>
 </div>
 
- @include('modals.map_add_marker')
  @include('modals.map_edit_marker')
  @include('modals.map_view_schedules')
  @include('modals.map_view_categories')

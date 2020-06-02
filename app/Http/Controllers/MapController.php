@@ -45,14 +45,16 @@ class MapController extends Controller
         $config['drawingControl'] = false;
         $config['drawingOnComplete'] = array('marker'=>'
                 newShape.setMap(null);
-                $("#modal-input-lat").val(newShape.getPosition().lat());
-                $("#modal-input-lng").val(newShape.getPosition().lng());
-                $("#newMarker").modal("show");
+                $("#modal-input-edit-marker-lat").val(newShape.getPosition().lat());
+                $("#modal-input-edit-marker-lng").val(newShape.getPosition().lng());
+                $("#editMarker").modal("show");
             ');
 
         $config['center'] = 'auto';
         $config['kmlLayerURL'] = 'https://blttrails.ca/BLTMap.kml'; //Base Map of Trail
         $config['map_type'] = 'SATELLITE';
+        $config['disableStreetViewControl'] = true;
+        $config['zoomControlPosition'] = 'RIGHT_CENTER';
 
         $this->gmap->initialize($config); // Initialize Map with custom configuration
 
@@ -156,34 +158,9 @@ class MapController extends Controller
             ->save(public_path('/images/map-card/' . $image));
     }
 
-    public function saveNewMarker(Request $request) {
-        request()->validate([
-            'lat' => 'required',
-            'lng' => 'required',
-            'title' => 'required',
-            'categories_id' => 'required',
-            'image' => 'nullable|sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:10000'
-        ]);
-        $newMarker = $request->all();
-        if($request->has('image')) {
-            $imageName = (new \App\Category)->getCategoryNameByID($newMarker['categories_id']) . '-' . $newMarker['title'] . '-' . time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
-            $this->resizeImageForMapCard($imageName);
-            $newMarker['image'] = $imageName;
-        }
-        $POI = (new Point)->create($newMarker);
-        $POI['icon'] = (new \App\Category)->getDefaultIconByID($POI['categories_id']);
-        $POI['description'] = $this->generateInfoWindowFromPoint($POI);
-
-        //todo: trigger schedule generation for new POI
-        return  response()->json($POI);
-    }
-
-
     public function saveEditMarker(Request $request) {
         request()->validate([
             'lat' => 'required',
-            'id' => 'required',
             'lng' => 'required',
             'title' => 'required',
             'categories_id' => 'required',
@@ -206,6 +183,7 @@ class MapController extends Controller
         $POI = Point::updateOrCreate(['id' => $request->input('id')], $newMarker);
         $POI['icon'] = (new \App\Category)->getDefaultIconByID($POI['categories_id']);
         $POI['description'] = $this->generateInfoWindowFromPoint($POI);
+        //todo: trigger schedule generation for new POI
         return  response()->json($POI);
     }
 
@@ -294,6 +272,19 @@ class MapController extends Controller
         $task->status = 'Completed';
         $task->save();
         return('Task marked as completed');
+    }
+
+    public function getIp(){
+        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
+            if (array_key_exists($key, $_SERVER) === true){
+                foreach (explode(',', $_SERVER[$key]) as $ip){
+                    $ip = trim($ip); // just to be safe
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
+                        return $ip;
+                    }
+                }
+            }
+        }
     }
 
 }

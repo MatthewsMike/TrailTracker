@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', 'MapController@index');
-Route::post('save-new-marker', 'MapController@saveNewMarker');
 Route::post('save-edit-marker', 'MapController@saveEditMarker');
 Route::post('get-marker-by-id', 'MapController@getMarkerByIDJSON');
 Route::post('save-category-schedule', 'MapController@saveCategorySchedule');

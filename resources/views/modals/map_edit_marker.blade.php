@@ -15,12 +15,26 @@
                             <!-- /Point ID -->
                             <!-- Position --> <!-- todo set to move marker button -->
                             <div class="form-group">
-                                <label class="col-form-label" for="modal-input-edit-marker-lat">Lat</label>
-                                <input type="text" name="modal-input-edit-marker-lat" class="form-control" id="modal-input-edit-marker-lat" required>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label class="col-form-label" for="modal-input-edit-marker-lat">Lat</label>
+                                        <input type="text" name="modal-input-edit-marker-lat" class="form-control" id="modal-input-edit-marker-lat" disabled required>
+                                    </div>
+                                    <div class="col">
+                                        <label class="col-form-label" for="modal-input-edit-marker-lng">Lng</label>
+                                        <input type="text" name="modal-input-edit-marker-lng" class="form-control" id="modal-input-edit-marker-lng" disabled required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col">
+                                        <button type="button" class="btn btn-primary" id="moveMarker">Move Marker</button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label" for="modal-input-edit-marker-lng">Lng</label>
-                                <input type="text" name="modal-input-edit-marker-lng" class="form-control" id="modal-input-edit-marker-lng" required>
                             </div>
                             <!-- Position -->
                             <!-- title -->
@@ -84,14 +98,20 @@
     var defaultCategory = "";
     $(document).ready(function () {
         $("#addMarker").click(function (e) {
-            drawingManager.setOptions({
-                drawingControl: true,
-                drawingMode: 'marker'
-            });
+            showDrawingControls();
+        });
+
+        $("#moveMarker").click(function (e) {
+            //todo: implement as a draggable marker.
+            removeAllMarkers();
+            showDrawingControls();
+            $("#editMarker").modal("hide");
         });
 
         $(".btn-cancel-edit-marker").click(function (e) {
             hideMapDrawControls();
+            removeAllMarkers();
+            requestAllMarkers();
         });
 
         $("#btn-save-edit-marker").click(function (e) {
@@ -151,11 +171,17 @@
                         AddMarkerToMap(data);
                         $('#editMarker').modal('hide');
                         hideMapDrawControls();
+                        button.html("Save");
                         button.prop('disabled', false);
                         button.html(buttonText);
                         removeAllMarkers();
                         requestAllMarkers();
                     }
+                },
+                error: function(error) {
+                    //todo
+                    button.html("Save");
+                    button.prop('disabled', false);
                 }
             });
 
@@ -209,6 +235,11 @@
         $("#editMarker").modal("show");
     }
 
-
+function showDrawingControls() {
+    drawingManager.setOptions({
+        drawingControl: true,
+        drawingMode: 'marker'
+    });
+}
 
 </script>

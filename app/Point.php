@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 /**
  * Task
  *
@@ -48,6 +50,7 @@ use Illuminate\Database\Eloquent\Model;
 class Point extends Model
 {
     //
+    use SoftDeletes;
     protected $guarded = ['isApproved'];
 
     public function category() {
