@@ -13,21 +13,19 @@
         "axios": "^0.19",
         "bootstrap": "^4.0.0",
         "cross-env": "^7.0.2",
-        "jquery": "^3.5.1",
+        "jquery": "^3.2",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.13",
         "popper.js": "^1.12",
-        "resolve-url-loader": "^3.1.0",
-        "sass": "^1.15.2",
-        "sass-loader": "^8.0.0",
-        "vue-template-compiler": "^2.6.11"
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.20.1",
+        "sass-loader": "^8.0.0"
     },
     "dependencies": {
         "bootstrap-daterangepicker": "^3.0.5",
         "daterangepicker": "^3.1.0",
         "jquery-ui": "^1.12.1",
         "moment": "^2.26.0",
-        "node-sass": "^4.14.1",
-        "webpack": "^4.0.0"
+        "node-sass": "^4.14.1"
     }
 }

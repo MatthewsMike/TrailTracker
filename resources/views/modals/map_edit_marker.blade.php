@@ -2,7 +2,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Marker</h5>
+                    <h5 class="modal-title" id="modal-title-edit-marker">Edit Marker</h5>
                     <button type="button" class="close btn-cancel btn-cancel-edit-marker" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -75,6 +75,7 @@
                                 <input type="file" name="modal-input-edit-marker-image" id="modal-input-edit-marker-image" class="form-control">
                             </div>
                             <!-- /image -->
+                            @auth
                             <!-- delete -->
                             <img src="" id="modal-input-edit-marker-current-image"> <!--todo: add default image -->
                             <div class="form-group">
@@ -82,7 +83,7 @@
                                 <input type="checkbox" name="modal-input-edit-marker-delete" id="modal-input-edit-marker-delete">
                             </div>
                             <!-- /delete -->
-
+                            @endauth
                         </div>
                     </form>
                 </div>
@@ -99,6 +100,8 @@
     $(document).ready(function () {
         $("#addMarker").click(function (e) {
             showDrawingControls();
+            resetEditMarkerForm();
+            setEditMarkerModalTitle('Add Marker');
         });
 
         $("#moveMarker").click(function (e) {
@@ -230,9 +233,10 @@
                 $('#modal-input-edit-marker-description').val(marker.description);
                 $('#modal-input-edit-marker-type').val(marker.type).trigger('change');
                 $('#modal-input-edit-marker-current-image').attr('src', '{{ url('/images/map-card') }}/' + marker.image);
+                setEditMarkerModalTitle('Edit Marker: ' + marker.title);
+                $("#editMarker").modal("show");
             }
         });
-        $("#editMarker").modal("show");
     }
 
 function showDrawingControls() {
@@ -242,4 +246,17 @@ function showDrawingControls() {
     });
 }
 
+function resetEditMarkerForm() {
+    $('#modal-input-edit-marker-point-id').val('');
+    $('#modal-input-edit-marker-lat').val('');
+    $('#modal-input-edit-marker-lng').val('');
+    $('#modal-input-edit-marker-title').val('');
+    $('#modal-input-edit-marker-description').val('');
+    $('#modal-input-edit-marker-type').val('Maintenance').change();
+    $('#modal-input-edit-marker-current-image').attr('src', '');
+}
+
+function setEditMarkerModalTitle(title) {
+    $('#modal-title-edit-marker').html(title)
+}
 </script>

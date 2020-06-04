@@ -25,7 +25,13 @@ Route::post('save-category', 'MapController@saveCategory');
 Route::post('execute-validate-pictures', 'MapController@executeVerifyPictures');
 Route::post('execute-validate-tasks', 'MapController@executeVerifyTasks');
 Route::post('execute-mark-task-complete', 'MapController@executeMarkTaskComplete');
+Route::post('execute-mark-maintenance-complete', 'MapController@executeMarkMaintenanceComplete');
+
 
 Route::get('/welcome', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

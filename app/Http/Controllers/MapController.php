@@ -22,6 +22,8 @@ class MapController extends Controller
 
     public function __construct(GMaps $gmap){
         $this->gmap = $gmap;
+        //$this->middleware('auth')->except('index');
+
     }
 
     public function index(){
@@ -77,8 +79,7 @@ class MapController extends Controller
     }
 
     private function getAllPointsOfInterest() {
-
-        return (new \App\Point)->with('category')->get();
+        return (new \App\Point)->with('category')->where('type', '=', 'Feature')->get();
     }
 
     private function addMapPointsPropertiesToMarker($POI) {
@@ -92,42 +93,58 @@ class MapController extends Controller
     }
 
     private function generateInfoWindowFromPoint($POI) {
-        //Move to Point Class
-        $html = "<div class=\"card\" style=\"width:302px\">";
-        if($POI->image) {
-            $html .= "<img class=\"card-img-top card-image-map\" src=\"" . url('/images/map-card/'). '/'. $POI->image ."\" alt=\"Card image\">";
+        $html = $this->generateInfoWindowTop($POI);
+        $html .= "        <a class=\"dropdown-item editMarker\" href=\"#\" point-id='". $POI->id ."'>Edit Marker</a>";
+        if(auth()->check()) {
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'>todo Manage Schedule</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'>todo Report Condition</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'>todo Hide This Type</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'>todo Rate</a>";
         }
-        $html .= "<div class=\"card-body\">";
-        $html .= "<h4 class=\"card-title\">" . $POI->title . "</h4>";
-        $html .= "<p class=\"card-text\">" . $POI->description . ".</p>";
-        $html .= "<button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Options</button>";
-        $html .= "    <div class=\"dropdown-menu\">";
-        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Manage Schedule</a>";
-        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Report Condition</a>";
-        $html .= "        <a class=\"dropdown-item editMarker\" href=\"#\" id='". $POI->id ."'>Edit Marker</a>";
-        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Hide This Type</a>";
-        $html .= "        <a class=\"dropdown-item\" href=\"#\">todo Rate</a>";
-        $html .= "    </div>";
-        $html .= "</div>";
-        $html .= "</div>";
+        $html .= $this->generateInfoWindowBottom($POI);
         return $html;
     }
+
     private function generateInfoWindowFromTask($task) {
-        //Move to Point Class
+        $html = $this->generateInfoWindowTop($task);
+        $html .= "        <a class=\"dropdown-item taskMarkCompleted\" href=\"#\" task-id='". $task->tasks_id ."'>Mark Completed</a>";
+        if(auth()->check()) {
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Assign</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Delegate</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Report Condition</a>";
+        }
+        $html .= $this->generateInfoWindowBottom($task);
+        return $html;
+    }
+
+    private function generateInfoWindowFromMaintenanceItem($point) {
+        $html = $this->generateInfoWindowTop($point);
+        $html .= "        <a class=\"dropdown-item maintenanceMarkCompleted\" href=\"#\" point-id='". $point->id ."'>Mark Completed</a>";
+        if(auth()->check()) {
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'>todo Assign</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'>todo Delegate</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'>todo Report Condition</a>";
+        }
+        $html .= $this->generateInfoWindowBottom($point);
+        return $html;
+    }
+
+    private function generateInfoWindowTop($point) {
         $html = "<div class=\"card\" style=\"width:302px\">";
-        if($task->image) {
-            $html .= "<img class=\"card-img-top card-image-map\" src=\"" . '/images/map-card/' . $task->image ."\" alt=\"Card image\">";
+        if($point->image) {
+            $html .= "<img class=\"card-img-top card-image-map\" src=\"" . '/images/map-card/' . $point->image ."\" alt=\"Card image\">";
         }
         $html .= "<div class=\"card-body\">";
-        $html .= "<h4 class=\"card-title\">" . $task->title . "</h4>";
-        $html .= "<p class=\"card-text\">" . $task->description . ".</p>";
+        $html .= "<h4 class=\"card-title\">" . $point->title . "</h4>";
+        $html .= "<p class=\"card-text\">" . $point->description . ".</p>";
         $html .= "<button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Options</button>";
         $html .= "    <div class=\"dropdown-menu\">";
-        $html .= "        <a class=\"dropdown-item taskMarkCompleted\" href=\"#\" task-id='". $task->tasks_id ."'>Mark Completed</a>";
-        $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Assign</a>";
-        $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Delegate</a>";
-        $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Report Condition</a>";
-        $html .= "    </div>";
+
+        return $html;
+    }
+
+    private function generateInfoWindowBottom($point){
+        $html = "    </div>";
         $html .= "</div>";
         $html .= "</div>";
         return $html;
@@ -166,7 +183,7 @@ class MapController extends Controller
             'categories_id' => 'required',
             'image' => 'nullable|sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:15000'
         ]);
-        log::debug(request()->input('delete'));
+
         if(request()->input('delete') == 'delete') {
             return Point::destroy(request()->input('id'));
         }
@@ -209,10 +226,19 @@ class MapController extends Controller
     public function GetAllTasksInDateRangeJSON(Request $request) {
         //todo: only return 1st of series (distinct on points_id and type of task) - Min Date.
         $taskCollection = Task::select('tasks.id as tasks_id', 'tasks.*', 'points.*', 'categories.*')->join('points','tasks.points_id','=', 'points.id')->join('categories','points.categories_id', '=','categories.id')->whereNotIn('status',['Cancelled', 'Completed'])->where('estimated_date','<=', carbon::now()->addDays($request->input('daysToLookAhead')))->get();
+        $maintenanceCollection = (new \App\Point)->with('category')->where('type', '=', 'Maintenance')->get();
+        $maintenanceCollection = $maintenanceCollection->map(function($task) {
+            $task['description'] = $this->generateInfoWindowFromMaintenanceItem($task);
+            return $task;
+        });
+
         $taskCollection = $taskCollection->map(function($task) {
             $task['description'] = $this->generateInfoWindowFromTask($task);
             return $task;
         });
+
+        $taskCollection = $taskCollection->concat($maintenanceCollection);
+//need lat, lng, title, description, icon, default_icon,
         return response()->json($taskCollection);
 
     }
@@ -272,6 +298,15 @@ class MapController extends Controller
         $task->status = 'Completed';
         $task->save();
         return('Task marked as completed');
+    }
+
+    public function executeMarkMaintenanceComplete(Request $request) {
+        request()->validate([
+            'pointId' => 'required'
+        ]);
+
+        Point::destroy(request()->input('pointId'));
+        return "Item has been marked completed";
     }
 
     public function getIp(){

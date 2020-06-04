@@ -12,6 +12,7 @@
         <meta name="viewport" content="width=device-width"> <!-- Fix object size on mobile devices -->
 </head>
 <body>
+
 <div class="container" id="container">
     <div class="content">
         {!! $map['html'] !!}
@@ -22,15 +23,22 @@
                 <button type="button" class="btn btn-primary" id="showPointsOfInterest">Show Points Of Interest</button>
                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#" id="showMaintenanceSchedules">Manage Default Schedules</a>
-                        <a class="dropdown-item" href="#" id="showCategories">Manage Categories</a>
-                        <a class="dropdown-item" href="#" id="ValidateTasks">Validate Tasks</a>
-                        <a class="dropdown-item" href="#" id="ValidatePictures">Validate Pictures</a>
-                        <a class="dropdown-item" href="#">Todo - List Maintenance Items</a>
-                        <a class="dropdown-item" href="#">Todo - Show Account Preferences</a>
-                        <a class="dropdown-item" href="#">Todo - Manage Visible POIs</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Todo - Show Social Media Mentions</a>
+                        @auth
+                            <a class="dropdown-item" href="#" id="showMaintenanceSchedules">Manage Default Schedules</a>
+                            <a class="dropdown-item" href="#" id="showCategories">Manage Categories</a>
+                            <a class="dropdown-item" href="#" id="validateTasks">Validate Tasks</a>
+                            <a class="dropdown-item" href="#" id="validatePictures">Validate Pictures</a>
+                            <a class="dropdown-item" href="#">Todo - List Maintenance Items</a>
+                            <a class="dropdown-item" href="#">Todo - Show Account Preferences</a>
+                            <a class="dropdown-item" href="#">Todo - Manage Visible POIs</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Todo - Show Social Media Mentions</a>
+                        @endauth
+                        @guest
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#loginModal" id="logIn">{{__('Login')}}</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#registerModal">{{ __('Register') }}</a>
+                        @endguest
                     </div>
             </div>
         </div>
@@ -50,9 +58,11 @@
     </div>
 </div>
 
- @include('modals.map_edit_marker')
- @include('modals.map_view_schedules')
- @include('modals.map_view_categories')
-
+@include('modals.map_edit_marker')
+@include('modals.map_view_schedules')
+@include('modals.map_view_categories')
+@include('modals.login')
+@include('modals.register')
+@yield('scripts')
 </body>
 </html>
