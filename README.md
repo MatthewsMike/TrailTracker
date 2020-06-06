@@ -18,7 +18,6 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 ####Features
 1. Allow for viewing of events for a marker.  (i.e. Project category marker can have status updates)
 1. Allow for Override schedule for an individual marker. 
-1. Track replaced pictures for points.
 1. Allow severity rating of any "Maintenance" category point. (This would be favorite rating for Feature). Implement when tacking Vue?
 1. Make POI info window contain actions/option button per type
    1. Maintenance: Accept, Release, Complete (with note), Review Schedule Default/This Point
@@ -48,7 +47,7 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 1. Create thank you / attribution note for all packages used
 1. Review language to make use of Marker/POI/Point consistent
 1. Rename routes to [Laravel Naming Convention Standards](https://webdevetc.com/blog/laravel-naming-conventions)
-1. Split Map Controller
+1. Split Map Controller, move into models
 1. Deal with Dependency injection
 
 

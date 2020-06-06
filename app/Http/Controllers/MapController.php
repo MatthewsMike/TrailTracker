@@ -201,6 +201,7 @@ class MapController extends Controller
         $POI['icon'] = (new \App\Category)->getDefaultIconByID($POI['categories_id']);
         $POI['description'] = $this->generateInfoWindowFromPoint($POI);
         //todo: trigger schedule generation for new POI
+        (new \App\ArchiveImage())->add($POI->image, $POI->id, $this->getIp(), auth()->id() );
         return  response()->json($POI);
     }
 
