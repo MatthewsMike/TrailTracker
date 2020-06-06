@@ -27,7 +27,20 @@ $(document).ready(function () {
 
     $('#showPointsOfInterest').click(function(e) {
         removeAllMarkers();
-        requestAllMarkers()
+        requestMarkersByType('Feature');
+    })
+    $('#showAllAssets').click(function(e) {
+        removeAllMarkers();
+        requestMarkersByType('Assets');
+    })
+    $('#showAllProjects').click(function(e) {
+        removeAllMarkers();
+        requestMarkersByType('Projects');
+    })
+
+    $('#showAllPoints').click(function(e) {
+        removeAllMarkers();
+        requestMarkersByType('All');
     })
 
     $('#showMaintenance').click(function (e) {
@@ -103,12 +116,13 @@ function removeAllMarkers(){
     markers_map = [];
 }
 
-function requestAllMarkers() {
+
+function requestMarkersByType($type) {
     $.ajax({
         type: 'POST',
-        url: 'get-points-of-interest-markers',
+        url: 'get-points-by-type',
         data: {
-            daysToLookAhead: 14,
+            category_type: $type,
         },
         success: function (markersProperties) {
             markersProperties.forEach(function (markerProperties) {
@@ -117,7 +131,6 @@ function requestAllMarkers() {
         }
     });
 }
-
 function requestAllTasks() {
     $.ajax({
         type: 'POST',
@@ -135,7 +148,7 @@ function requestAllTasks() {
 
 //called from snippet added in MapController
 function onMapLoadComplete(){
-    new klokantech.GeolocationControl(map, '14', google.maps.ControlPosition.RIGHT_CENTER);
+    new klokantech.GeolocationControl(map, 0, google.maps.ControlPosition.RIGHT_CENTER);
     let mapCanvas = $('#map_canvas');
     mapCanvas.on('click','.editMarker', function() {showMarkerModalEdit($(this).attr('point-id'));});
     mapCanvas.on('click','.taskMarkCompleted', function() {taskMarkerCompleted($(this).attr('task-id'));});

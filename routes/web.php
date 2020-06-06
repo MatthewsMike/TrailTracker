@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', 'MapController@index');
+Route::get('home', 'MapController@index')->name('home');
+
 Route::post('save-edit-marker', 'MapController@saveEditMarker');
 Route::post('get-marker-by-id', 'MapController@getMarkerByIDJSON');
 Route::post('save-category-schedule', 'MapController@saveCategorySchedule');
 Route::post('get-maintenance-markers', 'MapController@GetAllTasksInDateRangeJSON');
-Route::post('get-points-of-interest-markers', 'MapController@GetAllPointsOfInterestJSON');
+Route::post('get-points-by-type', 'MapController@GetPointsByTypeJSON');
 Route::post('get-categories-and-id-by-type', 'MapController@getCategoriesByTypesJSON');
 Route::post('get-schedule-by-category-id', 'MapController@getScheduleByCategoryIDJSON');
 Route::post('get-category-by-category-id', 'MapController@getCategoryByCategoryIDJSON');
@@ -28,10 +31,5 @@ Route::post('execute-mark-task-complete', 'MapController@executeMarkTaskComplete
 Route::post('execute-mark-maintenance-complete', 'MapController@executeMarkMaintenanceComplete');
 
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

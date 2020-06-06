@@ -6,6 +6,8 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 #todo
 
 ##Next
+1. Allow for Override schedule for an individual marker. 
+1. Allow severity rating of any "Maintenance" category point. (This would be favorite rating for Feature). Implement when tacking Vue?
 
 ##Future
 
@@ -17,8 +19,6 @@ This application is as a proof of concept for managing and crowdsourcing mainten
  
 ####Features
 1. Allow for viewing of events for a marker.  (i.e. Project category marker can have status updates)
-1. Allow for Override schedule for an individual marker. 
-1. Allow severity rating of any "Maintenance" category point. (This would be favorite rating for Feature). Implement when tacking Vue?
 1. Make POI info window contain actions/option button per type
    1. Maintenance: Accept, Release, Complete (with note), Review Schedule Default/This Point
    1. Allow Override schedule per point

@@ -63,7 +63,7 @@ class MapController extends Controller
         //events that would be triggered to early by OnLoadCompleted need to be added here.
         $this->gmap->onload = "onMapLoadComplete();";
 
-        $pointsOfInterest = $this->getAllPointsOfInterest();
+        $pointsOfInterest = $this->getAllPointsByType();
         foreach($pointsOfInterest as $POI) {
             $this->gmap->add_marker($this->addMapPointsPropertiesToMarker($POI));
         }
@@ -78,8 +78,9 @@ class MapController extends Controller
         return view('map', compact(['map','categoryTypes', 'frequencies', 'categories']));
     }
 
-    private function getAllPointsOfInterest() {
-        return (new \App\Point)->with('category')->where('type', '=', 'Feature')->get();
+    private function getAllPointsByType($type = 'Feature') {
+        if($type == 'All') return (new \App\Point)->with('category')->get();
+        else return (new \App\Point)->with('category')->where('type', '=', $type)->get();
     }
 
     private function addMapPointsPropertiesToMarker($POI) {
@@ -132,7 +133,7 @@ class MapController extends Controller
     private function generateInfoWindowTop($point) {
         $html = "<div class=\"card\" style=\"width:302px\">";
         if($point->image) {
-            $html .= "<img class=\"card-img-top card-image-map\" src=\"" . '/images/map-card/' . $point->image ."\" alt=\"Card image\">";
+            $html .= "<img class=\"card-img-top card-image-map\" src=\"" . url('/images/map-card/'). '/' . $point->image ."\" alt=\"Card image\">";
         }
         $html .= "<div class=\"card-body\">";
         $html .= "<h4 class=\"card-title\">" . $point->title . "</h4>";
@@ -248,8 +249,8 @@ class MapController extends Controller
         return response()->json(Point::where('id', $request->input('id'))->first());
     }
 
-    public function GetAllPointsOfInterestJSON() {
-        $POIs = $this->getAllPointsOfInterest();
+    public function GetPointsByTypeJSON(Request $request) {
+        $POIs = $this->getAllPointsByType($request->input('category_type'));
         foreach($POIs as $id => $POI) {
             $POIs[$id]->description = $this->generateInfoWindowFromPoint(($POI));
         }
