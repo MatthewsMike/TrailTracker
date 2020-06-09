@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -44,7 +45,6 @@ class Task extends Model
     }
 
     public function CreateAllTasksFromSchedules () {
-        log::debug('Creating all Tasks From Schedules');
         //todo:
         // 1: Get Items from Schedules
         // 2: Get Associated Table referenced values
@@ -52,7 +52,6 @@ class Task extends Model
         // 4: Take into account cascading dates
         $schedules = Schedule::all();
         foreach ($schedules as $schedule) {
-            Log::debug('Processing Schedule Id ' . $schedule->id);
             $this->VerifyOrCreateFutureTasks($schedule);
         }
     }
@@ -60,8 +59,15 @@ class Task extends Model
     private function VerifyOrCreateFutureTasks(Schedule $schedule) {
         $this->CancelTasksWhereMultipleOverdue($schedule);
         //todo: cancel tasks where more than required are scheduled
-        if($this->GetOpenTaskCount($schedule) != $this->GetFutureTasksToGenerateCount($schedule)) {
-            $this->CreateAllMissingTasksFromSchedule($schedule);
+        if($schedule->isScheduleLocationsFromCategory()) {
+            $schedulePoints = $schedule->GetAllSchedulePointsIdFromCategory();
+            foreach($schedulePoints as $points_id) {
+                $this->CreateAllMissingTasksFromDefaultSchedulePointID($schedule, $points_id);
+            }
+        } else {
+            if($this->GetOpenTaskCountFromOverrideSchedule($schedule) != $this->GetFutureTasksToGenerateCount($schedule)) {
+                $this->CreateAllMissingTasksFromOverrideSchedule($schedule);
+            }
         }
 
     }
@@ -70,67 +76,61 @@ class Task extends Model
         if($schedule->item_category == NULL ) {
             $futureTasksToGenerateCount = $schedule->future_events_to_generate;
         } else {
-            $PointsAffectedBySchedule = (new Point)->where('categories_id','=', '%' . $schedule->item_category . '%')->count();
+            $PointsAffectedBySchedule = (new Point)->where('categories_id','=',  $schedule->categories_id )->whereNotIn('id', DB::table('schedules')->where('points_id', '!=', null)->pluck('points_id'))->count();
             $futureTasksToGenerateCount = $schedule->future_events_to_generate * $PointsAffectedBySchedule;
         }
-        log::debug('Future Tasks To Generate Count: ' . $futureTasksToGenerateCount);
         return $futureTasksToGenerateCount;
     }
 
-    private function GetOpenTaskCount(Schedule $schedule) {
+    private function GetOpenTaskCountFromOverrideSchedule(Schedule $schedule) {
         $openTaskCount = (new Task)->whereNotIn('status',['Cancelled', 'Completed'])->where('schedule_id', $schedule->id)->count();
-        Log::debug('Open Task Count: ' . $openTaskCount);
        return $openTaskCount;
     }
 
-    private function GetOverdueTaskCount(Schedule $schedule) {
-        //todo: filter results based on schedule
-        $overdueTaskCount = (new Task)->whereNotIn('status',['Cancelled', 'Completed'])->where('estimated_date','<=', carbon::now())->count();
-        Log::debug('Overdue Task Count: ' . $overdueTaskCount);
-        return $overdueTaskCount;
+    private function GetOpenTaskCountFromDefaultSchedulePointID(Schedule $schedule, $points_id) {
+        $openTaskCount = (new Task)->whereNotIn('status',['Cancelled', 'Completed'])->where('schedule_id', $schedule->id)->where('points_id', '=', $points_id)->count();
+        return $openTaskCount;
     }
 
-    private function CreateAllMissingTasksFromSchedule(Schedule $schedule) {
-        $numberOfTaskToCreate =  $schedule->future_events_to_generate - $this->GetOpenTaskCount($schedule);
+    private function CreateAllMissingTasksFromOverrideSchedule(Schedule $schedule) {
+        $numberOfTaskToCreate =  $schedule->future_events_to_generate - $this->GetOpenTaskCountFromOverrideSchedule($schedule);
         While($numberOfTaskToCreate-- > 0) {
-            $this->CreateNextScheduledTask($schedule);
+            $this->CreateNextOverrideScheduledTask($schedule);
+        }
+    }
+    private function CreateAllMissingTasksFromDefaultSchedulePointID(Schedule $schedule, $points_id) {
+        $numberOfTaskToCreate =  $schedule->future_events_to_generate - $this->GetOpenTaskCountFromDefaultSchedulePointID($schedule, $points_id);
+        While($numberOfTaskToCreate-- > 0) {
+            $this->CreateNextDefaultScheduledTask($schedule, $points_id);
         }
     }
 
-    private function CreateNextScheduledTask(Schedule $schedule) {
-            //get base date.
-        Log::debug('Creating New Task from Schedule id ' . $schedule->id );
-        if($schedule->isScheduleLocationsFromCategory()) {
-            $pointsFromCategory = $schedule->GetAllSchedulePointsIdFromCategory(); //todo: exclude points that have custom schedule
-            log::debug($pointsFromCategory);
-            foreach($pointsFromCategory as $point) {
-                Log::debug('Creating Task for Point id ' . $point);
-                (new Task)->create(
-                    [   'schedule_id' => $schedule->id,
-                        'points_id' => $point,
-                        'status' => 'future',
-                        'type_id' => '1',
-                        'estimated_date' => $this->GetNextTaskDate($schedule, $point)
-                    ]
-                );
-            }
-        }
-        if($schedule->isScheduleLocationsFromPoint()) {
-            (new Task)->create(
-                ['schedule_id' => $schedule->id,
-                    'points_id' => $schedule->points_id,
-                    'status' => 'future',
-                    'type_id' => '1',
-                    'estimated_date' => $this->GetNextTaskDate($schedule, $schedule->points_id)
-                ]
-            );
-        }
+    private function CreateNextOverrideScheduledTask(Schedule $schedule) {
+
+        (new Task)->create(
+            ['schedule_id' => $schedule->id,
+                'points_id' => $schedule->points_id,
+                'status' => 'future',
+                'type_id' => '1',
+                'estimated_date' => $this->GetNextTaskDate($schedule, $schedule->points_id)
+            ]
+        );
+    }
+
+    private function CreateNextDefaultScheduledTask(Schedule $schedule, $points_id) {
+        (new Task)->create(
+            [   'schedule_id' => $schedule->id,
+                'points_id' => $points_id,
+                'status' => 'future',
+                'type_id' => '1',
+                'estimated_date' => $this->GetNextTaskDate($schedule, $points_id)
+            ]
+        );
     }
 
     private function GetNextTaskDate(Schedule $schedule, $points_id) {
         $dateOfLastTask = (new Task)->whereNotIn('status',['Cancelled'])->where('schedule_id', $schedule->id)->where('points_id', $points_id)->max('estimated_date');
         if($dateOfLastTask == null) $dateOfLastTask = $schedule->start_date;
-        //todo: implement frequency class
         $dateOfNextTask = carbon::parse($dateOfLastTask)->addDays(15);
         return max($dateOfNextTask, carbon::now());
     }
@@ -144,11 +144,15 @@ class Task extends Model
         }
     }
 
+    private function GetOverdueTaskCount(Schedule $schedule) {
+        $overdueTaskCount = (new Task)->whereNotIn('status',['Cancelled', 'Completed'])->where('schedule_id', '=', $schedule->id)->where('estimated_date','<=', carbon::now())->count();
+        return $overdueTaskCount;
+    }
+
     private function CancelTaskWithMessage(Task $task, string $message){
         $task->status = 'Cancelled';
         $task->save();
         //todo:log event with message
     }
-
 
 }

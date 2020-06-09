@@ -28,13 +28,13 @@
                             <a class="dropdown-item" href="#" id="showCategories">Manage Categories</a>
                             <a class="dropdown-item" href="#" id="validateTasks">Validate Tasks</a>
                             <a class="dropdown-item" href="#" id="validatePictures">Validate Pictures</a>
-                            <a class="dropdown-item" href="#" id="showAllPoints">Show all Points</a>
-                            <a class="dropdown-item" href="#" id="showAllAssets">Show all Assets</a>
-                            <a class="dropdown-item" href="#" id="showAllProjects">Show all Projects</a>
+                            <a class="dropdown-item" href="#" id="showAllPoints">Show Points</a>
+                            <a class="dropdown-item" href="#" id="showAllAssets">Show Assets</a>
+                            <a class="dropdown-item" href="#" id="showAllProjects">Show Projects</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Todo - List Maintenance Items</a>
                             <a class="dropdown-item" href="#">Todo - Show Account Preferences</a>
                             <a class="dropdown-item" href="#">Todo - Manage Visible POIs</a>
-                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Todo - Show Social Media Mentions</a>
                         @endauth
                         @guest

@@ -114,7 +114,7 @@
         $(".btn-cancel-edit-marker").click(function (e) {
             hideMapDrawControls();
             removeAllMarkers();
-            requestAllMarkers();
+            requestMarkersByType('Feature');
         });
 
         $("#btn-save-edit-marker").click(function (e) {

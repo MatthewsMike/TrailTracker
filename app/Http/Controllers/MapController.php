@@ -97,7 +97,7 @@ class MapController extends Controller
         $html = $this->generateInfoWindowTop($POI);
         $html .= "        <a class=\"dropdown-item editMarker\" href=\"#\" point-id='". $POI->id ."'>Edit Marker</a>";
         if(auth()->check()) {
-            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'>todo Manage Schedule</a>";
+            $html .= "        <a class=\"dropdown-item editMarkerSchedule\" href=\"#\" point-id='". $POI->id ."'>Manage Schedule</a>";
             $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'>todo Report Condition</a>";
             $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'>todo Hide This Type</a>";
             $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'>todo Rate</a>";
@@ -207,7 +207,7 @@ class MapController extends Controller
     }
 
 
-    public function saveCategorySchedule(Request $request) {
+    public function saveSchedule(Request $request) {
         request()->validate([
             'frequency_id' => 'required',
             'start_date' => 'required|date',
@@ -215,13 +215,19 @@ class MapController extends Controller
             'description' => 'required',
             'future_events_to_generate' => 'required',
             'cascade_future_tasks_on_completion' => 'required',
-            'categories_id' => 'required',
             'reward_points' => 'required',
             'action' => 'required'
         ]);
-        $schedule = Schedule::updateOrCreate(['id' => $request->input('id')], $request->all());
-        $response = "Default Schedule Updated For " . $schedule->category->name;
-        return  response()->json($response);
+        if($request->input('points_id') || $request->input('categories_id')) {
+            $schedule = Schedule::updateOrCreate(['id' => $request->input('id')], $request->all());
+            if($request->input('points_id') ) {
+                $response = "Override Schedule For " . (new Point)->find($request->input('points_id'))->title . " Updated.";
+            } else {
+                $response = "Default Schedule Updated For " . $schedule->category->name;
+            }
+            return  response()->json($response);
+        }
+        return response()->json("Unable to identify points to apply schedule to.  Reload page and try again");
     }
 
 
@@ -265,6 +271,18 @@ class MapController extends Controller
     public function getScheduleByCategoryIDJSON(Request $request) {
         return response()->json((new Schedule)::where('categories_id',$request->input('categories_id'))->first());
     }
+
+    public function getScheduleByPointIDJSON(Request $request) {
+        $schedule = (new Schedule)::where('points_id',$request->input('point_id'))->first();
+        if(!$schedule) {
+            $category_id = (new Point)->find($request->input('point_id'))->categories_id;
+            $schedule = (new Schedule)::where('categories_id',$category_id)->first();
+            $schedule->id = '';
+        }
+        return response()->json($schedule);
+    }
+
+
 
     public function getCategoryByCategoryIDJSON(Request $request) {
         return response()->json((new Category)::where('id',$request->input('categories_id'))->first());

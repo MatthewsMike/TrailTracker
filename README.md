@@ -6,7 +6,6 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 #todo
 
 ##Next
-1. Allow for Override schedule for an individual marker. 
 1. Allow severity rating of any "Maintenance" category point. (This would be favorite rating for Feature). Implement when tacking Vue?
 
 ##Future
@@ -49,6 +48,6 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 1. Rename routes to [Laravel Naming Convention Standards](https://webdevetc.com/blog/laravel-naming-conventions)
 1. Split Map Controller, move into models
 1. Deal with Dependency injection
-
+1. Fix in login/registering redirection. 
 
 

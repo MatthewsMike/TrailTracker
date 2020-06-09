@@ -73,6 +73,11 @@ class Schedule extends Model
 
     public function GetAllSchedulePointsIdFromCategory() {
         //todo: convert to one to many or handle case where category is part of the name of another.
-        return DB::table('points')->where('categories_id', '=',  $this->categories_id)->pluck('id');
+        return DB::table('points')
+                ->where('categories_id', '=',  $this->categories_id)
+                ->whereNotIn('id', DB::table('schedules')->where('points_id', '!=', null)->pluck('points_id'))
+                ->pluck('id');
     }
+
+
 }

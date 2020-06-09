@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $address
  * @property float $lat
  * @property float $lng
- * @property string $category
  * @property string $type
  * @property string $title
  * @property string|null $description

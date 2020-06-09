@@ -151,8 +151,11 @@ function onMapLoadComplete(){
     new klokantech.GeolocationControl(map, 0, google.maps.ControlPosition.RIGHT_CENTER);
     let mapCanvas = $('#map_canvas');
     mapCanvas.on('click','.editMarker', function() {showMarkerModalEdit($(this).attr('point-id'));});
+    mapCanvas.on('click','.editMarkerSchedule', function() {showScheduleModalEditMarker($(this).attr('point-id'));});
     mapCanvas.on('click','.taskMarkCompleted', function() {taskMarkerCompleted($(this).attr('task-id'));});
     mapCanvas.on('click','.maintenanceMarkCompleted', function() {maintenanceMarkerCompleted($(this).attr('point-id'));});
+
+
 }
 
 
@@ -187,5 +190,5 @@ function maintenanceMarkerCompleted(pointId) {
             requestAllTasks();
         }
     });
-
 }
+
