@@ -10,4 +10,11 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-.idea
+prod.sh
+public/images/*.jpg
+public/images/map-card/*.jpg
+.idea/php.xml
+.idea/TrailTracker.iml
+.idea/workspace.xml
+.idea/dataSources/f68352d2-5473-4b8b-b9aa-f0f7c8a8c25f.xml
+.idea/inspectionProfiles/Project_Default.xml

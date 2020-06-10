@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Frequency;
+use App\MaintenanceRating;
 use App\Schedule;
 use App\Task;
 use Carbon\Carbon;
@@ -74,8 +75,9 @@ class MapController extends Controller
         $categoryTypes = (new Category())->getAllCategoryTypes();
         $categories = (new Category())->getAllCategoriesAndId();
         $frequencies  = (new Frequency())->getAllFrequenciesAndId();
+        $maintenance_ratings = (new MaintenanceRating())->getAllAsArray();
 
-        return view('map', compact(['map','categoryTypes', 'frequencies', 'categories']));
+        return view('map', compact(['map','categoryTypes', 'frequencies', 'categories', 'maintenance_ratings']));
     }
 
     private function getAllPointsByType($type = 'Feature') {
@@ -135,9 +137,15 @@ class MapController extends Controller
         if($point->image) {
             $html .= "<img class=\"card-img-top card-image-map\" src=\"" . url('/images/map-card/'). '/' . $point->image ."\" alt=\"Card image\">";
         }
+
         $html .= "<div class=\"card-body\">";
-        $html .= "<h4 class=\"card-title\">" . $point->title . "</h4>";
-        $html .= "<p class=\"card-text\">" . $point->description . ".</p>";
+        $html .= "<h4 class=\"card-title\">" . $point->title . "</h4>";        
+        $html .= "<p class=\"card-text\">" ;
+        if($point->maintenance_rating) {
+            $html .= $point->maintenanceRating->name . "<br>" ;
+        }
+        $html .= $point->description;
+        $html .= "</p>";
         $html .= "<button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Options</button>";
         $html .= "    <div class=\"dropdown-menu\">";
 
@@ -146,6 +154,7 @@ class MapController extends Controller
 
     private function generateInfoWindowBottom($point){
         $html = "    </div>";
+        
         $html .= "</div>";
         $html .= "</div>";
         return $html;

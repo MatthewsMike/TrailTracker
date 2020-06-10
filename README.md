@@ -15,8 +15,10 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 
 ####Performance
 1. Remove marker that was deleted/ task completed (perhaps add property on marker called "marker_id" and have that as an attr of the infowindow buttons)
- 
+1. Generate calls to maintain tasks and their status
+
 ####Features
+1. Allow for Generation of report based on Month's activity for Board of Directors Maintenance Report.
 1. Allow for viewing of events for a marker.  (i.e. Project category marker can have status updates)
 1. Make POI info window contain actions/option button per type
    1. Maintenance: Accept, Release, Complete (with note), Review Schedule Default/This Point
@@ -46,8 +48,10 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 1. Create thank you / attribution note for all packages used
 1. Review language to make use of Marker/POI/Point consistent
 1. Rename routes to [Laravel Naming Convention Standards](https://webdevetc.com/blog/laravel-naming-conventions)
+    1. Be consistent with column name points_id vs point_id
 1. Split Map Controller, move into models
 1. Deal with Dependency injection
 1. Fix in login/registering redirection. 
+1. Review DB Calls in schedule model to convert to eloquent ORM
 
 

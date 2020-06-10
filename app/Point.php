@@ -56,4 +56,8 @@ class Point extends Model
         return $this->hasOne('App\Category','id', 'categories_id');
     }
 
+    public function maintenanceRating() {
+        return $this->hasOne('App\MaintenanceRating','id', 'maintenance_rating');
+    }
+
 }

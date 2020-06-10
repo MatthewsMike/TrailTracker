@@ -68,6 +68,17 @@
                                 </Select>
                             </div>
                             <!-- /category -->
+                            <!-- rating -->
+                            <div class="form-group">
+                                <label class="col-form-label" for="modal-input-edit-marker-rating">Rating</label>
+                                <select name="modal-input-edit-marker-rating" id="modal-input-edit-marker-rating" class="form-control" required>
+                                        <option value="-1">Please Select</option>
+                                        @foreach($maintenance_ratings as $value => $rating)
+                                        <option value="{{$value}}">{{$rating}}</option>
+                                        @endforeach
+                                </select>
+                            </div>
+                            <!-- /rating -->
                             <!-- image -->
                                 <img src="" id="modal-input-edit-marker-current-image"> <!--todo: add default image -->
                             <div class="form-group">
@@ -136,6 +147,7 @@
             fd.append('type', $('#modal-input-edit-marker-type').val());
             fd.append('title', $('#modal-input-edit-marker-title').val());
             fd.append('description', $('#modal-input-edit-marker-description').val());
+            fd.append('maintenance_rating', $('#modal-input-edit-marker-rating').val());
             if($('#modal-input-edit-marker-delete').is(':checked')) {
                 fd.append('delete', 'delete');
             }
@@ -171,14 +183,17 @@
                         //deleted
                     } else {
                         //saved
-                        AddMarkerToMap(data);
+                        removeAllMarkers();
                         $('#editMarker').modal('hide');
                         hideMapDrawControls();
                         button.html("Save");
                         button.prop('disabled', false);
                         button.html(buttonText);
-                        removeAllMarkers();
-                        requestAllMarkers();
+                        if(data.type = 'Maintenance') {
+                            requestAllTasks();
+                        } else {
+                            requestMarkersByType(data.type);
+                        }
                     }
                 },
                 error: function(error) {
@@ -232,6 +247,7 @@
                 defaultCategory = marker.categories_id;
                 $('#modal-input-edit-marker-description').val(marker.description);
                 $('#modal-input-edit-marker-type').val(marker.type).trigger('change');
+                $('#modal-input-edit-marker-rating').val(marker.maintenance_rating);
                 $('#modal-input-edit-marker-current-image').attr('src', '{{ url('/images/map-card') }}/' + marker.image);
                 setEditMarkerModalTitle('Edit Marker: ' + marker.title);
                 $("#editMarker").modal("show");
@@ -254,6 +270,7 @@ function resetEditMarkerForm() {
     $('#modal-input-edit-marker-description').val('');
     $('#modal-input-edit-marker-type').val('Maintenance').change();
     $('#modal-input-edit-marker-current-image').attr('src', '');
+    $('#modal-input-edit-marker-rating').val('-1');
 }
 
 function setEditMarkerModalTitle(title) {
