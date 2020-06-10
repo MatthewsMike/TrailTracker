@@ -69,7 +69,7 @@
                             </div>
                             <!-- /category -->
                             <!-- rating -->
-                            <div class="form-group">
+                            <div class="form-group" id="modal-input-edit-marker-group-rating" style="display: none;">
                                 <label class="col-form-label" for="modal-input-edit-marker-rating">Rating</label>
                                 <select name="modal-input-edit-marker-rating" id="modal-input-edit-marker-rating" class="form-control" required>
                                         <option value="-1">Please Select</option>
@@ -209,6 +209,11 @@
 
         $('#modal-input-edit-marker-type').change(function() {
             let type = this.value;
+            if(type == 'Maintenance') {
+                $("#modal-input-edit-marker-group-rating").show();
+            } else {
+                $("#modal-input-edit-marker-group-rating").hide();
+            }
             $.ajax({
                 type: 'POST',
                 url: 'get-categories-and-id-by-type',
