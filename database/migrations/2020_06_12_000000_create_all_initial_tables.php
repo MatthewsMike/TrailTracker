@@ -2,10 +2,10 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMaintenanceTable extends Migration
+
+class CreateAllInitialTables extends Migration
 {
     /**
      * Run the migrations.
@@ -14,17 +14,52 @@ class CreateMaintenanceTable extends Migration
      */
     public function up()
     {
-        Schema::create('skills', function (Blueprint $table) {
+        Schema::create('archive_images', function (Blueprint $table) {
             $table->id();
-            $table->string('skill');
-            $table->string('description');
+            $table->foreignId('points_id');
+            $table->string('image');
+            $table->foreignId('users_id')->nullable();
+            $table->string('ip')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
 
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('type');
+            $table->string('name');
+            $table->string('default_icon')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+ 
         Schema::create('frequency', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->integer('duration_in_days');
+        });
+
+        Schema::create('maintenance_ratings', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        Schema::create('points', function (Blueprint $table) {
+            $table->id();
+            $table->string('address')->nullable();
+            $table->double('lat',9,6);
+            $table->double('lng',9,6);
+            $table->string('type');
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->string('icon')->nullable();
+            $table->string('url')->nullable();
+            $table->integer('maintenance_rating')->nullable();
+            $table->foreignId('categories_id')->nullable();
+            $table->foreignId('ApprovedBy')->nullable()->references('id')->on('users');
+            $table->softDeletes();
+            $table->timestamps();
         });
 
         Schema::create('requirements', function (Blueprint $table) {
@@ -38,7 +73,7 @@ class CreateMaintenanceTable extends Migration
             $table->foreignId('frequency_id');
             $table->date('start_date');
             $table->enum('action',['Inspection','Work Item']);
-            $table->string('item_category')->nullable();
+            $table->foreignId('categories_id')->nullable();
             $table->foreignId('points_id')->nullable();
             $table->integer('reward_points');
             $table->string('title');
@@ -60,6 +95,13 @@ class CreateMaintenanceTable extends Migration
             $table->foreignId('skills_id');
         });
 
+        Schema::create('skills', function (Blueprint $table) {
+            $table->id();
+            $table->string('skill');
+            $table->string('description');
+            $table->timestamps();
+        });
+
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('schedule_id');
@@ -79,21 +121,7 @@ class CreateMaintenanceTable extends Migration
             $table->enum('type', ['Point', 'Path', 'Category', 'Type']);
             $table->integer('type_id');
         });
-
-        DB::table('schedules')->insert(
-            [
-                'frequency_id'=>'1',
-                'start_date'=>'2020-05-01',
-                'action'=>'Work Item',
-                'item_category'=>'Member',
-                'points_id'=>null,
-                'reward_points'=>10,
-                'title'=>'Test Schedule',
-                'description'=>'Test Schedule Description',
-                'future_events_to_generate'=>3,
-                'cascade_future_tasks_on_completion'=>true
-            ]
-        );
+    
     }
 
     /**
@@ -103,12 +131,16 @@ class CreateMaintenanceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skills');
+        Schema::dropIfExists('archive_images');
+        Schema::dropIfExists('categories');
         Schema::dropIfExists('frequency');
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('maintenance_ratings');
+        Schema::dropIfExists('points');
         Schema::dropIfExists('requirements');
+        Schema::dropIfExists('schedules');
         Schema::dropIfExists('schedule_requirements');
         Schema::dropIfExists('schedule_skills');
+        Schema::dropIfExists('skills');
         Schema::dropIfExists('tasks');
         Schema::dropIfExists('task_events');
     }

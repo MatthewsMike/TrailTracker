@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 use App\Point;
 use Illuminate\Support\Facades\Log;
-use Intervention\Image\ImageManagerStatic as Image;
+
 use function Psy\debug;
 
 class MapController extends Controller
@@ -64,7 +64,7 @@ class MapController extends Controller
         //events that would be triggered to early by OnLoadCompleted need to be added here.
         $this->gmap->onload = "onMapLoadComplete();";
 
-        $pointsOfInterest = $this->getAllPointsByType();
+        $pointsOfInterest = (new Point)->getAllPointsByType();
         foreach($pointsOfInterest as $POI) {
             $this->gmap->add_marker($this->addMapPointsPropertiesToMarker($POI));
         }
@@ -80,10 +80,7 @@ class MapController extends Controller
         return view('map', compact(['map','categoryTypes', 'frequencies', 'categories', 'maintenance_ratings']));
     }
 
-    private function getAllPointsByType($type = 'Feature') {
-        if($type == 'All') return (new \App\Point)->with('category')->get();
-        else return (new \App\Point)->with('category')->where('type', '=', $type)->get();
-    }
+
 
     private function addMapPointsPropertiesToMarker($POI) {
         $marker = array();
@@ -135,7 +132,7 @@ class MapController extends Controller
     private function generateInfoWindowTop($point) {
         $html = "<div class=\"card\" style=\"width:302px\">";
         if($point->image) {
-            $html .= "<img class=\"card-img-top card-image-map\" src=\"" . url('/images/map-card/'). '/' . $point->image ."\" alt=\"Card image\">";
+            $html .= "<img class=\"card-img-top card-image-map\" src=\"" . url(env('PATH_TO_IMAGES_MAP_CARD') ). '/' . $point->image ."\" alt=\"Card image\">";
         }
 
         $html .= "<div class=\"card-body\">";
@@ -154,36 +151,15 @@ class MapController extends Controller
 
     private function generateInfoWindowBottom($point){
         $html = "    </div>";
-        
         $html .= "</div>";
         $html .= "</div>";
         return $html;
     }
 
-    private function verifyAllMapCardImagesResized() {
-        $images = (new Point)->where('image', '!=', '')->pluck('image');
-        foreach($images as $image) {
-            if(is_file(public_path('/images/' . $image))) {
-                if(!$this->isMapCardImageCreated($image)) {
-                    $this->resizeImageForMapCard($image);
-                }
-            }
-        }
-    }
 
-    private function isMapCardImageCreated($image) {
-        if(is_file(public_path('/images/map-card/' . $image))) {
-            return true;
-        }
-        return false;
-    }
 
-    private function resizeImageForMapCard($image) {
-        Image::make(public_path('/images/' . $image))
-            ->resize(300, null, function ($constraint) {$constraint->aspectRatio();})
-            ->orientate()
-            ->save(public_path('/images/map-card/' . $image));
-    }
+
+
 
     public function saveEditMarker(Request $request) {
         request()->validate([
@@ -202,12 +178,13 @@ class MapController extends Controller
 
         if($request->has('image')) {
             $imageName = (new \App\Category)->getCategoryNameByID($newMarker['categories_id']) . '-' . $newMarker['title'] . '-' . time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
-            $this->resizeImageForMapCard($imageName);
+            $request->image->move(public_path(env('PATH_TO_IMAGES')), $imageName);
+
             $newMarker['image'] = $imageName;
         }
 
         $POI = Point::updateOrCreate(['id' => $request->input('id')], $newMarker);
+        $POI->resizeImageForMapCard();
         $POI['icon'] = (new \App\Category)->getDefaultIconByID($POI['categories_id']);
         $POI['description'] = $this->generateInfoWindowFromPoint($POI);
         //todo: trigger schedule generation for new POI
@@ -265,7 +242,7 @@ class MapController extends Controller
     }
 
     public function GetPointsByTypeJSON(Request $request) {
-        $POIs = $this->getAllPointsByType($request->input('category_type'));
+        $POIs = (new Point)->getAllPointsByType($request->input('category_type'));
         foreach($POIs as $id => $POI) {
             $POIs[$id]->description = $this->generateInfoWindowFromPoint(($POI));
         }
@@ -315,7 +292,7 @@ class MapController extends Controller
     }
 
     public function executeVerifyPictures() {
-        $this->verifyAllMapCardImagesResized();
+        (new Point)->verifyAllImagesResizedForMapCard();
         return "All Pictures Verified";
     }
 

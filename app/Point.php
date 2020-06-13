@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * Task
@@ -60,4 +61,41 @@ class Point extends Model
         return $this->hasOne('App\MaintenanceRating','id', 'maintenance_rating');
     }
 
+    public function getAllPointsByType($type = 'Feature') {
+        if($type == 'All') return (new \App\Point)->with('category')->get();
+        else return (new \App\Point)->with('category')->where('type', '=', $type)->get();
+    }
+
+    public function verifyAllImagesResizedForMapCard() {
+        $points = (new Point)->where('image', '!=', '');
+        foreach($points as $point) {
+            if($point->isValidImagePresent()) {
+                $point->resizeImageForMapCard();
+            }
+        }
+    }
+
+    private function isValidImagePresent() {
+        if(is_file(public_path(env('PATH_TO_IMAGES')  .$this->image)))  {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private function isMapCardImageCreated() {
+        if(is_file(public_path(env('PATH_TO_IMAGES_MAP_CARD'). $this->image))) {
+            return true;
+        }
+        return false;
+    }
+
+    public function resizeImageForMapCard($force = false) {
+        if($this->isValidImagePresent() && (!$this->isMapCardImageCreated() || $force)) {    
+            Image::make(public_path(env('PATH_TO_IMAGES') . $this->image))
+            ->resize(300, null, function ($constraint) {$constraint->aspectRatio();})
+            ->orientate()
+            ->save(public_path(env('PATH_TO_IMAGES_MAP_CARD') . $this->image));
+        }
+    }
 }
