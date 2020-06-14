@@ -19,13 +19,13 @@
         "popper.js": "^1.12",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.20.1",
-        "sass-loader": "^8.0.0"
+        "sass-loader": "^8.0.0",
+        "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
         "bootstrap-daterangepicker": "^3.0.5",
         "daterangepicker": "^3.1.0",
         "jquery-ui": "^1.12.1",
-        "moment": "^2.26.0",
-        "node-sass": "^4.14.1"
+        "moment": "^2.26.0"
     }
 }

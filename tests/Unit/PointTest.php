@@ -119,4 +119,14 @@ class PointTest extends TestCase
         }
     }
 
+    public function test_hasMaintenanceRating_returns_false_when_rating_null() {
+        $point = factory(Point::class)->make();
+        $this->assertFalse($point->hasMaintenanceRating());
+    }
+
+    public function test_hasMaintenanceRating_returns_true_when_rating_exists() {
+        $point = factory(Point::class)->make();
+        $point->maintenance_rating = '1';
+        $this->assertTrue($point->hasMaintenanceRating());
+    }
 }

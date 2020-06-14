@@ -11,7 +11,7 @@ $factory->define(Point::class, function (Faker $faker) {
         'lat'=> $faker->latitude(44.5, 44.7), 
         'type'=> $faker->randomElement(['Feature','Maintenance','Asset','Projects']) ,
         'categories_id'=>$faker->randomdigit(), 
-        'title'=>$faker->title, 
+        'title'=>$faker->sentence(8), 
         'description'=>$faker->realText(150)
     ];
 });

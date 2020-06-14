@@ -75,6 +75,10 @@ class Point extends Model
         }
     }
 
+    public function hasMaintenanceRating() {
+        return (empty($this->maintenanceRating) ? false : true);
+    }
+
     private function isValidImagePresent() {
         if(is_file(public_path(env('PATH_TO_IMAGES')  .$this->image)))  {
             return true;

@@ -17,7 +17,7 @@
     <div class="content">
         {!! $map['html'] !!}
         <div id="custom-controls" class="nav-controls">
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="btn-group" role="group" aria-label="TrailTracker-Controls">
                 <button type="button" class="btn btn-primary" id="addMarker">Add Marker</button>
                 <button type="button" class="btn btn-primary" id="showMaintenance">Show Maintenance Items</button>
                 <button type="button" class="btn btn-primary" id="showPointsOfInterest">Show Points Of Interest</button>

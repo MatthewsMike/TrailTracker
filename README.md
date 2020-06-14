@@ -7,6 +7,8 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 
 ##Next
 1. Allow severity rating of any "Maintenance" category point. (This would be favorite rating for Feature). Implement when tacking Vue?
+1. Add Unit Tests to Tasks
+1. Add Unit Tests to Schedules 
 
 ##Future
 

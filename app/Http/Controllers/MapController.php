@@ -52,8 +52,8 @@ class MapController extends Controller
                 $("#modal-input-edit-marker-lng").val(newShape.getPosition().lng());
                 $("#editMarker").modal("show");
             ');
-
-        $config['center'] = 'auto';
+        $config['center'] = '44.655694,-63.734611';
+        //$config['center'] = 'auto';
         $config['kmlLayerURL'] = 'https://blttrails.ca/BLTMap.kml'; //Base Map of Trail
         $config['map_type'] = 'SATELLITE';
         $config['disableStreetViewControl'] = true;
@@ -138,7 +138,7 @@ class MapController extends Controller
         $html .= "<div class=\"card-body\">";
         $html .= "<h4 class=\"card-title\">" . $point->title . "</h4>";        
         $html .= "<p class=\"card-text\">" ;
-        if($point->maintenance_rating) {
+        if($point->hasMaintenanceRating()) {
             $html .= $point->maintenanceRating->name . "<br>" ;
         }
         $html .= $point->description;
@@ -181,6 +181,9 @@ class MapController extends Controller
             $request->image->move(public_path(env('PATH_TO_IMAGES')), $imageName);
 
             $newMarker['image'] = $imageName;
+        }
+        if($newMarker['maintenance_rating'] == '-1') {
+            $newMarker['maintenance_rating'] = null;
         }
 
         $POI = Point::updateOrCreate(['id' => $request->input('id')], $newMarker);

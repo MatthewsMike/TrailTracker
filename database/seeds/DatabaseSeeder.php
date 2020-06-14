@@ -46,140 +46,140 @@ class DatabaseSeeder extends Seeder
                 'id' => '1',
                 'type' => 'Feature',
                 'name' => 'Parking Lot',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/1207-fac-parking.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '2',
                 'type' => 'Feature',
                 'name' => 'Information Board',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/1203-fac-info.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '3',
                 'type' => 'Feature',
                 'name' => 'Garbage Can',
-                'default_icon' => '',
+                'default_icon' => 'https://anatistechnologies.com/public/images/icons/garbage-can.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '4',
                 'type' => 'Feature',
                 'name' => 'View',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/1399-rec-viewing-platform.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '5',
                 'type' => 'Feature',
                 'name' => 'Bench',
-                'default_icon' => '',
+                'default_icon' => 'https://anatistechnologies.com/public/images/icons/bench.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '6',
                 'type' => 'Feature',
                 'name' => 'Bridge',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/1233-poi-bridge.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '7',
                 'type' => 'Feature',
                 'name' => 'Dog Bag Dispenser',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/965-biz-animal.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '8',
                 'type' => 'Feature',
                 'name' => 'Amenity',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/1087-biz-restaurant-icecream.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '9',
                 'type' => 'Feature',
                 'name' => 'KM Marker',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '10',
                 'type' => 'Feature',
                 'name' => 'Mural',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/1229-poi-art.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '11',
                 'type' => 'Feature',
                 'name' => 'Trail Head',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/1369-rec-hiking-trail.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '12',
                 'type' => 'Feature',
                 'name' => 'Gate',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '13',
                 'type' => 'Maintenance',
                 'name' => 'Hazardous Tree',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '14',
                 'type' => 'Maintenance',
                 'name' => 'Pot Hole',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '15',
                 'type' => 'Maintenance',
                 'name' => 'Trail Erosion',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '16',
                 'type' => 'Maintenance',
                 'name' => 'Trail Narrowing',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '17',
                 'type' => 'Feature',
                 'name' => 'Garbage Can (City)',
-                'default_icon' => '',
+                'default_icon' => 'https://anatistechnologies.com/public/images/icons/garbage-can-city.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '18',
                 'type' => 'Assets',
                 'name' => 'Supplies',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '19',
                 'type' => 'Projects',
                 'name' => 'Bench',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
                 'id' => '20',
                 'type' => 'Projects',
                 'name' => 'Erosion Control',
-                'default_icon' => '',
+                'default_icon' => 'https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ]
@@ -257,7 +257,7 @@ class DatabaseSeeder extends Seeder
                 'frequency_id' => '4',
                 'start_date' => '2020-05-01',
                 'action' => 'Work Item',
-                'points_id' => '',
+                'points_id' => null,
                 'categories_id' => '3',
                 'reward_points' => '10',
                 'title' => 'Empty Garbage',
@@ -269,7 +269,7 @@ class DatabaseSeeder extends Seeder
                 'start_date' => '2020-05-01',
                 'action' => 'Work Item',
                 'points_id' => '30',
-                'categories_id' => '',
+                'categories_id' => null,
                 'reward_points' => '15',
                 'title' => 'Empty Garbage',
                 'description' => 'Empty Garbage',
