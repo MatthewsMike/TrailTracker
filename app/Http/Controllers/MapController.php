@@ -106,14 +106,13 @@ class MapController extends Controller
     }
 
     private function generateInfoWindowFromTask($task) {
-        $html = $this->generateInfoWindowTop($task);
+        $html = $this->generateInfoWindowTop($task->point);
         $html .= "        <a class=\"dropdown-item taskMarkCompleted\" href=\"#\" task-id='". $task->tasks_id ."'>Mark Completed</a>";
         if(auth()->check()) {
             $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Assign</a>";
             $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Delegate</a>";
-            $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Report Condition</a>";
         }
-        $html .= $this->generateInfoWindowBottom($task);
+        $html .= $this->generateInfoWindowBottom($task->point);
         return $html;
     }
 
@@ -121,9 +120,16 @@ class MapController extends Controller
         $html = $this->generateInfoWindowTop($point);
         $html .= "        <a class=\"dropdown-item maintenanceMarkCompleted\" href=\"#\" point-id='". $point->id ."'>Mark Completed</a>";
         if(auth()->check()) {
-            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'>todo Assign</a>";
-            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'>todo Delegate</a>";
-            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'>todo Report Condition</a>";
+            $html .= "     <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'>todo Assign</a>";
+            $html .= "     <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'>todo Delegate</a>";
+            $html .= "   </div>";
+            $html .= "   </div><div class=\"btn-group\">";
+            $html .= "   <button type=\"button\" id=\"dropdown-maintenance-rating\" class=\"dropdown-toggle  btn btn-warning\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" href=\"#\">Update Severity</button>";
+            $html .= "   <div class=\"dropdown-menu\" aria-labelledby=\"dropdown-maintenance-rating\">";
+            $maintenanceRatings = (new MaintenanceRating)->getAllAsArray();
+            foreach($maintenanceRatings as $value => $rating) {
+                $html .=     "<a  class=\"dropdown-item maintenanceMarkSeverity\" href=\"#\" point-id='". $point->id ."' maintenance-rating-id=\"" . $value . "\">" . $rating . "</a>";
+            } 
         }
         $html .= $this->generateInfoWindowBottom($point);
         return $html;
@@ -139,17 +145,21 @@ class MapController extends Controller
         $html .= "<h4 class=\"card-title\">" . $point->title . "</h4>";        
         $html .= "<p class=\"card-text\">" ;
         if($point->hasMaintenanceRating()) {
-            $html .= $point->maintenanceRating->name . "<br>" ;
+            $html .= '<b>' . $point->maintenanceRating->name . "</b><br>" ;
         }
         $html .= $point->description;
         $html .= "</p>";
-        $html .= "<button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Options</button>";
-        $html .= "    <div class=\"dropdown-menu\">";
+        $html .= "<div class=\"btn-group\">";
+        $html .= "  <div class=\"btn-group\">";
+        $html .= "      <button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Options</button>";
+    $html .= "              <div class=\"dropdown-menu\">";
 
         return $html;
     }
 
     private function generateInfoWindowBottom($point){
+        $html = "           </div>";
+        $html = "       </div>";
         $html = "    </div>";
         $html .= "</div>";
         $html .= "</div>";
@@ -197,7 +207,14 @@ class MapController extends Controller
 
 
     public function saveSchedule(Request $request) {
+        $messages = [
+            'categories_id.required_without' => 'The category field is required',
+            'points_id.required_without' => '',
+            'future_events_to_generate.required' => 'This field is required',
+            'frequency_id.required' => 'This field is required'
+        ];
         request()->validate([
+            'categories_id' => 'required_without:points_id',
             'frequency_id' => 'required',
             'start_date' => 'required|date',
             'title' => 'required',
@@ -206,7 +223,7 @@ class MapController extends Controller
             'cascade_future_tasks_on_completion' => 'required',
             'reward_points' => 'required',
             'action' => 'required'
-        ]);
+        ],$messages);
         if($request->input('points_id') || $request->input('categories_id')) {
             $schedule = Schedule::updateOrCreate(['id' => $request->input('id')], $request->all());
             if($request->input('points_id') ) {
@@ -317,6 +334,19 @@ class MapController extends Controller
         Point::destroy(request()->input('pointId'));
         return "Item has been marked completed";
     }
+
+    public function executeUpdateMaintenanceRating(Request $request) {
+        request()->validate([
+            'pointId' => 'required',
+            'maintenanceRatingId' => 'required'
+        ]);
+
+        $point = (new Point)->find(request()->input('pointId'));
+        $point->maintenance_rating = request()->input('maintenanceRatingId');
+        $point->save();
+        return $point->title . "'s condition has been updated to " . $point->maintenanceRating->name;
+    }
+
 
     public function getIp(){
         foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){

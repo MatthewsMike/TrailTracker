@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="modal-view-categories-input-type">Type</label>
                                 <select name="modal-view-categories-input-type" id="modal-view-categories-input-type" class="form-control" required>
-                                    <option value="-1">Please Select</option>
+                                    <option value="">Please Select</option>
                                     @foreach($categoryTypes as $type)
                                         <option value="{{$type}}">{{$type}}</option>
                                     @endforeach
@@ -41,8 +41,8 @@
                             <!-- /name -->
                             <!-- default-icon -->
                             <div class="form-group">
-                                <label class="col-form-label" for="modal-view-categories-input-default-icon">Default Icon</label>
-                                <input type="text" name="modal-view-categories-input-default-icon" class="form-control" id="modal-view-categories-input-default-icon">
+                                <label class="col-form-label" for="modal-view-categories-input-default_icon">Default Icon</label>
+                                <input type="text" name="modal-view-categories-input-default_icon" class="form-control" id="modal-view-categories-input-default_icon">
                             </div>
                             <!-- /default-icon -->
                         </div>
@@ -93,6 +93,14 @@
                     $('#ViewCategories').modal('hide');
                     $('#toast-view-category-save-body').html(data),
                     $('#toast-view-category-save').toast('show')
+                },
+                error: function (xhr) {
+                   clearAllValidationErrors();
+                    $.each(xhr.responseJSON.errors, function(key,value) {
+                        $('#modal-view-categories-input-' + key).addClass('is-invalid')
+                        $('#modal-view-categories-input-' + key).parent().append('<div class="alert alert-danger validation-error">'+value+'</div');
+                    }); 
+
                 }
             });
 
@@ -117,7 +125,7 @@
                 },
                 success: function (category) {
                     $('#modal-view-categories-input-name').val(category.name),
-                    $('#modal-view-categories-input-default-icon').val(category.default_icon),
+                    $('#modal-view-categories-input-default_icon').val(category.default_icon),
                     $('#modal-view-categories-input-type').val(category.type)
 
                 }

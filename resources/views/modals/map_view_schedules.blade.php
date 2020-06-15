@@ -13,9 +13,9 @@
                         <div class="card-body">
                             <!-- Category -->
                             <div class="form-group modal-view-schedule-category">
-                                <label class="col-form-label" for="modal-view-schedule-input-category">Category</label>
-                                <select name="modal-view-schedule-input-category" id="modal-view-schedule-input-category" class="form-control" required>
-                                    <option value="-1">Please Select</option>
+                                <label class="col-form-label" for="modal-view-schedule-input-categories_id">Category</label>
+                                <select name="modal-view-schedule-input-categories_id" id="modal-view-schedule-input-categories_id" class="form-control" required>
+                                    <option value="">Please Select</option>
                                     @foreach($categories as $id => $name)
                                         <option value="{{$id}}">{{$name}}</option>
                                     @endforeach
@@ -23,16 +23,16 @@
                             </div>
                             <!-- /Category -->
                             <!-- Point ID -->
-                            <input type="hidden" id="modal-view-schedule-input-point-id" name="modal-view-schedule-input-point-id" value="">
+                            <input type="hidden" id="modal-view-schedule-input-points_id" name="modal-view-schedule-input-points_id" value="">
                             <!-- /Point ID -->
                             <!-- Schedule ID -->
-                            <input type="hidden" id="modal-view-schedule-input-schedule-id" name="modal-view-schedule-input-schedule-id" value="">
+                            <input type="hidden" id="modal-view-schedule-input-schedule_id" name="modal-view-schedule-input-schedule_id" value="">
                             <!-- /Schedule ID -->
                             <!-- Frequency -->
                             <div class="form-group">
-                                <label class="col-form-label" for="modal-view-schedule-input-frequency">Frequency</label>
-                                <select name="modal-view-schedule-input-frequency" id="modal-view-schedule-input-frequency" class="form-control" required>
-                                        <option value="-1">Please Select</option>
+                                <label class="col-form-label" for="modal-view-schedule-input-frequency_id">Frequency</label>
+                                <select name="modal-view-schedule-input-frequency_id" id="modal-view-schedule-input-frequency_id" class="form-control" required>
+                                        <option value="">Please Select</option>
                                     @foreach($frequencies as $id => $name)
                                         <option value="{{$id}}">{{$name}}</option>
                                     @endforeach
@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="modal-view-schedule-input-action">Action Required</label>
                                 <select name="modal-view-schedule-input-action" id="modal-view-schedule-input-action" class="form-control" required>
-                                    <option value="-1">Please Select</option>
+                                    <option value="">Please Select</option>
                                     <option value="Work Item">Work Item</option>
                                     <option value="Inspection">Inspection</option>
                                 </select>
@@ -69,21 +69,21 @@
                             <!-- /Active Future Events To Generate -->
                             <!-- Active Future Events To Generate -->
                             <div class="form-group">
-                                <label class="col-form-label" for="modal-view-schedule-input-future-events">Concurrent Future Events To Schedule</label>
-                                <input type="text" name="modal-view-schedule-input-future-events" class="form-control" id="modal-view-schedule-input-future-events">
+                                <label class="col-form-label" for="modal-view-schedule-input-future_events_to_generate">Concurrent Future Events To Schedule</label>
+                                <input type="text" name="modal-view-schedule-input-future_events_to_generate" class="form-control" id="modal-view-schedule-input-future_events_to_generate">
                             </div>
                             <!-- /Active Future Events To Generate -->
                             <!-- Reward Points -->
                             <div class="form-group">
-                                <label class="col-form-label" for="modal-view-schedule-input-reward">Reward Points for Completing Task</label>
-                                <input type="text" name="modal-view-schedule-input-reward" class="form-control" id="modal-view-schedule-input-reward">
+                                <label class="col-form-label" for="modal-view-schedule-input-reward_points">Reward Points for Completing Task</label>
+                                <input type="text" name="modal-view-schedule-input-reward_points" class="form-control" id="modal-view-schedule-input-reward_points">
                             </div>
                             <!-- /Reward Points -->
                             <!-- Cascade future tasks on completion  -->
                             <div class="form-group">
-                                <label class="col-form-label" for="modal-view-schedule-input-cascade">Future Events Scheduled Base on Last Completed Task</label>
-                                <select name="modal-view-schedule-input-cascade" id="modal-view-schedule-input-cascade" class="form-control" required>
-                                    <option value="-1">Please Select</option>
+                                <label class="col-form-label" for="modal-view-schedule-input-cascade_future_tasks_on_completion">Future Events Scheduled Base on Last Completed Task</label>
+                                <select name="modal-view-schedule-input-cascade_future_tasks_on_completion" id="modal-view-schedule-input-cascade_future_tasks_on_completion" class="form-control" required>
+                                    <option value="">Please Select</option>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
                                 </select>
@@ -137,28 +137,36 @@
                 type: 'POST',
                 url: 'save-schedule',
                 data: {
-                    id: $('#modal-view-schedule-input-schedule-id').val(),
-                    categories_id: $('#modal-view-schedule-input-category').val(),
-                    points_id: $('#modal-view-schedule-input-point-id').val(),
-                    frequency_id: $('#modal-view-schedule-input-frequency').val(),
+                    id: $('#modal-view-schedule-input-schedule_id').val(),
+                    categories_id: $('#modal-view-schedule-input-categories_id').val(),
+                    points_id: $('#modal-view-schedule-input-points_id').val(),
+                    frequency_id: $('#modal-view-schedule-input-frequency_id').val(),
                     start_date: $('#modal-view-schedule-input-start-date').val(),
                     title: $('#modal-view-schedule-input-title').val(),
                     description: $('#modal-view-schedule-input-description').val(),
                     action: $('#modal-view-schedule-input-action').val(),
-                    reward_points: $('#modal-view-schedule-input-reward').val(),
-                    future_events_to_generate: $('#modal-view-schedule-input-future-events').val(),
-                    cascade_future_tasks_on_completion: $('#modal-view-schedule-input-cascade').val()
+                    reward_points: $('#modal-view-schedule-input-reward_points').val(),
+                    future_events_to_generate: $('#modal-view-schedule-input-future_events_to_generate').val(),
+                    cascade_future_tasks_on_completion: $('#modal-view-schedule-input-cascade_future_tasks_on_completion').val()
                 },
                 success: function (data) {
                     $('#ViewSchedules').modal('hide');
                     $('#toast-view-schedule-save-body').html(data),
                     $('#toast-view-schedule-save').toast('show')
+                },
+                error: function (xhr) {
+                   clearAllValidationErrors();
+                    $.each(xhr.responseJSON.errors, function(key,value) {
+                        $('#modal-view-schedule-input-' + key).addClass('is-invalid')
+                        $('#modal-view-schedule-input-' + key).parent().append('<div class="alert alert-danger validation-error">'+value+'</div');
+                    }); 
+
                 }
             });
 
         });
 
-        $("#modal-view-schedule-input-category").change(function() {
+        $("#modal-view-schedule-input-categories_id").change(function() {
             let category = this.value;
             $.ajax({
                 type: 'POST',
@@ -167,22 +175,22 @@
                     categories_id: category,
                 },
                 success: function (schedule) {
-                    $('#modal-view-schedule-input-schedule-id').val(schedule.id),
-                    $('#modal-view-schedule-input-frequency').val(schedule.frequency_id),
+                    $('#modal-view-schedule-input-schedule_id').val(schedule.id),
+                    $('#modal-view-schedule-input-frequency_id').val(schedule.frequency_id),
                     $('#modal-view-schedule-input-start-date').val(schedule.start_date),
                     $('#modal-view-schedule-input-title').val(schedule.title),
                     $('#modal-view-schedule-input-description').val(schedule.description),
                     $('#modal-view-schedule-input-action').val(schedule.action),
-                    $('#modal-view-schedule-input-reward').val(schedule.reward_points),
-                    $('#modal-view-schedule-input-future-events').val(schedule.future_events_to_generate),
-                    $('#modal-view-schedule-input-cascade').val(schedule.cascade_future_tasks_on_completion),
-                    $('#modal-view-schedule-input-point-id').val(schedule.points_id)
+                    $('#modal-view-schedule-input-reward_points').val(schedule.reward_points),
+                    $('#modal-view-schedule-input-future_events_to_generate').val(schedule.future_events_to_generate),
+                    $('#modal-view-schedule-input-cascade_future_tasks_on_completion').val(schedule.cascade_future_tasks_on_completion),
+                    $('#modal-view-schedule-input-points_id').val(schedule.points_id)
                 }
             });
 
         })
 
-        $("#modal-view-schedule-input-point-id").change(function() {
+        $("#modal-view-schedule-input-points_id").change(function() {
             let point_id = this.value;
             $.ajax({
                 type: 'POST',
@@ -191,16 +199,16 @@
                     point_id: point_id,
                 },
                 success: function (schedule) {
-                        $('#modal-view-schedule-input-schedule-id').val(schedule.id),
-                        $('#modal-view-schedule-input-frequency').val(schedule.frequency_id),
+                        $('#modal-view-schedule-input-schedule_id').val(schedule.id),
+                        $('#modal-view-schedule-input-frequency_id').val(schedule.frequency_id),
                         $('#modal-view-schedule-input-start-date').val(schedule.start_date),
                         $('#modal-view-schedule-input-title').val(schedule.title),
                         $('#modal-view-schedule-input-description').val(schedule.description),
                         $('#modal-view-schedule-input-action').val(schedule.action),
-                        $('#modal-view-schedule-input-reward').val(schedule.reward_points),
-                        $('#modal-view-schedule-input-future-events').val(schedule.future_events_to_generate),
-                        $('#modal-view-schedule-input-cascade').val(schedule.cascade_future_tasks_on_completion),
-                        $('#modal-view-schedule-input-category').val('')
+                        $('#modal-view-schedule-input-reward_points').val(schedule.reward_points),
+                        $('#modal-view-schedule-input-future_events_to_generate').val(schedule.future_events_to_generate),
+                        $('#modal-view-schedule-input-cascade_future_tasks_on_completion').val(schedule.cascade_future_tasks_on_completion),
+                        $('#modal-view-schedule-input-categories_id').val('')
                 }
             });
 
@@ -215,7 +223,7 @@
     function showScheduleModalEditMarker(pointId) {
         let cardTitle = $('a[point-id="' + pointId + '"]').closest('.card-body').find('.card-title').html();
         setViewScheduleModalTitle('Set Custom Schedule For: ' + cardTitle);
-        $('#modal-view-schedule-input-point-id').val(pointId).trigger("change");
+        $('#modal-view-schedule-input-points_id').val(pointId).trigger("change");
         $('.modal-view-schedule-category').hide();
         $('#ViewSchedules').modal('show');
     }

@@ -154,6 +154,7 @@ function onMapLoadComplete(){
     mapCanvas.on('click','.editMarkerSchedule', function() {showScheduleModalEditMarker($(this).attr('point-id'));});
     mapCanvas.on('click','.taskMarkCompleted', function() {taskMarkerCompleted($(this).attr('task-id'));});
     mapCanvas.on('click','.maintenanceMarkCompleted', function() {maintenanceMarkerCompleted($(this).attr('point-id'));});
+    mapCanvas.on('click','.maintenanceMarkSeverity', function() {maintenanceMarkSeverity($(this).attr('point-id'), $(this).attr('maintenance-rating-id'));});
 
 
 }
@@ -192,3 +193,24 @@ function maintenanceMarkerCompleted(pointId) {
     });
 }
 
+function maintenanceMarkSeverity(pointId, maintenanceRatingId) {
+    $.ajax({
+        type: 'POST',
+        url: 'execute-update-maintenance-rating',
+        data: {
+            pointId: pointId,
+            maintenanceRatingId: maintenanceRatingId
+        },
+        success: function (data) {
+            $('#toast-status-body').html(data);
+            $('#toast-status').toast('show');
+            removeAllMarkers();
+            requestAllTasks();
+        }
+    });
+}
+
+function clearAllValidationErrors() {
+    $(".validation-error").remove();
+    $("input").removeClass("is-invalid");
+}

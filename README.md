@@ -6,22 +6,29 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 #todo
 
 ##Next
-1. Allow severity rating of any "Maintenance" category point. (This would be favorite rating for Feature). Implement when tacking Vue?
 1. Add Unit Tests to Tasks
-1. Add Unit Tests to Schedules 
+1. Add Unit Tests to Schedules
 
 ##Future
 
 ####Bugs
-1. Perform error handling on AJAX form submissions
+1. Add Toast messages to any failed XHR errors.
 
 ####Performance
 1. Remove marker that was deleted/ task completed (perhaps add property on marker called "marker_id" and have that as an attr of the infowindow buttons)
 1. Generate calls to maintain tasks and their status
 
 ####Features
-1. Allow for Generation of report based on Month's activity for Board of Directors Maintenance Report.
-1. Allow for viewing of events for a marker.  (i.e. Project category marker can have status updates)
+1. Enable Authentication - Admin\director\member\guest roles (Consider package Laravel-permission by Spatie)
+    1. Create view for Members/users
+    1. Allow users to designate volunteer area for alerts
+    1. Allow users to indicate frequency of helping
+    1. Allow users to be alerted on multiple conditions: location, age of task, skills, etc.
+    1. Allow for choice in POI's to be displayed (Projects, Assets)
+    1. Notify Admin when new Task (Week Summary), or Maintenance Item (Immediate, or part of week sumary based on urgency)
+1. Add new model for Point Events
+    1. Allow for Generation of report based on Month's activity for Board of Directors Maintenance Report.
+    1. Allow for viewing of events for a marker.  (i.e. Project category marker can have status updates)
 1. Make POI info window contain actions/option button per type
    1. Maintenance: Accept, Release, Complete (with note), Review Schedule Default/This Point
    1. Allow Override schedule per point
@@ -31,13 +38,6 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 1. Add better task generation from schedule. 
     1. Possibly remove 'Future task count to generate' feature. 
     1. Add Cron Job to update Status from Future -> Current -> Overdue
-1. Track IP address of submissions
-1. Enable Authentication
-    1. Create view for Members/users
-    1. Allow users to designate volunteer area for alerts
-    1. Allow users to indicate frequency of helping
-    1. Allow users to be alerted on multiple conditions: location, age of task, skills, etc.
-    1. Allow for choice in POI's to be displayed (Projects, Assets)
 1. Integrate social media content that contains location data in geofence area.
 1. Add machine learning to generate maintenance items based on "inspection" tasks
    1. Garbage Icons based on predicted fullness.

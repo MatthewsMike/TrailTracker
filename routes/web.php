@@ -30,6 +30,7 @@ Route::post('execute-validate-pictures', 'MapController@executeVerifyPictures');
 Route::post('execute-validate-tasks', 'MapController@executeVerifyTasks');
 Route::post('execute-mark-task-complete', 'MapController@executeMarkTaskComplete');
 Route::post('execute-mark-maintenance-complete', 'MapController@executeMarkMaintenanceComplete');
+Route::post('execute-update-maintenance-rating', 'MapController@executeUpdateMaintenanceRating');
 
 
 Auth::routes();

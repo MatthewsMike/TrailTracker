@@ -13,7 +13,7 @@ class ArchiveImage extends Model
     protected $guarded = [];
 
     public function add($image, $points_id, $ip, $user_id) {
-        if(!empty($image) || !empty($points_id)) {
+        if(!empty($image) && !empty($points_id)) {
             $archiveImage = ArchiveImage::firstOrNew(['image' => $image]);
             $archiveImage->points_id = $points_id;
             $archiveImage->users_id = $user_id;

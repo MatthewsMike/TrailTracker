@@ -41,6 +41,11 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="modal-input-edit-marker-title">Title</label>
                                 <input type="text" name="modal-input-edit-marker-title" class="form-control" id="modal-input-edit-marker-title" required autofocus>
+                                @error('title')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <!-- /title -->
                             <!-- description -->
@@ -162,7 +167,6 @@
                         if (evt.lengthComputable) {
                             let percentComplete = evt.loaded / evt.total;
                             percentComplete = parseInt(percentComplete * 100);
-                            console.log(percentComplete);
                             button.html("saving..." + percentComplete + "%");
                             if (percentComplete === 100) {
 
@@ -196,11 +200,16 @@
                         }
                     }
                 },
-                error: function(error) {
-                    //todo
-                    button.html("Save");
-                    button.prop('disabled', false);
-                }
+                error: function (xhr) {
+                   clearAllValidationErrors();
+                    $.each(xhr.responseJSON.errors, function(key,value) {
+                        $('#modal-input-edit-marker-' + key).addClass('is-invalid')
+                        $('#modal-input-edit-marker-' + key).parent().append('<div class="alert alert-danger validation-error">'+value+'</div');
+                    }); 
+                    
+                button.html("Save");
+                button.prop('disabled', false);
+                },
             });
 
 
