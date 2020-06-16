@@ -56,18 +56,7 @@
         </div>
     </div>
 
-<div aria-live="polite" aria-atomic="true">
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000" id="toast-view-category-save"  style="position: absolute; top: 0; right: 0;">
-        <div class="toast-header" >
-            <strong class="mr-auto">Categories</strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body" id="toast-view-category-save-body">
-        </div>
-    </div>
-</div>
+
 <script type="text/javascript" defer>
     $(document).ready(function () {
         $("#showCategories").click(function (e) {
@@ -91,8 +80,7 @@
                 },
                 success: function (data) {
                     $('#ViewCategories').modal('hide');
-                    $('#toast-view-category-save-body').html(data),
-                    $('#toast-view-category-save').toast('show')
+                    toast(data);
                 },
                 error: function (xhr) {
                    clearAllValidationErrors();

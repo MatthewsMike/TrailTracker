@@ -155,8 +155,7 @@ $(document).ready(function () {
             type: 'POST',
             url: 'execute-validate-tasks',
             success: function (data) {
-                $('#toast-status-body').html(data);
-                $('#toast-status').toast('show');
+                toast(data);
             }
         });
     });
@@ -166,8 +165,7 @@ $(document).ready(function () {
             type: 'POST',
             url: 'execute-validate-pictures',
             success: function (data) {
-                $('#toast-status-body').html(data);
-                $('#toast-status').toast('show');
+                toast(data);
             }
         });
     });
@@ -270,8 +268,7 @@ function taskMarkerCompleted(taskId) {
             taskId: taskId
         },
         success: function (data) {
-            $('#toast-status-body').html(data);
-            $('#toast-status').toast('show');
+            toast(data);
             removeAllMarkers();
             requestAllTasks();
         }
@@ -287,8 +284,7 @@ function maintenanceMarkerCompleted(pointId) {
             pointId: pointId
         },
         success: function (data) {
-            $('#toast-status-body').html(data);
-            $('#toast-status').toast('show');
+            toast(data);
             removeAllMarkers();
             requestAllTasks();
         }
@@ -304,8 +300,7 @@ function maintenanceMarkSeverity(pointId, maintenanceRatingId) {
             maintenanceRatingId: maintenanceRatingId
         },
         success: function (data) {
-            $('#toast-status-body').html(data);
-            $('#toast-status').toast('show');
+            toast(data);
             removeAllMarkers();
             requestAllTasks();
         }

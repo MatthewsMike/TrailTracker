@@ -100,19 +100,6 @@
         </div>
     </div>
 
-<div aria-live="polite" aria-atomic="true">
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000" id="toast-view-schedule-save"  style="position: absolute; top: 0; right: 0;">
-        <div class="toast-header" >
-            <strong class="mr-auto">Schedules</strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body" id="toast-view-schedule-save-body">
-            Hello, world! This is a toast message.
-        </div>
-    </div>
-</div>
 <script type="text/javascript" defer>
     $(document).ready(function () {
         $('#modal-view-schedule-input-start-date').daterangepicker({
@@ -151,8 +138,7 @@
                 },
                 success: function (data) {
                     $('#ViewSchedules').modal('hide');
-                    $('#toast-view-schedule-save-body').html(data),
-                    $('#toast-view-schedule-save').toast('show')
+                    toast(data);
                 },
                 error: function (xhr) {
                    clearAllValidationErrors();
