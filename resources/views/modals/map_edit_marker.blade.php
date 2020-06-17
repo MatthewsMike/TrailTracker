@@ -13,7 +13,7 @@
                             <!-- Point ID -->
                             <input type="hidden" id="modal-input-edit-marker-point-id" name="modal-input-edit-marker-point-id" value="">
                             <!-- /Point ID -->
-                            <!-- Position --> <!-- todo set to move marker button -->
+                            <!-- Position --> <!-- TODO set to move marker button -->
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col">
@@ -85,7 +85,7 @@
                             </div>
                             <!-- /rating -->
                             <!-- image -->
-                                <img src="" id="modal-input-edit-marker-current-image"> <!--todo: add default image -->
+                                <img src="" id="modal-input-edit-marker-current-image"> <!-- TODO: add default image -->
                             <div class="form-group">
                                 <label class="col-form-label" for="modal-input-edit-marker-image">Image</label>
                                 <input type="file" name="modal-input-edit-marker-image" id="modal-input-edit-marker-image" class="form-control">
@@ -93,7 +93,7 @@
                             <!-- /image -->
                             @auth
                             <!-- delete -->
-                            <img src="" id="modal-input-edit-marker-current-image"> <!--todo: add default image -->
+                            <img src="" id="modal-input-edit-marker-current-image"> <!-- TODO: add default image -->
                             <div class="form-group">
                                 <label class="col-form-label" for="modal-input-edit-marker-delete">Delete Marker?</label>
                                 <input type="checkbox" name="modal-input-edit-marker-delete" id="modal-input-edit-marker-delete">
@@ -121,7 +121,7 @@
         });
 
         $("#moveMarker").click(function (e) {
-            //todo: implement as a draggable marker.
+            // TODO: implement as a draggable marker.
             removeAllMarkers();
             showDrawingControls();
             $("#editMarker").modal("hide");
@@ -245,6 +245,7 @@
     });
 
     function showMarkerModalEdit(id) {
+        clearAllValidationErrors();
         let category = this.value;
         $.ajax({
             type: 'POST',
@@ -253,7 +254,6 @@
                 id: id,
             },
             success: function (marker) {
-                console.log(marker);
                 $('#modal-input-edit-marker-point-id').val(marker.id);
                 $('#modal-input-edit-marker-lat').val(marker.lat);
                 $('#modal-input-edit-marker-lng').val(marker.lng);
@@ -285,6 +285,7 @@ function resetEditMarkerForm() {
     $('#modal-input-edit-marker-type').val('Maintenance').change();
     $('#modal-input-edit-marker-current-image').attr('src', '');
     $('#modal-input-edit-marker-rating').val('-1');
+    clearAllValidationErrors();
 }
 
 function setEditMarkerModalTitle(title) {

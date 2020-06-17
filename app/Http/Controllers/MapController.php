@@ -97,9 +97,9 @@ class MapController extends Controller
         $html .= "        <a class=\"dropdown-item editMarker\" href=\"#\" point-id='". $POI->id ."'>Edit Marker</a>";
         if(auth()->check()) {
             $html .= "        <a class=\"dropdown-item editMarkerSchedule\" href=\"#\" point-id='". $POI->id ."'>Manage Schedule</a>";
-            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'>todo Report Condition</a>";
-            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'>todo Hide This Type</a>";
-            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'>todo Rate</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'> TODO Report Condition</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'> TODO Hide This Type</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" point-id='". $POI->id ."'> TODO Rate</a>";
         }
         $html .= $this->generateInfoWindowBottom($POI);
         return $html;
@@ -109,8 +109,8 @@ class MapController extends Controller
         $html = $this->generateInfoWindowTop($task->point);
         $html .= "        <a class=\"dropdown-item taskMarkCompleted\" href=\"#\" task-id='". $task->tasks_id ."'>Mark Completed</a>";
         if(auth()->check()) {
-            $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Assign</a>";
-            $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'>todo Delegate</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'> TODO Assign</a>";
+            $html .= "        <a class=\"dropdown-item\" href=\"#\" task-id='". $task->tasks_id ."'> TODO Delegate</a>";
         }
         $html .= $this->generateInfoWindowBottom($task->point);
         return $html;
@@ -120,8 +120,8 @@ class MapController extends Controller
         $html = $this->generateInfoWindowTop($point);
         $html .= "        <a class=\"dropdown-item maintenanceMarkCompleted\" href=\"#\" point-id='". $point->id ."'>Mark Completed</a>";
         if(auth()->check()) {
-            $html .= "     <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'>todo Assign</a>";
-            $html .= "     <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'>todo Delegate</a>";
+            $html .= "     <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'> TODO Assign</a>";
+            $html .= "     <a class=\"dropdown-item\" href=\"#\" point-id='". $point->id ."'> TODO Delegate</a>";
             $html .= "   </div>";
             $html .= "   </div><div class=\"btn-group\">";
             $html .= "   <button type=\"button\" id=\"dropdown-maintenance-rating\" class=\"dropdown-toggle  btn btn-warning\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" href=\"#\">Update Severity</button>";
@@ -200,7 +200,7 @@ class MapController extends Controller
         $POI->resizeImageForMapCard();
         $POI['icon'] = (new \App\Category)->getDefaultIconByID($POI['categories_id']);
         $POI['description'] = $this->generateInfoWindowFromPoint($POI);
-        //todo: trigger schedule generation for new POI
+        // TODO: trigger schedule generation for new POI
         (new \App\ArchiveImage())->add($POI->image, $POI->id, $this->getIp(), auth()->id() );
         return  response()->json($POI);
     }
@@ -238,7 +238,7 @@ class MapController extends Controller
 
 
     public function GetAllTasksInDateRangeJSON(Request $request) {
-        //todo: only return 1st of series (distinct on points_id and type of task) - Min Date.
+        // TODO: only return 1st of series (distinct on points_id and type of task) - Min Date.
         $taskCollection = Task::select('tasks.id as tasks_id', 'tasks.*', 'points.*', 'categories.*')->join('points','tasks.points_id','=', 'points.id')->join('categories','points.categories_id', '=','categories.id')->whereNotIn('status',['Cancelled', 'Completed'])->where('estimated_date','<=', carbon::now()->addDays($request->input('daysToLookAhead')))->get();
         $maintenanceCollection = (new \App\Point)->with('category')->where('type', '=', 'Maintenance')->get();
         $maintenanceCollection = $maintenanceCollection->map(function($task) {

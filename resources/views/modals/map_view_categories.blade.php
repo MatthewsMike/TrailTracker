@@ -1,4 +1,4 @@
-<!-- todo: add a delete schedule and generated events button -->
+<!-- TODO: add a delete schedule and generated events button -->
 <div id="ViewCategories" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

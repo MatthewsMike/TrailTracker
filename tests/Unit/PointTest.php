@@ -24,7 +24,7 @@ class PointTest extends TestCase
         $this->FEATURE_POINTS_COUNT_IN_SEED_DATA = 25;
         $this->MAINTENANCE_POINTS_COUNT_IN_SEED_DATA = 1;
         $this->NON_EXISTANT_IMAGE = 'non-existant-file.jpegx';
-        $this->EXISTING_IMAGE = 'Amenity-Bluff Trail Parking-1591236361.jpeg'; //todo - add a default image resource for testing.
+        $this->EXISTING_IMAGE = 'Amenity-Bluff Trail Parking-1591236361.jpeg'; // TODO - add a default image resource for testing.
     }
     /**
      * A basic test example.

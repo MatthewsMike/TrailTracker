@@ -3,22 +3,21 @@
 This application is as a proof of concept for managing and crowdsourcing maintenance of a multi use trail.  The initial goal is to provide a system to view and act on maintenance tasks.  Task can be generated from user submissions (Downed Tree), or by a schedule (Empty Garbage).
 - [BLT Rails to Trails](https://blttrails.ca/)
 
-#todo
+# todo
 
-##Next
+## Next
 1. Add Unit Tests to Tasks
 1. Add Unit Tests to Schedules
 
-##Future
+## Future
 
-####Bugs
+#### Bugs
 1. Add Toast messages to any failed XHR errors.
 
-####Performance
+#### Performance
 1. Remove marker that was deleted/ task completed (perhaps add property on marker called "marker_id" and have that as an attr of the infowindow buttons)
-1. Generate calls to maintain tasks and their status
 
-####Features
+#### Features
 1. Enable Authentication - Admin\director\member\guest roles (Consider package Laravel-permission by Spatie)
     1. Create view for Members/users
     1. Allow users to designate volunteer area for alerts
@@ -44,8 +43,8 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 1. Reevaluate integration with bluimp image upload plugin as it allows client side image resizing to save mobile data.
 1. [Add Social Login](https://stormpath.com/blog/stormpath-laravel-social-login#:~:text=In%20the%20%E2%80%9CSite%20URL%E2%80%9D%20box,again%20and%20enter%20another%20URL.)
 
-####Clean-Up
-1. Pull todo comments into readme
+#### Clean-Up
+1. Pull feature TODO comments into readme
 1. Consider Moving JS for Modals to external files for compiling
 1. Create thank you / attribution note for all packages used
 1. Review language to make use of Marker/POI/Point consistent

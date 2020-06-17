@@ -45,7 +45,7 @@ class Task extends Model
     }
 
     public function CreateAllTasksFromSchedules () {
-        //todo:
+        // TODO:
         // 1: Get Items from Schedules
         // 2: Get Associated Table referenced values
         // 3: Insert Into Tasks Table if Not Exist
@@ -58,7 +58,7 @@ class Task extends Model
 
     private function VerifyOrCreateFutureTasks(Schedule $schedule) {
         $this->CancelTasksWhereMultipleOverdue($schedule);
-        //todo: cancel tasks where more than required are scheduled
+        // TODO: cancel tasks where more than required are scheduled
         if($schedule->isScheduleLocationsFromCategory()) {
             $schedulePoints = $schedule->GetAllSchedulePointsIdFromCategory();
             foreach($schedulePoints as $points_id) {
@@ -110,7 +110,7 @@ class Task extends Model
         (new Task)->create(
             ['schedule_id' => $schedule->id,
                 'points_id' => $schedule->points_id,
-                'status' => 'future',
+                'status' => 'Future',
                 'type_id' => '1',
                 'estimated_date' => $this->GetNextTaskDate($schedule, $schedule->points_id)
             ]
@@ -121,7 +121,7 @@ class Task extends Model
         (new Task)->create(
             [   'schedule_id' => $schedule->id,
                 'points_id' => $points_id,
-                'status' => 'future',
+                'status' => 'Future',
                 'type_id' => '1',
                 'estimated_date' => $this->GetNextTaskDate($schedule, $points_id)
             ]
@@ -133,6 +133,10 @@ class Task extends Model
         if($dateOfLastTask == null) $dateOfLastTask = $schedule->start_date;
         $dateOfNextTask = carbon::parse($dateOfLastTask)->addDays(15);
         return max($dateOfNextTask, carbon::now());
+    }
+
+    private function CancelTasksWhenMoreScheduledThanRquired() {
+        // TODO 
     }
 
     private function CancelTasksWhereMultipleOverdue(Schedule $schedule) {
@@ -152,7 +156,7 @@ class Task extends Model
     private function CancelTaskWithMessage(Task $task, string $message){
         $task->status = 'Cancelled';
         $task->save();
-        //todo:log event with message
+        // TODO:log event with message
     }
 
 }
