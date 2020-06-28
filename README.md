@@ -6,8 +6,9 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 # todo
 
 ## Next
-1. Add Unit Tests to Tasks
-1. Add Unit Tests to Schedules
+1. Add new model for Point Events
+    1. Allow for Generation of report based on Month's activity for Board of Directors Maintenance Report
+    1. Allow for viewing of events for a marker.  (i.e. Project category marker can have status updates)
 
 ## Future
 
@@ -22,26 +23,24 @@ This application is as a proof of concept for managing and crowdsourcing mainten
     1. Create view for Members/users
     1. Allow users to designate volunteer area for alerts
     1. Allow users to indicate frequency of helping
-    1. Allow users to be alerted on multiple conditions: location, age of task, skills, etc.
+    1. Allow users to be alerted on multiple conditions: location, age of task, skills, etc
     1. Allow for choice in POI's to be displayed (Projects, Assets)
     1. Notify Admin when new Task (Week Summary), or Maintenance Item (Immediate, or part of week sumary based on urgency)
-1. Add new model for Point Events
-    1. Allow for Generation of report based on Month's activity for Board of Directors Maintenance Report.
-    1. Allow for viewing of events for a marker.  (i.e. Project category marker can have status updates)
 1. Make POI info window contain actions/option button per type
    1. Maintenance: Accept, Release, Complete (with note), Review Schedule Default/This Point
    1. Allow Override schedule per point
    1. Feature: report condition, Hide this type, etc
-1. Generate modal which displays a list view of upcoming tasks by date.
-    1. Severity of Maintenance point + created date will determine due date.
-1. Add better task generation from schedule. 
+1. Generate modal which displays a list view of upcoming tasks by date
+    1. Severity of Maintenance point + created date will determine due date
+1. Add better task generation from schedule
     1. Possibly remove 'Future task count to generate' feature. 
     1. Add Cron Job to update Status from Future -> Current -> Overdue
-1. Integrate social media content that contains location data in geofence area.
+1. Integrate social media content that contains location data in geofence area
 1. Add machine learning to generate maintenance items based on "inspection" tasks
-   1. Garbage Icons based on predicted fullness.
+   1. Garbage Icons based on predicted fullness
 1. Reevaluate integration with bluimp image upload plugin as it allows client side image resizing to save mobile data.
-1. [Add Social Login](https://stormpath.com/blog/stormpath-laravel-social-login#:~:text=In%20the%20%E2%80%9CSite%20URL%E2%80%9D%20box,again%20and%20enter%20another%20URL.)
+1. [Add Social Login](https://stormpath.com/blog/stormpath-laravel-social-login#:~:text=In%20the%20%E2%80%9CSite%20URL%E2%80%9D%20box,again%20and%20enter%20another%20URL.)I jus
+1. Add Point to Task (one-many) relationship
 
 #### Clean-Up
 1. Pull feature TODO comments into readme
@@ -52,7 +51,7 @@ This application is as a proof of concept for managing and crowdsourcing mainten
     1. Be consistent with column name points_id vs point_id
 1. Split Map Controller, move into models
 1. Deal with Dependency injection
-1. Fix in login/registering redirection. 
+1. Fix in login/registering redirection
 1. Review DB Calls in schedule model to convert to eloquent ORM
-
+1. Fix Info Window Generation code to be cleaner
 

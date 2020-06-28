@@ -12,7 +12,11 @@ use App\Point;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 use Tests\TestCase;
+
+use function Psy\debug;
 
 class TaskTest extends TestCase
 {
@@ -20,13 +24,15 @@ class TaskTest extends TestCase
     use DatabaseMigrations;
     protected $EXPECTED_TASKS_FROM_INITIAL_DATABASE_SEED;
     protected $CATEGORIES_ID_OF_DEFAULT_SCHEDULE;
+    protected $DAYS_BETWEEN_TASKS_FOR_SEEDED_SCHEDULE;
  
     public function setUp(): void
     {
         parent::setUp();
         $this->seed();
-        $this->EXPECTED_TASKS_FROM_INITIAL_DATABASE_SEED = 5;
+        $this->EXPECTED_TASKS_FROM_INITIAL_DATABASE_SEED = 7;
         $this->CATEGORIES_ID_OF_DEFAULT_SCHEDULE = 3;
+        $this->DAYS_BETWEEN_TASKS_FOR_SEEDED_SCHEDULE = 30;
     }
 
     /**
@@ -43,6 +49,7 @@ class TaskTest extends TestCase
 
     public function test_class_does_not_create_more_tasks_on_repeated_runs()
     {
+        Log::debug('Failing Test Start');
         (new Task)->CreateAllTasksFromSchedules();
         (new Task)->CreateAllTasksFromSchedules();
         (new Task)->CreateAllTasksFromSchedules();
@@ -89,30 +96,64 @@ class TaskTest extends TestCase
         $this->AssertEquals($this->EXPECTED_TASKS_FROM_INITIAL_DATABASE_SEED, Task::all()->where('status','=','Future')->count());
     }
 
-    public function test_class_cascades_when_required_for_next_task()
-    {
-        // TODO Write Test
-        
+    
+    public function test_class_adds_event_log_for_any_cancelled_tasks() {
+        (new Task)->CreateAllTasksFromSchedules();
+        $task = (new Task)->first()->replicate();
+        $task->save();
+        (new Task)->CreateAllTasksFromSchedules();
+        $this->assertDatabaseHas('task_events',['tasks_id' => $task->id]);      
     }
 
-    public function test_class_does_not_cascades_when_not_required_for_next_task()
+    //cascade = next event based off most recent completed (falling back to estimated date, then start date of schedule)
+    public function test_class_cascades_when_required_for_next_task()
     {
-        // TODO Write Test
-        
+        (new Task)->CreateAllTasksFromSchedules();
+        $task = (new Task)->first(); 
+        $point_id = $task->points_id;
+        $task->estimated_date = carbon::now()->addDays(15);
+        $task->status = 'Completed';
+        $task->save();       
+        (new Task)->CreateAllTasksFromSchedules();
+        $task = (new Task)->where('points_id', '=', $point_id)->whereNotIn('status', ['Completed', 'Cancelled'])->first();
+        $this->assertEquals(carbon::now()->addDays($this->DAYS_BETWEEN_TASKS_FOR_SEEDED_SCHEDULE)->toDateString(),carbon::parse($task->estimated_date)->toDateString());
+    }
+
+    //not cascade = next event based off most recent estimated date (falling back to start date of schedule)
+    public function test_class_does_not_cascade_when_not_required_for_next_task()
+    {
+        (new Task)->CreateAllTasksFromSchedules();
+        $task = (new Task)->where('schedule_id', '=', '2')->first(); 
+        $point_id = $task->points_id;
+        $task->estimated_date = carbon::now()->addDays(15);
+        $task->status = 'Completed';
+        $task->save();
+        (new Task)->CreateAllTasksFromSchedules();
+        $task = (new Task)->where('points_id', '=', $point_id)->whereNotIn('status', ['Completed', 'Cancelled'])->first();
+        $this->assertEquals(carbon::now()->addDays(15)->addDays($this->DAYS_BETWEEN_TASKS_FOR_SEEDED_SCHEDULE)->toDateString(),carbon::parse($task->estimated_date)->toDateString());
     }
 
     public function test_class_does_not_create_default_schedule_task_for_override_point() {
-        // TODO Write Test
-
+        // Schedule id 3 is an override on points_id  31, set to generate 2 future tasks.
+        (new Task)->CreateAllTasksFromSchedules();
+        $countInstancesOfPointWithOverrideSchedule = Task::where('points_id', '=', '31')->count();
+        $this->assertEquals(2, $countInstancesOfPointWithOverrideSchedule);
     }
 
     public function test_class_cancels_task_when_multiple_of_same_task_overdue() {
-        // TODO Write Test
-        
+        (new Task)->CreateAllTasksFromSchedules();
+        $tasks = (new Task)::where('points_id', '=', '31')->get();
+        foreach($tasks as $task) {
+            $task->estimated_date = carbon::now()->addDays(-60);
+            $task->save();
+        }
+        (new Task)->CreateAllTasksFromSchedules();
+        $cancelledTaskCount = Task::where('status', '=', 'Cancelled')->count();
+        $this->assertEquals(1, $cancelledTaskCount);
+
+        $overallTaskCount = Task::where('points_id', '=', 31)->count();
+        $this->assertEquals(3,$overallTaskCount);
     }
 
-    public function test_class_adds_event_log_for_any_cancelled_tasks() {
-        // TODO Write Test
-        
-    }
+
 }

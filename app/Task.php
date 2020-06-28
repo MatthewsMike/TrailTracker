@@ -44,6 +44,18 @@ class Task extends Model
         return $this->hasOne('App\Point','id', 'points_id');
     }
 
+    
+    public function events() {
+        return $this->hasMany('App\TaskEvent','tasks_id', 'id');
+    }
+
+    public function setStatusAttribute($value) {
+        $this->attributes['status'] = $value;
+        if($value == 'Completed') {
+            $this->attributes['completed_date'] = carbon::now();
+        }
+    }
+
     public function CreateAllTasksFromSchedules () {
         // TODO:
         // 1: Get Items from Schedules
@@ -58,7 +70,8 @@ class Task extends Model
 
     private function VerifyOrCreateFutureTasks(Schedule $schedule) {
         $this->CancelTasksWhereMultipleOverdue($schedule);
-        // TODO: cancel tasks where more than required are scheduled
+        $this->CancelTasksWhenMoreScheduledThanRequired($schedule);
+
         if($schedule->isScheduleLocationsFromCategory()) {
             $schedulePoints = $schedule->GetAllSchedulePointsIdFromCategory();
             foreach($schedulePoints as $points_id) {
@@ -83,13 +96,16 @@ class Task extends Model
     }
 
     private function GetOpenTaskCountFromOverrideSchedule(Schedule $schedule) {
-        $openTaskCount = (new Task)->whereNotIn('status',['Cancelled', 'Completed'])->where('schedule_id', $schedule->id)->count();
-       return $openTaskCount;
+        return Task::whereNotIn('status',['Cancelled', 'Completed'])
+                    ->where('schedule_id', $schedule->id)
+                    ->count();
     }
 
     private function GetOpenTaskCountFromDefaultSchedulePointID(Schedule $schedule, $points_id) {
-        $openTaskCount = (new Task)->whereNotIn('status',['Cancelled', 'Completed'])->where('schedule_id', $schedule->id)->where('points_id', '=', $points_id)->count();
-        return $openTaskCount;
+        return Task::whereNotIn('status',['Cancelled', 'Completed'])
+                    ->where('schedule_id', $schedule->id)
+                    ->where('points_id', '=', $points_id)
+                    ->count();
     }
 
     private function CreateAllMissingTasksFromOverrideSchedule(Schedule $schedule) {
@@ -98,6 +114,7 @@ class Task extends Model
             $this->CreateNextOverrideScheduledTask($schedule);
         }
     }
+
     private function CreateAllMissingTasksFromDefaultSchedulePointID(Schedule $schedule, $points_id) {
         $numberOfTaskToCreate =  $schedule->future_events_to_generate - $this->GetOpenTaskCountFromDefaultSchedulePointID($schedule, $points_id);
         While($numberOfTaskToCreate-- > 0) {
@@ -129,34 +146,73 @@ class Task extends Model
     }
 
     private function GetNextTaskDate(Schedule $schedule, $points_id) {
-        $dateOfLastTask = (new Task)->whereNotIn('status',['Cancelled'])->where('schedule_id', $schedule->id)->where('points_id', $points_id)->max('estimated_date');
+        $dateOfLastTaskCompleted = (new Task)->whereNotIn('status',['Cancelled'])->where('schedule_id', $schedule->id)->where('points_id', $points_id)->max('completed_date');
+        
+        if($schedule->cascade_future_tasks_on_completion) {
+            $dateOfLastTaskEstimated = (new Task)->whereNotIn('status',['Cancelled','Completed'])->where('schedule_id', $schedule->id)->where('points_id', $points_id)->max('estimated_date');
+            $dateOfLastTask = max($dateOfLastTaskCompleted, $dateOfLastTaskEstimated);
+        } else {
+            $dateOfLastTaskEstimated = (new Task)->whereNotIn('status',['Cancelled'])->where('schedule_id', $schedule->id)->where('points_id', $points_id)->max('estimated_date');
+            $dateOfLastTask = $dateOfLastTaskEstimated;
+        }
+
         if($dateOfLastTask == null) $dateOfLastTask = $schedule->start_date;
-        $dateOfNextTask = carbon::parse($dateOfLastTask)->addDays(15);
+        $dateOfNextTask = carbon::parse($dateOfLastTask)->addDays($schedule->frequency->duration_in_days);
         return max($dateOfNextTask, carbon::now());
     }
 
-    private function CancelTasksWhenMoreScheduledThanRquired() {
-        // TODO 
-    }
-
-    private function CancelTasksWhereMultipleOverdue(Schedule $schedule) {
-        if($this->GetOverdueTaskCount($schedule) > 1) {
-            $tasks = (new Task)->skip(1)->take(PHP_INT_MAX)->whereNotIn('status',['Cancelled', 'Completed'])->where('estimated_date','<=', carbon::now())->orderByDesc('estimated_date');
-            foreach($tasks as $task) {
-                $this->CancelTaskWithMessage($task, 'Automatically cancelled via schedule audit');
+    private function CancelTasksWhenMoreScheduledThanRequired(Schedule $schedule) {     
+        $points = (new Task)->distinct('points_id')->where('schedule_id', '=', $schedule->id)->pluck('points_id');
+        foreach($points as $point_id) {
+              if($this->GetOpenScheduledTaskCountByPoint($schedule, $point_id) > $schedule->future_events_to_generate) {
+                $tasks = (new Task) ->skip($schedule->future_events_to_generate)
+                                    ->take(PHP_INT_MAX)
+                                    ->where('schedule_id', '=', $schedule->id)
+                                    ->where('points_id', '=', $point_id)
+                                    ->whereNotIn('status',['Cancelled', 'Completed'])
+                                    ->orderByDesc('estimated_date')
+                                    ->get();
+                foreach($tasks as $task) {
+                    $this->CancelTaskWithMessage($task, 'Automatically cancelled via schedule audit: Too Many Concurrent Tasks');
+                }
             }
         }
     }
 
-    private function GetOverdueTaskCount(Schedule $schedule) {
-        $overdueTaskCount = (new Task)->whereNotIn('status',['Cancelled', 'Completed'])->where('schedule_id', '=', $schedule->id)->where('estimated_date','<=', carbon::now())->count();
-        return $overdueTaskCount;
+    private function GetOpenScheduledTaskCountByPoint(Schedule $schedule, $point_id) {
+        return Task::whereNotIn('status',['Cancelled', 'Completed'])->where('schedule_id', '=', $schedule->id)->where('points_id','=',$point_id)->count();
     }
 
-    private function CancelTaskWithMessage(Task $task, string $message){
+    private function CancelTasksWhereMultipleOverdue(Schedule $schedule) {
+        $points = (new Task)->distinct('points_id')->where('schedule_id', '=', $schedule->id)->pluck('points_id');
+        foreach($points as $point_id) {
+            if($this->GetOverdueTaskCountByScheduleAndPoint($schedule, $point_id) > 1) {
+                $tasks = (new Task)->skip(1)->take(PHP_INT_MAX)->whereNotIn('status',['Cancelled', 'Completed'])->where('schedule_id', '=', $schedule->id)->where('estimated_date','<=', carbon::now())->orderByDesc('estimated_date')->get();
+                foreach($tasks as $task) {
+                    $this->CancelTaskWithMessage($task, 'Automatically cancelled via schedule audit: Multiple Overdue');
+                }
+            }
+        }
+    }
+
+    private function GetOverdueTaskCountByScheduleAndPoint(Schedule $schedule, $point_id) {
+        return Task::whereNotIn('status',['Cancelled', 'Completed'])
+                    ->where('schedule_id', '=', $schedule->id)
+                    ->where('points_id', '=', $point_id)
+                    ->where('estimated_date','<=', carbon::now())
+                    ->count();
+    }
+
+    private function CancelTaskWithMessage(Task $task, string $message) {
         $task->status = 'Cancelled';
         $task->save();
-        // TODO:log event with message
+        TaskEvent::Insert(
+            [
+                'tasks_id' => $task->id,
+                'notes' => $message,
+                'event_occurred_at' => carbon::now()
+            ]
+        );
     }
 
 }

@@ -249,8 +249,10 @@ class DatabaseSeeder extends Seeder
             [ 'id'=> '27', 'lng'=>'-63.701413', 'lat'=>'44.644304', 'type'=>'Feature', 'categories_id'=>'4', 'title'=>'Governor Lake View', 'description'=>'360 View: https://goo.gl/maps/N4vAAccwtvH2'],
             [ 'id'=> '28', 'lng'=>'-63.743808', 'lat'=>'44.660865', 'type'=>'Feature', 'categories_id'=>'9', 'title'=>'5km', 'description'=>'5km from Lakeside Entrance. 8km from St. Margarets Bay Entrance'],
             [ 'id'=> '29', 'lng'=>'-63.798487', 'lat'=>'44.67407', 'type'=>'Feature', 'categories_id'=>'9', 'title'=>'10km', 'description'=>'10km from Lakeside entrance. 3km from St. Margarets Bay entrance.'],                
-            [ 'id'=> '30', 'lng'=>'-63.798487', 'lat'=>'44.68407', 'type'=>'Maintenance', 'categories_id'=>'14', 'title'=>'10km', 'description'=>'10km from Lakeside entrance. 3km from St. Margarets Bay entrance.']                
-        ]);
+            [ 'id'=> '30', 'lng'=>'-63.798487', 'lat'=>'44.68407', 'type'=>'Maintenance', 'categories_id'=>'14', 'title'=>'10km', 'description'=>'10km from Lakeside entrance. 3km from St. Margarets Bay entrance.'],                
+            [ 'id'=> '31', 'lng'=>'-63.718761', 'lat'=>'44.642628', 'type'=>'Feature', 'categories_id'=>'17', 'title'=>'Garbage can (City)', 'description'=>''],         
+            [ 'id'=> '32', 'lng'=>'-63.717761', 'lat'=>'44.652628', 'type'=>'Feature', 'categories_id'=>'17', 'title'=>'Garbage can (City)', 'description'=>'']         
+            ]);
 
         Schedule::Insert([
             [
@@ -264,16 +266,27 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Empty Garbage',
                 'future_events_to_generate' => '1',
                 'cascade_future_tasks_on_completion' => '1'
+            ],             [
+                'frequency_id' => '4',
+                'start_date' => '2020-05-01',
+                'action' => 'Work Item',
+                'points_id' => null,
+                'categories_id' => '17',
+                'reward_points' => '10',
+                'title' => 'Empty Garbage (City)',
+                'description' => 'Empty Garbage (City)',
+                'future_events_to_generate' => '1',
+                'cascade_future_tasks_on_completion' => '0'
             ],            [
                 'frequency_id' => '3',
                 'start_date' => '2020-05-01',
                 'action' => 'Work Item',
-                'points_id' => '30',
+                'points_id' => '31',
                 'categories_id' => null,
                 'reward_points' => '15',
                 'title' => 'Empty Garbage',
                 'description' => 'Empty Garbage',
-                'future_events_to_generate' => '1',
+                'future_events_to_generate' => '2',
                 'cascade_future_tasks_on_completion' => '1'
             ],
         ]);
