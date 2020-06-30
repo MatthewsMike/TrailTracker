@@ -330,8 +330,7 @@ class MapController extends Controller
         request()->validate([
             'pointId' => 'required'
         ]);
-
-        Point::destroy(request()->input('pointId'));
+        Point::removeMaintenancePoint(request()->input('pointId'), $this->getIp());
         return "Item has been marked completed";
     }
 

@@ -14,3 +14,4 @@ prod.sh
 public/images/*.jpeg
 public/images/map-card/*.jpeg
 /.idea/*
+.vscode/launch.json

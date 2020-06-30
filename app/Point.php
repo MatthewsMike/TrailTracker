@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -61,6 +62,10 @@ class Point extends Model
         return $this->hasOne('App\MaintenanceRating','id', 'maintenance_rating');
     }
 
+    public function events() {
+        return $this->hasMany('App\PointEvent','points_id', 'id');
+    }
+
     public function getAllPointsByType($type = 'Feature') {
         if($type == 'All') return (new \App\Point)->with('category')->get();
         else return (new \App\Point)->with('category')->where('type', '=', $type)->get();
@@ -101,5 +106,20 @@ class Point extends Model
             ->orientate()
             ->save(public_path(env('PATH_TO_IMAGES_MAP_CARD') . $this->image));
         }
+    }
+
+    public static function removeMaintenancePoint($points_id, $ip) {
+        $point = (new Point)->find($points_id);   
+        PointEvent::Insert(
+            [
+                'points_id' => $point->id,
+                'type' => "Deleted",
+                'notes' => "Maintenance point marked as resolved",
+                'event_occurred_at' => carbon::now(),
+                'users_id' => auth()->id(),
+                'ip' => $ip
+            ]
+        );
+        $point->delete();
     }
 }

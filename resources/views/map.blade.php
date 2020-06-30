@@ -32,6 +32,7 @@
                             <a class="dropdown-item" href="#" id="showAllAssets">Show Assets</a>
                             <a class="dropdown-item" href="#" id="showAllProjects">Show Projects</a>
                             <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/logout" id="logOut">{{__('Logout')}}</a>
                             <a class="dropdown-item" href="#"> TODO - List Maintenance Items</a>
                             <a class="dropdown-item" href="#"> TODO - Show Account Preferences</a>
                             <a class="dropdown-item" href="#"> TODO - Manage Visible POIs</a>

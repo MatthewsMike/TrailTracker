@@ -20,7 +20,7 @@ class PointTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->seed();
+        $this->artisan('db:seed');
         $this->FEATURE_POINTS_COUNT_IN_SEED_DATA = 27;
         $this->MAINTENANCE_POINTS_COUNT_IN_SEED_DATA = 1;
         $this->NON_EXISTANT_IMAGE = 'non-existant-file.jpegx';

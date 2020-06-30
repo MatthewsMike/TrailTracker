@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
+
+Route::get('/redirect', 'SocialAuthGoogleController@redirect');
+Route::get('/callback', 'SocialAuthGoogleController@callback');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 Route::get('/', 'MapController@index');
 Route::get('home', 'MapController@index')->name('home');
 

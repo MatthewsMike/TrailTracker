@@ -41,7 +41,7 @@
                             <!-- /name -->
                             <!-- default-icon -->
                             <div class="form-group">
-                                <label class="col-form-label" for="modal-view-categories-input-default_icon">Default Icon</label>
+                                <label class="col-form-label" for="modal-view-categories-input-default-icon">Default Icon</label>
                                 <input type="text" name="modal-view-categories-input-default_icon" class="form-control" id="modal-view-categories-input-default_icon">
                             </div>
                             <!-- /default-icon -->

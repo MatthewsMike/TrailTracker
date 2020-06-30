@@ -137,9 +137,13 @@ function requestAllTasks() {
             daysToLookAhead: 14,
         },
         success: function (markersProperties) {
-            markersProperties.forEach(function(marker){
-                AddMarkerToMap(marker);
-            })
+            if(markersProperties.length != 0 ) {
+                markersProperties.forEach(function(marker){
+                    AddMarkerToMap(marker);
+                })
+            } else {
+                toast("Yay, There are no items flagged as needing maintenance");
+            }
         }
     });
 }

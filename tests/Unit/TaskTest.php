@@ -29,7 +29,7 @@ class TaskTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->seed();
+        $this->artisan('db:seed');
         $this->EXPECTED_TASKS_FROM_INITIAL_DATABASE_SEED = 7;
         $this->CATEGORIES_ID_OF_DEFAULT_SCHEDULE = 3;
         $this->DAYS_BETWEEN_TASKS_FOR_SEEDED_SCHEDULE = 30;
