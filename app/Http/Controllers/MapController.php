@@ -7,6 +7,7 @@ use App\Frequency;
 use App\MaintenanceRating;
 use App\Schedule;
 use App\Task;
+use App\PointEvent;
 use Carbon\Carbon;
 use FarhanWazir\GoogleMaps\GMaps;
 use Illuminate\Http\Request;
@@ -41,6 +42,8 @@ class MapController extends Controller
         $config = array();
         $config['map_height'] = "100%";
         $config['zoom'] = '14';
+        $config['https'] = true;
+        
         //Allow users to add markers
         $config['drawing'] = true;
         $config['drawingModes'] = array('marker');
@@ -52,10 +55,18 @@ class MapController extends Controller
                 $("#modal-input-edit-marker-lng").val(newShape.getPosition().lng());
                 $("#editMarker").modal("show");
             ');
+
         $config['center'] = '44.655694,-63.734611';
+        
+        //clustering
+        /*
+        $config['cluster'] = true;
+        $config['clusterMinimumClusterSize'] = 3;
+        $config['clusterZoomOnClick'] = false;
+        */
         //$config['center'] = 'auto';
         $config['kmlLayerURL'] = 'https://blttrails.ca/BLTMap.kml'; //Base Map of Trail
-        $config['map_type'] = 'SATELLITE';
+        $config['map_type'] = 'HYBRID';
         $config['disableStreetViewControl'] = true;
         $config['zoomControlPosition'] = 'RIGHT_CENTER';
 
@@ -182,6 +193,16 @@ class MapController extends Controller
 
         if(request()->input('delete') == 'delete') {
             return Point::destroy(request()->input('id'));
+            PointEvent::Insert(
+                [
+                    'points_id' => request()->input('id'),
+                    'type' => "Deleted",
+                    'notes' => "Point removed by user",
+                    'event_occurred_at' => carbon::now(),
+                    'users_id' => auth()->id(),
+                    'ip' => $this->getIp()
+                ]
+            );
         }
 
         $newMarker = $request->all();
@@ -197,6 +218,16 @@ class MapController extends Controller
         }
 
         $POI = Point::updateOrCreate(['id' => $request->input('id')], $newMarker);
+        PointEvent::Insert(
+            [
+                'points_id' => $POI->id,
+                'type' => "Updated",
+                'notes' => "Point updated by user",
+                'event_occurred_at' => carbon::now(),
+                'users_id' => auth()->id(),
+                'ip' => $this->getIp()
+            ]
+        );
         $POI->resizeImageForMapCard();
         $POI['icon'] = (new \App\Category)->getDefaultIconByID($POI['categories_id']);
         $POI['description'] = $this->generateInfoWindowFromPoint($POI);

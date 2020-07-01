@@ -158,7 +158,16 @@ function onMapLoadComplete(){
     mapCanvas.on('click','.maintenanceMarkCompleted', function() {maintenanceMarkerCompleted($(this).attr('point-id'));});
     mapCanvas.on('click','.maintenanceMarkSeverity', function() {maintenanceMarkSeverity($(this).attr('point-id'), $(this).attr('maintenance-rating-id'));});
 
-
+    var MapBounds = {
+        north: 44.75,
+        south: 44.55,
+        west: -63.9,
+        east: -63.6
+      };
+     map.setRestriction({
+        latLngBounds: MapBounds,
+        strictBounds: false
+     }) 
 }
 
 

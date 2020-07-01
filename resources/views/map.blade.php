@@ -41,6 +41,7 @@
                         @guest
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" data-toggle="modal" data-target="#loginModal" id="logIn">{{__('Login')}}</a>
+                            <a class="dropdown-item" href="{{ url('/redirect') }}">Login with Google</a>
                             <a class="dropdown-item" data-toggle="modal" data-target="#registerModal">{{ __('Register') }}</a>
                         @endguest
                     </div>
