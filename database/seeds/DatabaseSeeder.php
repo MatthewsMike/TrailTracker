@@ -290,5 +290,21 @@ class DatabaseSeeder extends Seeder
                 'cascade_future_tasks_on_completion' => '1'
             ],
         ]);
+
+
+        // Reset cached roles and permissions
+        app()['cache']->forget('spatie.permission.cache');
+
+        /** @var \App\User $user */
+        $user = factory(\App\User::class)->create();
+        $user->assignRole('user');
+
+        /** @var \App\User $user */
+        $admin = factory(\App\User::class)->create([
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+        ]);
+
+        $admin->assignRole('admin');
     }
 }

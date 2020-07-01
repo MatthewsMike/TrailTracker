@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.18.0 on 2020-06-30 23:10:10.
+ * Generated for Laravel 7.18.0 on 2020-07-01 18:32:40.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15674,6 +15674,18 @@ namespace Laravel\Socialite\Facades {
  
 }
 
+namespace Spatie\Permission { 
+
+    /**
+     * 
+     *
+     */ 
+    class PermissionServiceProvider {
+         
+    }
+ 
+}
+
 namespace Facade\Ignition\Facades { 
 
     /**
@@ -18883,6 +18895,8 @@ namespace  {
     class Session extends \Illuminate\Support\Facades\Session {}
 
     class Socialite extends \Laravel\Socialite\Facades\Socialite {}
+
+    class Spatie extends \Spatie\Permission\PermissionServiceProvider {}
 
     class Storage extends \Illuminate\Support\Facades\Storage {}
 

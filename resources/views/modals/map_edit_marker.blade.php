@@ -193,7 +193,7 @@
                         button.html("Save");
                         button.prop('disabled', false);
                         button.html(buttonText);
-                        if(data.type = 'Maintenance') {
+                        if(data.type == 'Maintenance') {
                             requestAllTasks();
                         } else {
                             requestMarkersByType(data.type);
@@ -285,6 +285,7 @@ function resetEditMarkerForm() {
     $('#modal-input-edit-marker-type').val('Maintenance').change();
     $('#modal-input-edit-marker-current-image').attr('src', '');
     $('#modal-input-edit-marker-rating').val('-1');
+    $('#modal-input-edit-marker-delete').prop("checked", false);
     clearAllValidationErrors();
 }
 

@@ -66,6 +66,10 @@ class Point extends Model
         return $this->hasMany('App\PointEvent','points_id', 'id');
     }
 
+    public function tasks() {
+        return $this->hasMany('App\Task','points_id', 'id');
+    }
+
     public function getAllPointsByType($type = 'Feature') {
         if($type == 'All') return (new \App\Point)->with('category')->get();
         else return (new \App\Point)->with('category')->where('type', '=', $type)->get();

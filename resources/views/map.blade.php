@@ -23,20 +23,26 @@
                 <button type="button" class="btn btn-primary" id="showPointsOfInterest">Show Points Of Interest</button>
                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
                     <div class="dropdown-menu">
+                        @hasrole('user|admin')
+                        <a class="dropdown-item" href="#" id="showAllPoints">Show Points</a>
+                        <a class="dropdown-item" href="#" id="showAllAssets">Show Assets</a>
+                        <a class="dropdown-item" href="#" id="showAllProjects">Show Projects</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"> TODO - List Maintenance Items</a>
+                        <a class="dropdown-item" href="#"> TODO - Show Account Preferences</a>
+                        <a class="dropdown-item" href="#"> TODO - Manage Visible POIs</a>
+                        @endhasrole
+                        @hasrole('admin')
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" id="showMaintenanceSchedules">Manage Default Schedules</a>
+                        <a class="dropdown-item" href="#" id="showCategories">Manage Categories</a>
+                        <a class="dropdown-item" href="#" id="validateTasks">Validate Tasks</a>
+                        <a class="dropdown-item" href="#" id="validatePictures">Validate Pictures</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" id="manageUsers"> TODO - Manage Users</a>
+                        @endhasrole
                         @auth
-                            <a class="dropdown-item" href="#" id="showMaintenanceSchedules">Manage Default Schedules</a>
-                            <a class="dropdown-item" href="#" id="showCategories">Manage Categories</a>
-                            <a class="dropdown-item" href="#" id="validateTasks">Validate Tasks</a>
-                            <a class="dropdown-item" href="#" id="validatePictures">Validate Pictures</a>
-                            <a class="dropdown-item" href="#" id="showAllPoints">Show Points</a>
-                            <a class="dropdown-item" href="#" id="showAllAssets">Show Assets</a>
-                            <a class="dropdown-item" href="#" id="showAllProjects">Show Projects</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/logout" id="logOut">{{__('Logout')}}</a>
-                            <a class="dropdown-item" href="#"> TODO - List Maintenance Items</a>
-                            <a class="dropdown-item" href="#"> TODO - Show Account Preferences</a>
-                            <a class="dropdown-item" href="#"> TODO - Manage Visible POIs</a>
-                            <a class="dropdown-item" href="#"> TODO - Show Social Media Mentions</a>
+                        <a class="dropdown-item" href="/logout" id="logOut">{{__('Logout')}}</a>
                         @endauth
                         @guest
                             <div class="dropdown-divider"></div>

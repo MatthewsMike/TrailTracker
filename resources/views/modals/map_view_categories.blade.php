@@ -41,8 +41,8 @@
                             <!-- /name -->
                             <!-- default-icon -->
                             <div class="form-group">
-                                <label class="col-form-label" for="modal-view-categories-input-default-icon">Default Icon</label>
-                                <input type="text" name="modal-view-categories-input-default-icon" class="form-control" id="modal-view-categories-input-default-icon">
+                                <label class="col-form-label" for="modal-view-categories-input-default_icon">Default Icon</label>
+                                <input type="text" name="modal-view-categories-input-default_icon" class="form-control" id="modal-view-categories-input-default_icon">
                             </div>
                             <!-- /default-icon -->
                         </div>
@@ -75,7 +75,7 @@
                 data: {
                     id: $('#modal-view-categories-input-category').val(),
                     name: $('#modal-view-categories-input-name').val(),
-                    default_icon: $('#modal-view-categories-input-default-icon').val(),
+                    default_icon: $('#modal-view-categories-input-default_icon').val(),
                     type: $('#modal-view-categories-input-type').val()
                 },
                 success: function (data) {

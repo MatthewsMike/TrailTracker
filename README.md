@@ -6,9 +6,6 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 # todo
 
 ## Next
-1. Add new model for Point Events
-    1. Allow for Generation of report based on Month's activity for Board of Directors Maintenance Report
-    1. Allow for viewing of events for a marker.  (i.e. Project category marker can have status updates)
 
 ## Future
 
@@ -39,8 +36,10 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 1. Add machine learning to generate maintenance items based on "inspection" tasks
    1. Garbage Icons based on predicted fullness
 1. Reevaluate integration with bluimp image upload plugin as it allows client side image resizing to save mobile data.
-1. [Add Social Login](https://stormpath.com/blog/stormpath-laravel-social-login#:~:text=In%20the%20%E2%80%9CSite%20URL%E2%80%9D%20box,again%20and%20enter%20another%20URL.)I jus
-1. Add Point to Task (one-many) relationship
+1. Allow for Generation of report based on Month's activity for Board of Directors Maintenance Report
+1. Allow for viewing of events for a marker.  (i.e. Project category marker can have status updates)
+1. Allow for generic usage by customizing Bounds and KML base layer
+1. Allow Users to change password
 
 #### Clean-Up
 1. Pull feature TODO comments into readme
@@ -54,4 +53,17 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 1. Fix in login/registering redirection
 1. Review DB Calls in schedule model to convert to eloquent ORM
 1. Fix Info Window Generation code to be cleaner
+1. DIP the MapController
+1. complete initial instruction setup section
 
+
+# First Time Install Setup
+1. clone git repo
+1. configure .env file
+1. In project folder, run the following commands
+    1. run "composer install" 
+    1. run "php artisan migrate" 
+    1. run "php artisan db:seed"
+... 
+1. add Cron Job for Scheduled tasks triggering "* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1"
+1. default admin account created on initial db migrations admin@YourDomain.TLD / password

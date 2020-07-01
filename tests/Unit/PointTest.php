@@ -6,7 +6,6 @@ use Tests\TestCase;
 use App\Point;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Storage;
 
 class PointTest extends TestCase
 {
