@@ -42,7 +42,7 @@
                         <a class="dropdown-item" href="#" id="manageUsers"> TODO - Manage Users</a>
                         @endhasrole
                         @auth
-                        <a class="dropdown-item" href="/logout" id="logOut">{{__('Logout')}}</a>
+                        <a class="dropdown-item" href="{{ url('/redirect') }}" id="logOut">{{__('Logout')}}</a>
                         @endauth
                         @guest
                             <div class="dropdown-divider"></div>

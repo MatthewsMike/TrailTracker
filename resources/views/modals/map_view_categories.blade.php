@@ -94,14 +94,6 @@
 
         });
 
-        $(function() {
-            $('.datepicker').daterangepicker({
-                singleDatePicker: true,
-                showDropdowns: true,
-                minYear: 2020
-            });
-        });
-
 
         $("#modal-view-categories-input-category").change(function() {
             let categories_id = this.value;

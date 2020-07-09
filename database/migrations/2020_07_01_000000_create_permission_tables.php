@@ -95,7 +95,7 @@ class CreatePermissionTables extends Migration
 
         //Add Default user - or if one already exists, give Admin access to first user
             if(User::all()->count()) {
-                $user = User::first()->get();
+                $user = User::first();
             } else {
                 $user = factory(\App\User::class)->create([
                     'name' => 'admin',

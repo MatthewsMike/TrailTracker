@@ -6,6 +6,14 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 # todo
 
 ## Next
+1. Enable Authentication - Admin\director\member\guest roles (Consider package Laravel-permission by Spatie)
+    1. Create view for Members/users
+    1. Allow users to designate volunteer area for alerts
+    1. Allow users to indicate frequency of helping
+    1. Allow users to be alerted on multiple conditions: location, age of task, skills, etc
+    1. Allow for choice in POI's to be displayed (Projects, Assets)
+    1. Notify Admin when new Task (Week Summary), or Maintenance Item (Immediate, or part of week sumary based on urgency)
+
 
 ## Future
 
@@ -16,13 +24,6 @@ This application is as a proof of concept for managing and crowdsourcing mainten
 1. Remove marker that was deleted/ task completed (perhaps add property on marker called "marker_id" and have that as an attr of the infowindow buttons)
 
 #### Features
-1. Enable Authentication - Admin\director\member\guest roles (Consider package Laravel-permission by Spatie)
-    1. Create view for Members/users
-    1. Allow users to designate volunteer area for alerts
-    1. Allow users to indicate frequency of helping
-    1. Allow users to be alerted on multiple conditions: location, age of task, skills, etc
-    1. Allow for choice in POI's to be displayed (Projects, Assets)
-    1. Notify Admin when new Task (Week Summary), or Maintenance Item (Immediate, or part of week sumary based on urgency)
 1. Make POI info window contain actions/option button per type
    1. Maintenance: Accept, Release, Complete (with note), Review Schedule Default/This Point
    1. Allow Override schedule per point

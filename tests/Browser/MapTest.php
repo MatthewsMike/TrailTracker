@@ -10,6 +10,7 @@ use Tests\DuskTestCase;
 class MapTest extends DuskTestCase
 {
     use withFaker;
+
     /**
      * A basic browser test example.
      *
@@ -42,14 +43,14 @@ class MapTest extends DuskTestCase
             $browser->visit(env('APP_URL').'/')
                     ->click('#addMarker')
                     ->click('#map_canvas')
-                    ->type('modal-input-edit-marker-title', $title)
-                    ->type('modal-input-edit-marker-description', $description)
-                    ->select('modal-input-edit-marker-type', 'Feature')
+                    ->type('#modal-input-edit-marker-title', $title)
+                    ->type('#modal-input-edit-marker-description', $description)
+                    ->select('#modal-input-edit-marker-type', 'Feature')
                     ->waitUntil('!$.active')
-                    ->select('modal-input-edit-marker-categories', '12')
-                    ->assertDontSee('modal-input-edit-marker-rating')
+                    ->select('#modal-input-edit-marker-categories', '12')
+                    ->assertDontSee('#modal-input-edit-marker-rating')
                     ->click('#btn-save-edit-marker')
-                    ->waitUntil('!$.active');                 
+                    ->waitUntil('!$.active');                
         });
 
         $this->assertDatabaseHas('points', [

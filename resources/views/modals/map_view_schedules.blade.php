@@ -102,11 +102,7 @@
 
 <script type="text/javascript" defer>
     $(document).ready(function () {
-        $('#modal-view-schedule-input-start-date').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            minYear: 2020
-        });
+        $('#modal-view-schedule-input-start-date').flatpickr();
 
         $("#showMaintenanceSchedules").click(function (e) {
             setViewScheduleModalTitle('Save Default Schedule For Category');
