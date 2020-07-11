@@ -213,7 +213,7 @@ class MapController extends Controller
 
             $newMarker['image'] = $imageName;
         }
-        if($newMarker['maintenance_rating'] == '-1' or $newMarker['maintenance_rating'] = 'null') {
+        if($newMarker['maintenance_rating'] == '-1' or $newMarker['maintenance_rating'] == 'null') {
             $newMarker['maintenance_rating'] = null;
         }
 

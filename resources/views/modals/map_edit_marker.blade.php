@@ -117,6 +117,11 @@
         $("#addMarker").click(function (e) {
             showDrawingControls();
             resetEditMarkerForm();
+            //Kloklantech module for display current location of user doesn't provide a hook
+            //to know if it is enabled, or a method to enable when it was disabled, this the following.
+            if($('.enable-current-location-marker').css('background-position') == '0% 0%') {
+                $('.enable-current-location-marker').click();
+            }
             setEditMarkerModalTitle('Add Marker');
         });
 
@@ -212,6 +217,11 @@
                 },
             });
 
+            //Disable Blue location circle. See previous note in #addMarker Function
+            if($('.enable-current-location-marker').css('background-position') != '0% 0%') {
+                $('.enable-current-location-marker').click();
+            }
+
 
         });
 
@@ -244,9 +254,11 @@
 
     });
 
+    //Call to this function is set up in /resources/js/map_helper.js
     function showMarkerModalEdit(id) {
         clearAllValidationErrors();
         let category = this.value;
+
         $.ajax({
             type: 'POST',
             url: 'get-marker-by-id',

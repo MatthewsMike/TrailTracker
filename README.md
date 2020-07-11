@@ -12,8 +12,8 @@ This application is as a proof of concept for managing and crowdsourcing mainten
     1. Allow users to indicate frequency of helping
     1. Allow users to be alerted on multiple conditions: location, age of task, skills, etc
     1. Allow for choice in POI's to be displayed (Projects, Assets)
-    1. Notify Admin when new Task (Week Summary), or Maintenance Item (Immediate, or part of week sumary based on urgency)
-
+    1. Notify Admin when new Task (Week Summary), or Maintenance Item (Immediate, or part of week summary based on urgency)
+1. For 'Add Marker' Popup new button 'current location' if location is accessible on device. 
 
 ## Future
 
