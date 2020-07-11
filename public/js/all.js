@@ -324,3 +324,16 @@ function clearAllValidationErrors() {
     $(".validation-error").remove();
     $("input").removeClass("is-invalid");
 }
+
+function isCurrentLocationDisplayEnabled() {
+    if($('.enable-current-location-marker').css('background-position') == '0% 0%') {
+        return false;
+    }
+    return true;
+}
+
+function setCurrentLocationDisplay(newState) {
+    if(newState != isCurrentLocationDisplayEnabled()) {
+        $('.enable-current-location-marker').click();
+    }
+}
