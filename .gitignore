@@ -15,3 +15,5 @@ public/images/*.jpeg
 public/images/map-card/*.jpeg
 /.idea/*
 .vscode/launch.json
+/Report
+report.sh

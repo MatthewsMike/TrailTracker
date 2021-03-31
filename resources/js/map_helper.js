@@ -1,5 +1,5 @@
 var centreGot = false;
-
+var currentLocationDisplay;
 $(document).ready(function () {
 
     $('#modal-input-type').change(function() {
@@ -150,7 +150,7 @@ function requestAllTasks() {
 
 //called from snippet added in MapController
 function onMapLoadComplete(){
-    new klokantech.GeolocationControl(map, 0, google.maps.ControlPosition.RIGHT_CENTER);
+    currentLocationDisplay = new klokantech.GeolocationControl(map, 0, google.maps.ControlPosition.RIGHT_CENTER);
     let mapCanvas = $('#map_canvas');
     mapCanvas.on('click','.editMarker', function() {showMarkerModalEdit($(this).attr('point-id'));});
     mapCanvas.on('click','.editMarkerSchedule', function() {showScheduleModalEditMarker($(this).attr('point-id'));});
@@ -224,14 +224,11 @@ function clearAllValidationErrors() {
 }
 
 function isCurrentLocationDisplayEnabled() {
-    if($('.enable-current-location-marker').css('background-position') == '0% 0%') {
-        return false;
-    }
-    return true;
+    return currentLocationDisplay.enabled;
 }
 
 function setCurrentLocationDisplay(newState) {
     if(newState != isCurrentLocationDisplayEnabled()) {
-        $('.enable-current-location-marker').click();
+        currentLocationDisplay.element.click();
     }
 }

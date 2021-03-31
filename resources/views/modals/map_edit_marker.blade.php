@@ -116,6 +116,7 @@
     $(document).ready(function () {
         $("#addMarker").click(function (e) {
             showDrawingControls();
+            toast('Tap on map to add a marker.');
             resetEditMarkerForm();
             setCurrentLocationDisplay(true);
             setEditMarkerModalTitle('Add Marker');

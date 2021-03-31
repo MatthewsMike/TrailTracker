@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
                 'id' => '3',
                 'type' => 'Feature',
                 'name' => 'Garbage Can',
-                'default_icon' => 'https://anatistechnologies.com/public/images/icons/garbage-can.png',
+                'default_icon' => 'https://hfxweb.ca/public/images/icons/garbage-can.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder
                 'id' => '5',
                 'type' => 'Feature',
                 'name' => 'Bench',
-                'default_icon' => 'https://anatistechnologies.com/public/images/icons/bench.png',
+                'default_icon' => 'https://hfxweb.ca/public/images/icons/bench.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
@@ -158,7 +158,7 @@ class DatabaseSeeder extends Seeder
                 'id' => '17',
                 'type' => 'Feature',
                 'name' => 'Garbage Can (City)',
-                'default_icon' => 'https://anatistechnologies.com/public/images/icons/garbage-can-city.png',
+                'default_icon' => 'https://hfxweb.ca/public/images/icons/garbage-can-city.png',
                 'created_at' => '2020-06-06 20:08:16',
                 'updated_at' => '2020-06-06 20:08:16'  
             ],            [
